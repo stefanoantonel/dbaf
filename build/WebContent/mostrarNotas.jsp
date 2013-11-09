@@ -19,6 +19,9 @@ body {
 
 
 <style type="text/css">
+body{
+text-align:center;
+}
 textarea {
 	font-family: Verdana;
 	display: block;
@@ -28,6 +31,7 @@ textarea {
 
 <script type="text/javascript">
 	$(document).on("ready",function(){
+		
 		
 		
 		var not = ${notas};
@@ -84,6 +88,23 @@ textarea {
 			alert(a);
 		});
 		
+		$("#agregar").click(function(){
+			$.ajax({
+	   		     url: "CrearNota",
+	   		     success:function(datos,status,jqXHR){
+						//cuadno no le envian nada funciona como get y sino como set.
+						console.log("Nota creada");
+						$.get('GetNotas', function(data) {
+					        $("body").html(data);
+					    });
+						
+						/* var a=$("#contenido").html();
+						$("#contenido").html(a+datos); */
+	   		    	
+	   		     }
+  		     });
+		});
+		
 		$("textarea").blur(function() {
 			var notaCamb=$(this).val();
 			var notaId=$(this).attr("id");
@@ -103,7 +124,7 @@ textarea {
 	   		     }
    		     });
 		});
-		
+		$(document).css("text-align", "center");//???
 	});
 </script>
 
@@ -114,7 +135,11 @@ textarea {
 		style="display: list-item; color: red; border-style: solid;">
 		${sessionScope.notas}
 	</div>
-
+	<div>
+	<input type="checkbox" style="display:inline ;"/>
+	<textarea rows="" cols="" style="display: inline;">area </textarea>
+	</div>
+	<input id="agregar" type="button" value="Agregar Nota"/>
 	
 </body>
 </html>
