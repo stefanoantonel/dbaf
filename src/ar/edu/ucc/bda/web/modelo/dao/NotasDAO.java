@@ -103,5 +103,16 @@ public class NotasDAO {
 		//System.out.println("UsuarioDAO: resultado ="+resultado+"");
 		return notas;
 	}
-
+	public boolean save(String nota, String id){	
+		try {
+			String sql="UPDATE `practico`.`notas` SET `nota`='"+nota+"' WHERE `id`='"+id+"' ";
+			PreparedStatement stm=cn.prepareStatement(sql);
+			stm.executeUpdate();
+			return true;
+		} 
+		catch (SQLException e) {
+			System.out.println("error en save notas");
+			return false;
+		}
+	}
 }

@@ -1,6 +1,8 @@
 package ar.edu.ucc.bda.web.servlets;
 
 import java.io.IOException;
+import java.util.Enumeration;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +25,8 @@ public class ContenidoRandom extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
 		response.setContentType("text/html");	
 		response.getWriter().print("<input type=\"text\" value=\""+Math.random()+"\"<br/>");
 	}

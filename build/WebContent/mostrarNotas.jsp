@@ -85,15 +85,18 @@ textarea {
 		});
 		
 		$("textarea").blur(function() {
+			var notaCamb=$(this).val();
+			var notaId=$(this).attr("id");
 			console.log("toco el area= "+$(this).val());
+			//HttpSession session = request.getSession();
+			//session.setAttribute("object", object);
+			//session.setAttribute("cambio", $(this).val());
+			$("#cambio").val($(this).val());
 			$.ajax({
-	   		     url: "contenidoRandom",
-	   		     //"vijilante" -- listener 
-	   		     //html: me devuelte lo q ya tiene
+	   		     url: "GuardaNota?nota="+notaCamb+"&id="+notaId+"",
 	   		     success:function(datos,status,jqXHR){
 						//cuadno no le envian nada funciona como get y sino como set.
-						alert("todo ok");
-						
+						console.log("Nota guardada");
 						/* var a=$("#contenido").html();
 						$("#contenido").html(a+datos); */
 	   		    	
@@ -109,7 +112,9 @@ textarea {
 <body>
 	<div align="center" id="scope"
 		style="display: list-item; color: red; border-style: solid;">
-		${sessionScope.notas}</div>
+		${sessionScope.notas}
+	</div>
+
 	
 </body>
 </html>
