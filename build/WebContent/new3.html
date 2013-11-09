@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Demo Ajax</title>
+<!-- cargamos el kernel de jQuery, hace los servicios basicos, pueden implemetar componentes graficos -->
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<script src="css/js/jquery-1.9.1.js"></script>
+<script src="css/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+//queda ahi hasta que alguien lo llame. Si esta la pagina cargada
+
+	//$(document).on("ready", function(){
+    //    alert("h");
+    	  // alert("hola!");
+    	   //alert("Tengo "+ $(":input").length +" input");
+    	   //alert("Tengo "+$(":input[name='sexo']").length);
+		   //alert("Tengo "+$(":input[name='sexo']","#abajo").length+" IDabajo");
+           
+           //$('#u').find('li').val()
+		   //var cuantos=0;
+		   //cuantos=$(":input").filter(':radio').length
+		   //alert("Tengo "+cuantos);
+		   //cuantos=$("#ejemplos").find('form').length //el form tag 
+		   //alert("Tengo "+cuantos);
+		   //alert($("#dos").prev().attr("id"));
+          
+		   //$(':input').val()
+    //});
+    $(document).ready(function(){
+        //alert("Hola");
+        $(document).find(":input[type='text'").value("jaj");
+    });
+    
+	/*
+       $(document).ready(function(){
+ 
+    	   
+    	   $("#botonClick").click(function (){
+			
+    		   $.ajax({
+    		     url: "contenidoRandom",
+    		     //"vijilante" -- listener 
+    		     //html: me devuelte lo q ya tiene
+    		     success:function(datos,status,jqXHR)
+    		     {
+    		    	 //cuadno no le envian nada funciona como get y sino como set.
+    		    	var a=$("#contenido").html();
+    		    	$("#contenido").html(a+datos);
+    		    	
+    		     }
+    		   });
+    		   
+    		   
+    	    }); 
+       });
+       
+       */
+	
+	</script>
+</head>
+<body>
+
+<div class="btn" id="botonClick">Click</div>
+<div id="contenido"></div>
+
+<div id="ejemplos">
+
+<form >
+<input name="sexo" value="H" type="radio">
+<input name="nombre" value="marco" type="text">
+<input name="boton" value="boton" type="button">
+</form>
+
+
+<form id="abajo">
+
+<input name="sexo" value="M" type="radio">
+<input name="nombre" value="luisa" type="text">
+<input name="boton" value="boton2" type="button">
+</form>
+
+<ul id="u">
+    <li>Hola como va?</li>
+    <li>Hola </li>
+</ul>
+
+</div>
+</body>
+</html>

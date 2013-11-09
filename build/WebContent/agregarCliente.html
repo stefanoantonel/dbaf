@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+	<form action="AgregarCliente"   method="post"> <!--a este filtro se lo queremos enviar a lista clientes, en action va la url -->
+		<div align="center" style="border:10px solid black; background-color:gray;" >
+			<label for="parametroNombre">Nombre:</label>
+			<input type="text" id="parametroNombre" name="parametroNombre" />
+			<br/>
+			<label for="parametroIdZona">Id Zona:</label>
+			<input type="text" id="parametroIdZona" name="parametroIdZona" />
+			<br/>
+			<label for="parametroHabilitado">Habilitar Cuenta:</label>
+			<input type="radio" id="parametroHabilitado" name="parametroHabilitado" value="1"/>Si
+			<input type="radio" id="parametroHabilitado" name="parametroHabilitado" value="0"/>No
+			<br/>
+			<input type="submit" value="Guardar"/>
+		</div>
+	</form>
+
+
+
+</body>
+</html>

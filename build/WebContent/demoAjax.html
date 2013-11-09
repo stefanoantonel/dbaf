@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Demo Ajax</title>
+<!-- cargamos el kernel de jQuery, hace los servicios basicos, pueden implemetar componentes graficos -->
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<script src="css/js/jquery-1.9.1.js"></script>
+<script src="css/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+//queda ahi hasta que alguien lo llame. Si esta la pagina cargada
+       $(document).ready(function(){
+ 
+    	   $("#botonClick").click(function (){
+
+    		   $.ajax({
+    		     url: "contenidoRandom",
+    		     //"vijilante" -- listener 
+    		     //html: me devuelte lo q ya tiene
+    		     success:function(datos,status,jqXHR)
+    		     {
+    		    	 //cuadno no le envian nada funciona como get y sino como set.
+    		    	var a=$("#contenido").html();
+    		    	$("#contenido").html(a+datos);
+    		    	
+    		     }
+    		   });
+    		   
+    	   });
+    	    
+       });
+	
+	</script>
+</head>
+<body>
+
+<div class="btn" id="botonClick">Click</div>
+<div id="contenido"></div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Autocomplete!</title>
+	<script src="css/js/jquery-1.9.1.js"></script>
+	
+	<style type="text/css">
+		.contenedor-lista-autocompletar{ 
+			position: absolute;
+			display: block;
+			background-color: blue;
+			border-style: solid dashed;
+			border-width: 1px;
+		}	
+	</style>
+	
+	
+	<script>
+		$(document).ready(function(){ //va a servir para inicializar la fncion de autocompletar
+			//la function(item) 
+		//al princio vamos a escribir algo, le mandamos al servidor , volvemos con los datos y tenemos que crear un div para mostrarlo.
+		
+		//getDatos es un servlet que vamos a hacer para devolver los datos 
+		//al autocomplete funcion le mando una funcion para que me ejecute, aparte de las variables le mando un codggigo completo para que se ejecute.
+		//tenemos que generar un id para el div que va a mostrar las cosas pero el id va a ser aleatorio para que no se repita, se lo vamos a pasar como parametro
+			var idElem=Math.ceil(Math.random()*10000); 
+			autocompletar("#texto","getDatos",2,function(item){
+				$("#salida").html("Cliente: "+item.descripcion+ "<br/>Fecha: "+item.otro.fecha);
+			},idElem);
+		});
+		//elemento es lo que voy a ahcer autocomplete
+		
+		function autocompletar(elemento, url, minLetras, clickCallback,idElem){
+			//deberiamos crer un manejador de jquery. jquery le agrega muchas cosas al elemento.
+			//recien con el $(elemento) lo empiezo a manejar con el jquery, el #texto es un string 
+			var elem=$(elemento);
+			//le digo que ante un keyup me haga la funcion
+			elem.keyup(function(evt){
+				var idDiv="divAutocomplete"+idElem;
+				if(elem.val().length>=minLetras){//elem.val obtengo el valor 
+					//si el div ya existe lo borro porque es dificil trabajr sobre el mismo..
+					//para que jquery me detecte tiene que empezar con un # si es id.
+					if($("#"+idDiv)){
+						$("#"+idDiv).remove();
+					}
+					//Calcular la posisicon del div
+					//para hacer una llamada al server uso el $.ajax, y ese recibe configuraciion {}
+					var pos=elem.position(); //obtenemos la posision de la caja de texto
+					var top=pos.top+elem.outerHeight(); //el outer me da cuanto mide contando los bordes y esas cosa.
+					
+					var posDiv="width: "+elem.outerWidth()+"px;top: "+top+"px;left: "pos.left+"px;";
+					$.ajax({
+						url: url,
+						data:{ texto: elem.val() },
+						success: function(datos, status, jqXHR){ //los pongo porque tengo que respetar el orden 
+							//aca va la funcion en si..
+							//cuando me llegan los datos inserto el div
+							//voy a buscar el body por tag, ni . ni #
+							//uso las '' para no tener que \"
+							$("body").append('<div class="contenedor-lista-autocompletar" style="display:none;'+ posDiv+'" id="'+idDiv+'"><ul class="lista-autocompletar"></ul></div>');
+							//al que le voy a poner los datos es a UL, el div solo me permite contener
+							/*como estoy seguro que no hay 2 ul dento del div, le digo que me encuentre u dentro del div. se puede enviar 2 parametos, el que y el donde
+							por defecto me busca en todo el doc.*/
+							var ul=$("ul",$("#"+idDiv));
+							//como el servidor me manda mas de un dato me manda un arreglo de JSON
+							//el arreglo es el dato. y le digo al jquery-> manejame datos y recorrelo.
+							$(datos).each(function(indice,objeto){ //el objeto en este caso es el ciente. 
+								//por cada uno de los objetos los tengo que poner en el li del ul.
+								var idItem=idDiv+indice+"item"; //creamos un id para cada LI
+								ul.append('<li class="item_autocompletar" id="'+idItem+'">'+objeto.descripcion+'</li>'); //es el unico atributo que le obligo que tenga
+								$("#"+idItem).click(function(evt){
+									if(clickCallback && typeof clickCallback!=="undefined") //le pregunto si callback existe y si tiene un tipo ?? 
+										clickCallback(objeto)
+									elem.val(objeto.descripcion);
+									$("#"+idDiv).hide(300);
+									$("#"+idDiv).remove());
+									evento.preventDefault(); //solo el evento se ejecuta aca, las paginas web lo que hacen es hacer el evento y dsp se las pasa al padre, y asi hast ala pagina. pero no queiro eso.
+									// });
+								});
+								
+							});
+							//Tengo que poner el div visible
+							$("#"+idDiv).show();
+						}
+					});
+				}
+				else { //me aseguro que cuando borre y me quede 1 letra que no muestre nada.
+					if($("#"+idDiv))
+						$("#"+idDiv).remove();
+				
+				}
+			})
+		}
+		
+	</script>
+</head>
+<body>
+	<input type="text" id="texto" >
+	<div id="salida"></div>
+</body>
+</html>

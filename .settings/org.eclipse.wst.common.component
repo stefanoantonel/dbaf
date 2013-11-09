@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="dbaf">
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/" source-path="/build/WebContent"/>
+        <property name="java-output-path" value="/dbaf/build/classes"/>
+        <property name="context-root" value="dbaf"/>
+    </wb-module>
+</project-modules>
