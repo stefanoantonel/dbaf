@@ -85,7 +85,7 @@ textarea {
 		});
 		
 		$("textarea").blur(function() {
-			console.log("toco el area= "+$(this).text());
+			console.log("toco el area= "+$(this).val());
 			$.ajax({
 	   		     url: "contenidoRandom",
 	   		     //"vijilante" -- listener 
