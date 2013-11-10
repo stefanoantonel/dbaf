@@ -29,6 +29,13 @@ textarea {
 	font-family: Verdana;
 	display: block;
 }
+div.textarea{
+	border-width:thin;
+	border-style: solid;
+	border-color: black;
+	width: 20em;
+	list-style: inherit;
+}
 </style>
 
 
@@ -59,13 +66,17 @@ textarea {
 		$.each(not, function(indice,json){
 			
 			console.log("value: "+json.value+" lista: "+json.lista);
+			var comienzoDiv="<div style=\"vertical-align: top; color: light-red; border-style: dotted;\" >";
 			var check="<input type=\"checkbox\" style=\"display:inline ;\" "+esLista(json.lista)+"/>";
 			console.log("esLista: "+esLista(json.lista));
-			var area="<textarea id="+json.id+" wrap=\"hard\" title=\"Creada: "+json.agregada+" Modificada: "+json.modificada+"\" style=\"display:inline\"> "+json.value+"</textarea>";
+			var area="<textarea class=\"textarea\" id="+json.id+" wrap=\"soft\" title=\"Creada: "+json.agregada+" Modificada: "+json.modificada+"\" style=\"display:inline\"> "+json.value+"</textarea>";
+			//var area="<div contenteditable=\"true\" class=\"textarea\" id="+json.id+" wrap=\"hard\" title=\"Creada: "+json.agregada+" Modificada: "+json.modificada+"\" style=\"display:inline\"> "+json.value+"</div>";
 			var boton="<input class=\"botonEliminar\" value=\"Elliminar\" type=\"button\" />";
 			var enter="<div style=\"display:block;\"/>";
+			var finDiv="</div><br/>";
 			
-			$("body").last().append(check+area+boton+enter);
+			
+			$("body").last().append(comienzoDiv+check+area+boton+enter+finDiv);
 			//console.log(json.id);
 			//console.log(json.value);
 		});
@@ -115,10 +126,10 @@ textarea {
 		
 		 
 		//alert($("#scope").html());	
-		$("div").click(function(){
+		/* $("div").click(function(){
 			var a=$(this).text();
 			alert(a);
-		});
+		}); */
 		
 		$("#agregar").click(function(){
 			$.ajax({
@@ -164,7 +175,7 @@ textarea {
 			}
 		});
 		
-		$("textarea").blur(function() {
+		$(".textarea").blur(function() {
 			var notaCamb=$(this).val();
 			var notaId=$(this).attr("id");
 			//console.log("toco el area= "+$(this).val());
@@ -216,7 +227,12 @@ textarea {
 	</div>
 	
 
-	<input id="agregar" type="button" value="Agregar Nota" style="display:block;" align="middle"/>
+	<div align="center" style="vertical-align:top;  "> 
+		
+		<input id="agregar" type="button" value="Agregar Nota" style="display:block;" align="middle"/>
+		<br/>
+	</div>
+	
 	
 	
 	

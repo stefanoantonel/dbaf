@@ -1,9 +1,12 @@
 package ar.edu.ucc.bda.web.servlets;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import javax.crypto.Cipher;
+import javax.crypto.CipherOutputStream;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,6 +51,7 @@ public class Login extends HttpServlet {
 		// TODO Auto-generated method stub
 		String usuariop=request.getParameter("usuario");
 		String clavep=request.getParameter("clave");
+		
 		request.getServletContext().setAttribute("usuarioActual", usuariop);
 		System.out.println("guardo el usuario: " +usuariop);
 		Connection cn=(Connection)getServletContext().getAttribute(Constantes.NOMBRE_CONEXION);
@@ -106,4 +110,5 @@ public class Login extends HttpServlet {
         
 	}
 
+	
 }
