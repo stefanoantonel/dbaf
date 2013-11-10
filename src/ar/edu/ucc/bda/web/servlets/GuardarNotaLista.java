@@ -24,13 +24,13 @@ public class GuardarNotaLista extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Connection cn=(Connection)getServletContext().getAttribute(Constantes.NOMBRE_CONEXION);
-		String nota=request.getParameter("lista");
-		
+		String estado=request.getParameter("lista");
+		String id=request.getParameter("id");
 		
 		NotasDAO dao=new NotasDAO(cn);
-		boolean a=dao.update(nota, id);
+		boolean a=dao.updateLista(estado, id);
 		if(a==true){
-			System.out.println("Todo ok guardados");
+			System.out.println("Todo ok notaLista");
 		}
 		response.setContentType("text/html");	
 		response.getWriter().print("<input type=\"text\" value=\""+Math.random()+"\"<br/>");

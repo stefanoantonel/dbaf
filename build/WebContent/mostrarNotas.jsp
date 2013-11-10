@@ -189,11 +189,12 @@ textarea {
 				
 		$("input:checkbox").click(function(){
 			var estado=$(this).is(":checked");
-			console.log("cambio: "+estado);
-			estado = (esatdo==true) ? "1" : "0";
-			console.log("dsp if estado:"+esatdo);
+			var id=$(this).next().attr("id");
+			console.log("cambio: "+estado+" id:"+id);
+			estado = (estado==true) ? "1" : "0";
+			console.log("dsp if estado:"+estado);
 			$.ajax({
-	   		     url: "GuardaNotaLista?lista="+estado+"",
+	   		     url: "GuardarNotaLista?lista="+estado+"&id="+id+"",
 	   		     success:function(datos,status,jqXHR){
 						//cuadno no le envian nada funciona como get y sino como set.
 						console.log("Nota realizada");
