@@ -58,8 +58,9 @@ public class Login extends HttpServlet {
 		IUsuarioDAO usuarioDAO=new UsuarioDAO(cn); //uso la interfaz y uso la implementacion especifica de usuarioDAO. Esto usa polimorfismp
 		try {
 			
-			Usuario usuario=usuarioDAO.cargar(usuariop); 
-			if(usuario!=null && usuario.getClave().equals(clavep)){
+			Usuario usuario=usuarioDAO.cargar(usuariop,clavep); 
+//			if(usuario!=null && usuario.getClave().equals(clavep)){
+			if(usuario!=null){
 				//todo ok. tengo que crear una sesion
 				System.out.println("antes de crear la sesion");
 				ArrayList<Usuario> ses=(ArrayList<Usuario>)request.getServletContext().getAttribute("sesiones");

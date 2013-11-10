@@ -9,6 +9,7 @@ public interface IUsuarioDAO {
 	
 	
 	public Usuario cargar(String nombre) throws PersistenciaException;
+	public Usuario cargar(String nombre,String clave) throws PersistenciaException;
 	
 	public boolean eliminar (Usuario usuario)throws PersistenciaException;
 	public Usuario agregar(Usuario usuario)throws PersistenciaException;

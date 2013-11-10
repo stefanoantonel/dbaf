@@ -18,13 +18,15 @@ public class UsuarioDAO implements IUsuarioDAO {
 			
 	}
 	//esto es cargar en memoria al usuario NO agregar
-	public Usuario cargar(String nombre) throws PersistenciaException{
-		
-		String sql="SELECT * FROM usuarios WHERE usuario=?";
+	public Usuario cargar(String nombre,String clave) throws PersistenciaException{
+//		INSERT INTO usuarios VALUES('usuario',AES_ENCRYPT('contraseña','llave'),3);
+//		SELECT * FROM usuarios where clave=AES_ENCRYPT('contraseña','llave');
+		String sql="SELECT * FROM usuarios WHERE usuario=? and clave=AES_ENCRYPT('pass',?)";
 		Usuario resultado=null;
 		try {
 			PreparedStatement stm=cn.prepareStatement(sql);
 			stm.setString(1,nombre);
+			stm.setString(2, clave);
 			ResultSet rs=stm.executeQuery();
 			
 			if(rs.next()){
@@ -88,6 +90,11 @@ public class UsuarioDAO implements IUsuarioDAO {
 	public boolean modificar(Usuario usuario) throws PersistenciaException{
 		// TODO Auto-generated method stub
 		return false;
+	}
+	@Override
+	public Usuario cargar(String nombre) throws PersistenciaException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
