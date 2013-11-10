@@ -77,8 +77,10 @@ public class NotasDAO {
 				JSONObject nota=new JSONObject();
 				nota.put("id",rs.getString("id") );
 				nota.put("value", rs.getString("nota"));
+				nota.put("lista", rs.getString("lista"));
 				nota.put("agregada", rs.getString("fecha_agregada"));
 				nota.put("modificada", rs.getString("fecha_modificada"));
+				
 				notas.put(nota);
 				//descripciones.add(rs.getString("nota"));
 				while(rs.next()){
@@ -86,6 +88,9 @@ public class NotasDAO {
 //					descripciones.add(rs.getString("nota"));
 					nota.put("id",rs.getString("id") );
 					nota.put("value", rs.getString("nota"));
+					nota.put("lista", rs.getString("lista"));
+					nota.put("agregada", rs.getString("fecha_agregada"));
+					nota.put("modificada", rs.getString("fecha_modificada"));
 					notas.put(nota);
 				}
 				System.out.println();
@@ -117,6 +122,20 @@ public class NotasDAO {
 			return false;
 		}
 	}
+	
+//	public boolean updateLista(String lista, String id){	
+//		try {
+//			String sql="UPDATE `practico`.`notas` SET `nota`='"+nota+"' WHERE `id`='"+id+"' ";
+//			PreparedStatement stm=cn.prepareStatement(sql);
+//			stm.executeUpdate();
+//			return true;
+//		} 
+//		catch (SQLException e) {
+//			System.out.println("error en save notas");
+//			return false;
+//		}
+//	}
+
 	public boolean insert(String usuario){
 		try {
 			String sql="INSERT INTO `practico`.`notas`(`nota`,`usuario_id`,`fecha_agregada`) VALUES('','"+usuario+"',CURDATE()) ";
@@ -131,9 +150,9 @@ public class NotasDAO {
 			return false;
 		}
 	}
-	public boolean delete(String nota){
+	public boolean delete(String id){
 		try{
-			String sql="Delete from `practico`.`notas` where nota like '%"+nota+"%'";
+			String sql="Delete from `practico`.`notas` where id="+id+"";
 			PreparedStatement stm=cn.prepareStatement(sql);
 			System.out.println(sql);
 			stm.executeUpdate();
@@ -144,4 +163,5 @@ public class NotasDAO {
 			return false;
 		}
 	}
+	
 }

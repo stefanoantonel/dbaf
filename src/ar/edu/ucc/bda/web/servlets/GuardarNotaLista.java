@@ -12,20 +12,21 @@ import javax.servlet.http.HttpServletResponse;
 import ar.edu.ucc.bda.web.modelo.dao.NotasDAO;
 import ar.edu.ucc.bda.web.utiles.Constantes;
 
-@WebServlet("/GuardaNota")
-public class GuardaNota extends HttpServlet {
+@WebServlet("/GuardarNotaLista")
+public class GuardarNotaLista extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public GuardaNota() {
+ 
+    public GuardarNotaLista() {
         super();
         
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Connection cn=(Connection)getServletContext().getAttribute(Constantes.NOMBRE_CONEXION);
-		String nota=request.getParameter("nota");
-		String id=request.getParameter("id");
-		System.out.println("NotaCambiada: "+nota+" Id: "+id);
+		String nota=request.getParameter("lista");
+		
+		
 		NotasDAO dao=new NotasDAO(cn);
 		boolean a=dao.update(nota, id);
 		if(a==true){
@@ -36,8 +37,8 @@ public class GuardaNota extends HttpServlet {
 		
 	}
 
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("entro post");
 		doGet(request, response);
 	}
 

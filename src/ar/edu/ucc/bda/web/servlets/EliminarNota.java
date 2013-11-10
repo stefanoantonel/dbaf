@@ -32,10 +32,10 @@ public class EliminarNota extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Connection cn=(Connection)getServletContext().getAttribute(Constantes.NOMBRE_CONEXION);
 		
-		String nota=request.getParameter("nota");
-		nota=nota.trim();
+		String id=request.getParameter("id");
+		id=id.trim();
 		NotasDAO dao=new NotasDAO(cn);
-		boolean a=dao.delete(nota);
+		boolean a=dao.delete(id);
 		if(a==true){
 			System.out.println("Todo ok eliminado");
 		}

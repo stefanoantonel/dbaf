@@ -33,6 +33,23 @@ textarea {
 
 
 <script type="text/javascript">
+
+	
+	function esLista(lista){
+		//console.log("listaFunc= "+ lista);
+		var lis="";
+		if(lista!=null){
+			if(lista=="1"){
+				lis=" checked=\"checked\" ";
+			}
+			else
+				lis="";
+			
+		}
+		return lis;
+	}
+	
+
 	$(document).on("ready",function(){
 		
 		
@@ -41,14 +58,16 @@ textarea {
 		//alert (persons);
 		$.each(not, function(indice,json){
 			
-			var check="<input type=\"checkbox\" style=\"display:inline ;\"/>";
-			var area="<textarea id="+json.id+" title=\"Creada: "+json.agregada+" Modificada: "+json.modificada+"\" style=\"display:inline\"> "+json.value+"</textarea>";
+			console.log("value: "+json.value+" lista: "+json.lista);
+			var check="<input type=\"checkbox\" style=\"display:inline ;\" "+esLista(json.lista)+"/>";
+			console.log("esLista: "+esLista(json.lista));
+			var area="<textarea id="+json.id+" wrap=\"hard\" title=\"Creada: "+json.agregada+" Modificada: "+json.modificada+"\" style=\"display:inline\"> "+json.value+"</textarea>";
 			var boton="<input class=\"botonEliminar\" value=\"Elliminar\" type=\"button\" />";
 			var enter="<div style=\"display:block;\"/>";
 			
 			$("body").last().append(check+area+boton+enter);
-			console.log(json.id);
-			console.log(json.value);
+			//console.log(json.id);
+			//console.log(json.value);
 		});
 		
 		$("textarear").tooltip({
@@ -121,19 +140,21 @@ textarea {
 		
 		$("input.botonEliminar").click(function(){
 			//alert($(this).prev().val());
-			var not=$(this).prev().val();
-			$.ajax({
-	   		     url: "EliminarNota?nota="+not+"",
+			var id=$(this).prev().attr("id");
+			console.log("id nota prev"+id);
+			 $.ajax({
+	   		     url: "EliminarNota?id="+id+"",
 	   		     success:function(datos,status,jqXHR){
 						//cuadno no le envian nada funciona como get y sino como set.
 						console.log("Nota eliminada");
 						
 						
-						/* var a=$("#contenido").html();
-						$("#contenido").html(a+datos); */
+						//var a=$("#contenido").html();
+						//$("#contenido").html(a+datos);
 	   		    	
 	   		     }
  		     });
+ 		     
 			
 		});
 		
@@ -146,7 +167,7 @@ textarea {
 		$("textarea").blur(function() {
 			var notaCamb=$(this).val();
 			var notaId=$(this).attr("id");
-			console.log("toco el area= "+$(this).val());
+			//console.log("toco el area= "+$(this).val());
 			//HttpSession session = request.getSession();
 			//session.setAttribute("object", object);
 			//session.setAttribute("cambio", $(this).val());
@@ -163,6 +184,26 @@ textarea {
    		     });
 		});
 		$(document).css("text-align", "center");//???
+				
+				
+				
+		$("input:checkbox").click(function(){
+			var estado=$(this).is(":checked");
+			console.log("cambio: "+estado);
+			estado = (esatdo==true) ? "1" : "0";
+			console.log("dsp if estado:"+esatdo);
+			$.ajax({
+	   		     url: "GuardaNotaLista?lista="+estado+"",
+	   		     success:function(datos,status,jqXHR){
+						//cuadno no le envian nada funciona como get y sino como set.
+						console.log("Nota realizada");
+						/* var a=$("#contenido").html();
+						$("#contenido").html(a+datos); */
+	   		    	
+	   		     }
+   		     });
+			
+		});
 	});
 </script>
 
