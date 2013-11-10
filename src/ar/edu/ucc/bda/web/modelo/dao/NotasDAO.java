@@ -77,6 +77,8 @@ public class NotasDAO {
 				JSONObject nota=new JSONObject();
 				nota.put("id",rs.getString("id") );
 				nota.put("value", rs.getString("nota"));
+				nota.put("agregada", rs.getString("fecha_agregada"));
+				nota.put("modificada", rs.getString("fecha_modificada"));
 				notas.put(nota);
 				//descripciones.add(rs.getString("nota"));
 				while(rs.next()){
@@ -117,7 +119,7 @@ public class NotasDAO {
 	}
 	public boolean insert(String usuario){
 		try {
-			String sql="INSERT INTO `practico`.`notas`(`nota`,`usuario_id`) VALUES('','"+usuario+"') ";
+			String sql="INSERT INTO `practico`.`notas`(`nota`,`usuario_id`,`fecha_agregada`) VALUES('','"+usuario+"',CURDATE()) ";
 			PreparedStatement stm=cn.prepareStatement(sql);
 			System.out.println(sql);
 			stm.executeUpdate();
@@ -126,6 +128,19 @@ public class NotasDAO {
 		catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("error en save notas");
+			return false;
+		}
+	}
+	public boolean delete(String nota){
+		try{
+			String sql="Delete from `practico`.`notas` where nota like '%"+nota+"%'";
+			PreparedStatement stm=cn.prepareStatement(sql);
+			System.out.println(sql);
+			stm.executeUpdate();
+			return true;
+		}
+		catch(Exception e){
+			e.printStackTrace();
 			return false;
 		}
 	}

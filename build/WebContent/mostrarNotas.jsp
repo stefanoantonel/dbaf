@@ -15,6 +15,9 @@ body {
 <title>Block de Notas</title>
 <script src="css/js/jquery-1.9.1.js"></script>
 <script src="css/js/bootstrap.min.js"></script>
+ <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  
 
 
 
@@ -38,12 +41,22 @@ textarea {
 		//alert (persons);
 		$.each(not, function(indice,json){
 			
-			$("body").last().append("<textarea id="+json.id+"> "+json.value+"</textarea >");
+			var check="<input type=\"checkbox\" style=\"display:inline ;\"/>";
+			var area="<textarea id="+json.id+" title=\"Creada: "+json.agregada+" Modificada: "+json.modificada+"\" style=\"display:inline\"> "+json.value+"</textarea>";
+			var boton="<input class=\"botonEliminar\" value=\"Elliminar\" type=\"button\" />";
+			var enter="<div style=\"display:block;\"/>";
+			
+			$("body").last().append(check+area+boton+enter);
 			console.log(json.id);
 			console.log(json.value);
 		});
 		
-		
+		$("textarear").tooltip({
+			show: {
+		        effect: "slideDown",
+		        delay: 2500,
+			}
+		});
 		/* var cost = ${notas};
 	    var costarr = $.parseJSON(cost);
 	    $.each(cost, function(i, item) {
@@ -105,6 +118,31 @@ textarea {
   		     });
 		});
 		
+		
+		$("input.botonEliminar").click(function(){
+			//alert($(this).prev().val());
+			var not=$(this).prev().val();
+			$.ajax({
+	   		     url: "EliminarNota?nota="+not+"",
+	   		     success:function(datos,status,jqXHR){
+						//cuadno no le envian nada funciona como get y sino como set.
+						console.log("Nota eliminada");
+						
+						
+						/* var a=$("#contenido").html();
+						$("#contenido").html(a+datos); */
+	   		    	
+	   		     }
+ 		     });
+			
+		});
+		
+		$("textarea").mousedown(function(event) {
+			if(event.which==3){ //click derecho
+				 
+			}
+		});
+		
 		$("textarea").blur(function() {
 			var notaCamb=$(this).val();
 			var notaId=$(this).attr("id");
@@ -131,15 +169,14 @@ textarea {
 
 </head>
 <body>
-	<div align="center" id="scope"
-		style="display: list-item; color: red; border-style: solid;">
+	<div align="center" id="scope" style="display: none; color: red; border-style: solid;">
 		${sessionScope.notas}
 	</div>
-	<div>
-	<input type="checkbox" style="display:inline ;"/>
-	<textarea rows="" cols="" style="display: inline;">area </textarea>
-	</div>
-	<input id="agregar" type="button" value="Agregar Nota"/>
+	
+
+	<input id="agregar" type="button" value="Agregar Nota" style="display:block;" align="middle"/>
+	
+	
 	
 </body>
 </html>
