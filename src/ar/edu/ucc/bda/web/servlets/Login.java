@@ -57,7 +57,7 @@ public class Login extends HttpServlet {
 		Connection cn=(Connection)getServletContext().getAttribute(Constantes.NOMBRE_CONEXION);
 		IUsuarioDAO usuarioDAO=new UsuarioDAO(cn); //uso la interfaz y uso la implementacion especifica de usuarioDAO. Esto usa polimorfismp
 		try {
-			
+			usuarioDAO.encriptar("ds");
 			Usuario usuario=usuarioDAO.cargar(usuariop,clavep); 
 //			if(usuario!=null && usuario.getClave().equals(clavep)){
 			if(usuario!=null){

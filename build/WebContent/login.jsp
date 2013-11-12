@@ -25,7 +25,7 @@
 		});
 
 		$("#registrarse").click(function() {
-			$("#form").css("visibility", "visible");
+			$("#formAgrega").css("visibility", "visible");
 
 		});
 		//alert($("#scope").html());
@@ -61,11 +61,12 @@
 
 		<br /> <img id="progreso" src="css/img/lo.gif" name="pe"
 			style="display: none">
-		<div id="form" style="visibility: hidden;">
-			<iframe src="ListaZona" width="400" height="400"></iframe>
+		<div id="formAgrega" style="visibility: hidden;">
+			<iframe src="agregarUsuario.jsp" width="400" height="400"></iframe>
 		</div>
+		
 	</div>
-
+	
 
 </body>
 </html>

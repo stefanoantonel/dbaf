@@ -81,7 +81,7 @@ div.textarea{
 			//console.log(json.value);
 		});
 		
-		$("textarear").tooltip({
+		$("textarear").tooltip({  
 			show: {
 		        effect: "slideDown",
 		        delay: 2500,

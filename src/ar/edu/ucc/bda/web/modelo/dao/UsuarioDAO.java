@@ -13,6 +13,12 @@ public class UsuarioDAO implements IUsuarioDAO {
 //esta clase es la que se va a conectar con la BD
 	private Connection cn;
 	
+	
+	public static void main(String [ ] args)
+	{
+	     
+	}
+	
 	public UsuarioDAO(Connection cn){
 		this.cn=cn;
 			
@@ -22,6 +28,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 //		INSERT INTO usuarios VALUES('usuario',AES_ENCRYPT('contraseña','llave'),3);
 //		SELECT * FROM usuarios where clave=AES_ENCRYPT('contraseña','llave');
 		String sql="SELECT * FROM usuarios WHERE usuario=? and clave=AES_ENCRYPT('pass',?)";
+		
 		Usuario resultado=null;
 		try {
 			PreparedStatement stm=cn.prepareStatement(sql);
@@ -30,11 +37,13 @@ public class UsuarioDAO implements IUsuarioDAO {
 			ResultSet rs=stm.executeQuery();
 			
 			if(rs.next()){
-				resultado=new Usuario(rs.getString("usuario"),rs.getString("clave"));
-				//System.out.println("todo ok usuarioDAO");
+//				String nom, String cla,String mail)
+				resultado=new Usuario(rs.getString("usuario"),rs.getString("clave"),rs.getString("mail"));
+				
+				System.out.println("clave en string: "+resultado.getClave());
 			}
 			else{
-				System.out.println("usuario DAO dio null");
+				System.out.println("usuario DAO cargar dio null");
 				
 			}
 		} catch (SQLException e) {
@@ -55,35 +64,27 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 
 	
-	public Usuario agregar(Usuario usuario) throws PersistenciaException{
+	public boolean agregar(Usuario usuario) throws PersistenciaException{
 		
-		String sql="INSERT INTO practico.usuarios(usuario,clave) VALUES (?,?)";
+		String sql="INSERT INTO practico.usuarios(usuario,clave,mail,cuentaActivada,fecha_creacion) VALUES (?,AES_ENCRYPT('pass','"+usuario.getClave()+"'),?,'0',CURDATE())";
 		Usuario resultado=null;
 		try {
 			PreparedStatement stm=cn.prepareStatement(sql);
 			stm.setString(1,usuario.getNombre());
-			stm.setString(2,usuario.getClave());
+//			String c=encriptar(usuario.getClave());
+//			stm.set(2,c);
+			stm.setString(2,usuario.getEmail());
 			
-			ResultSet rs=stm.executeQuery();
 			
-			if(rs.next()){
-				resultado=new Usuario(rs.getString("usuario"),rs.getString("clave"));
-				System.out.println("todo ok usuarioDAO");
-			}
-			else{
-				System.out.println("ddsp de ejecutar usuario DAO dio null");
-				
-			}
+			System.out.println(stm.toString());
+			stm.executeUpdate();
+			return true;
 		} catch (SQLException e) {
-			System.out.println("error usuarioDAO");
+			System.out.println("error agregar usuario en usuarioDAO");
 			e.printStackTrace();
-			throw new PersistenciaException(); //relanzo la persistencia con otro nombre
+			return false;
 			
 		}
-		
-		System.out.println("UsuarioDAO: resultado ="+resultado+"");
-		return resultado;
-	
 	}
 
 	
@@ -93,6 +94,16 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 	@Override
 	public Usuario cargar(String nombre) throws PersistenciaException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public String encriptar(String clave) {
+		return "AES_ENCRYPT('pass','"+clave+"')";
+	}
+	@Override
+	public String desencriptar(String clave) {
 		// TODO Auto-generated method stub
 		return null;
 	}
