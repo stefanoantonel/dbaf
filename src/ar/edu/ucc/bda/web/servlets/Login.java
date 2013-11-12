@@ -63,8 +63,9 @@ public class Login extends HttpServlet {
 			
 			int estado=-1; //me va a traer el estado del usuario (Activado, caduco, etc)
 			Usuario usuario=usuarioDAO.cargar(usuariop,clavep);
-			estado=usuario.getEstado();
-			
+			if(usuario!=null){
+				estado=usuario.getEstado();
+			}
 			
 			request.getSession().setAttribute("uActual",usuariop);
 			request.getSession().setAttribute("cActual",clavep);
@@ -118,11 +119,13 @@ public class Login extends HttpServlet {
 					response.sendRedirect("modificarUsuario.jsp");
 					break;
 				}
-				default: break;
+				default: {
+					response.sendRedirect("login.jsp");
+					break;
+				}
 			}
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
