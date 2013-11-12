@@ -53,9 +53,9 @@ public class UsuarioDAO implements IUsuarioDAO {
 					estado=2; //falta activar 
 				}
 				//Calendar.getInstance().compareTo(Calendar.getInstance())
-				DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-				Date date = new Date();
-				System.out.println(dateFormat.format("dia actual: "+date));
+//				DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+//				Date date = new Date();
+//				System.out.println(dateFormat.format("dia actual: "+date));
 				//Date.valueOf(expiracion).compareTo(Date.this.);
 				
 				resultado=new Usuario(nombrep,clavep,mail,id);

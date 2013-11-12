@@ -23,7 +23,7 @@ public class ClienteDAO{
 				PreparedStatement pst=con.prepareStatement(sql);
 				
 				pst.setString(1,cli.getCliente());
-				pst.setInt(2,cli.getIdZona());
+				pst.setInt(2,1);
 				pst.setInt(3, cli.isCuentaHabilitada()? 1:0);
 				
 				pst.executeUpdate();
@@ -35,6 +35,7 @@ public class ClienteDAO{
 			//RequestDispatcher rd = getServletContext().getRequestDispatcher("/agregarCliente.jsp");
 			
 			//rd.forward(request, response);
+			System.out.println("error clienteDAO agregar()");
 			return false;
 		}
 	}
