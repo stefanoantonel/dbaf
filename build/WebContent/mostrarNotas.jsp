@@ -62,12 +62,13 @@
 			
 			console.log("value: "+json.value+" lista: "+json.lista);
 			var comienzoDiv="<div style=\"vertical-align: top; color: light-red; border-style: dotted;\" >";
-			var check="<input type=\"checkbox\" style=\"display:inline ;\" "+esLista(json.lista)+"/>";
+			var check="<input type=\"checkbox\" style=\"vertical-align: middle;\" "+esLista(json.lista)+"/>";
 			console.log("esLista: "+esLista(json.lista));
 			var area="<textarea class=\"textarea\" id="+json.id+" title=\"Creada: "+json.agregada+" Modificada: "+json.modificada+"\" style=\"display:inline\"> "+json.value+"</textarea>";
 			//var area="<div contenteditable=\"true\" class=\"tooltip\" class=\"textarea\" id="+json.id+" wrap=\"hard\" title=\"Creada: "+json.agregada+" Modificada: "+json.modificada+"\" style=\"display:inline\"> "+json.value+"</div>";
 			//var boton="<input class=\"btn  btn-info btn-large\" class=\"botonEliminar\" value=\"Elliminar\" type=\"button\" />";
 			var boton="<button title=\"Eliminar nota\"  class=\"btn\" type=\"button\" class=\"botonEliminar\" class=\"close\" >&times;</button>";
+			
 			var enter="<div style=\"display:block;\"/>";
 			var finDiv="</div><br/>";
 			
@@ -151,7 +152,7 @@
 
 	<div align="center" style="vertical-align:top;  "> 
 		
-		<input id="agregar" type="button" value="Agregar Nota" style="display:block;" align="middle"/>
+		<input id="agregar" class="btn" type="button" value="Agregar Nota" style="display:block;" align="middle"/>
 		<br/>
 	</div>
 	
