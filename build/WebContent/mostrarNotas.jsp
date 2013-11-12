@@ -51,9 +51,14 @@
 			
 			$("#bloque").append("<iframe src=\"./nota.jsp\"></iframe> </br>");
 			
-		//	$("#nota").attr("id",json.id);
-			$("#aa").attr("text", "new title value");
+		//	$('#nota').attr('id', 'first6');
+		//	$("#aa").text("text");
 		
+			$('#nota').each(function(){
+				  if(this.id){
+				    this.id = this.id+"1";
+				  }
+				});
 		});
 		
 
