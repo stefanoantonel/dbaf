@@ -46,11 +46,27 @@
 			var enter="<div style=\"display:block;\"/>";
 			var finDiv="</div><br/>"; */
 			
-			//$("body").last().append(comienzoDiv+check+area+boton+enter+finDiv);
+			//$("body").last().append(comienzoDiv+check+area+boton+enter+finDiv);<<<<<<< HEAD
 			//$("#bloque").append($("#nota"));
 			//console.log($("#agregar").attr("id"," "+indice+" "));
 			$("body").last().append($("#agregar").attr("name"," "+indice+" "));
 			console.log($());
+			
+			/* 
+=======
+			
+			
+			$("#bloque").append("<iframe src=\"./nota.jsp\"></iframe> </br>");
+			
+		//	$('#nota').attr('id', 'first6');
+		//	$("#aa").text("text");
+		
+			$('#nota').each(function(){
+				  if(this.id){
+				    this.id = this.id+"1";
+				  }
+				});
+>>>>>>> cdee02d51274b480d2c07993f21ba6866594c6bd */
 		});
 		
 
