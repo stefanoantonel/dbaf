@@ -27,10 +27,10 @@ public class CrearNota extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Connection cn=(Connection)getServletContext().getAttribute(Constantes.NOMBRE_CONEXION);
-		String usuarioActual=(String) request.getServletContext().getAttribute("usuarioActual");
+		String usuarioActualId=(String) request.getServletContext().getAttribute("usuarioActualId");
 		
 		NotasDAO dao=new NotasDAO(cn);
-		boolean a=dao.insert(usuarioActual);
+		boolean a=dao.insert(usuarioActualId);
 		if(a==true){
 			System.out.println("Todo ok guardados");
 		}

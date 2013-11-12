@@ -66,7 +66,7 @@ public class NotasDAO {
 	public JSONArray load(String usuario) throws JSONException {
 		List<String> descripciones=new ArrayList<>();
 //		String sql="SELECT * FROM notas WHERE usuario=?";
-		String sql="SELECT * FROM notas WHERE usuario_id=?";
+		String sql="SELECT * FROM notas WHERE usuarios_id=?";
 		Usuario resultado=null;
 		JSONArray notas=new JSONArray();
 		try {
@@ -139,7 +139,7 @@ public class NotasDAO {
 
 	public boolean insert(String usuario){
 		try {
-			String sql="INSERT INTO `practico`.`notas`(`nota`,`usuario_id`,`fecha_agregada`) VALUES('','"+usuario+"',CURDATE()) ";
+			String sql="INSERT INTO `practico`.`notas`(`nota`,`usuarios_id`,`fecha_agregada`) VALUES('','"+usuario+"',CURDATE()) ";
 			PreparedStatement stm=cn.prepareStatement(sql);
 			System.out.println(sql);
 			stm.executeUpdate();

@@ -47,7 +47,7 @@ public class AgregarUsuario extends HttpServlet {
 		else{
 			try{
 				int clave=Integer.parseInt(clave1);
-				Usuario nuevo=new Usuario(usuariop, clave1,email);
+				Usuario nuevo=new Usuario(usuariop, clave1,email,"");
 				
 				Connection cn=(Connection)getServletContext().getAttribute(Constantes.NOMBRE_CONEXION);
 				IUsuarioDAO usuarioDAO=new UsuarioDAO(cn); //uso la interfaz y uso la implementacion especifica de usuarioDAO. Esto usa polimorfismp
@@ -62,7 +62,7 @@ public class AgregarUsuario extends HttpServlet {
 					}
 					else{
 						String mensaje=" <div class=\"alert alert-error\"> <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a>"
-					    		+ "<strong>Error: contraseña incorrecta</strong> </div>";
+					    		+ "<strong>Error: contraseña incorrecta o usuario ya registrado</strong> </div>";
 						despachar(mensaje, request, response);
 					}
 				} 

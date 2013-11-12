@@ -5,13 +5,15 @@ public class Usuario {
 	String nombre;
 	String email;
 	String clave;
+	String id;
 
 
-	public Usuario(String nom, String cla,String mail) {
+	public Usuario(String nom, String cla,String mail,String ident) {
 		super();
 		this.nombre = nom;
 		this.clave = cla;
 		this.email=mail;
+		this.id=ident;
 	}
 
 
@@ -42,6 +44,16 @@ public class Usuario {
 
 	public void setClave(String clave) {
 		this.clave = clave;
+	}
+
+
+	public String getId() {
+		return id;
+	}
+
+
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 

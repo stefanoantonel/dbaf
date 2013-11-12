@@ -53,12 +53,14 @@ public class Login extends HttpServlet {
 		String clavep=request.getParameter("clave");
 		
 		request.getServletContext().setAttribute("usuarioActual", usuariop);
+		
 		System.out.println("guardo el usuario: " +usuariop);
 		Connection cn=(Connection)getServletContext().getAttribute(Constantes.NOMBRE_CONEXION);
 		IUsuarioDAO usuarioDAO=new UsuarioDAO(cn); //uso la interfaz y uso la implementacion especifica de usuarioDAO. Esto usa polimorfismp
 		try {
-			usuarioDAO.encriptar("ds");
-			Usuario usuario=usuarioDAO.cargar(usuariop,clavep); 
+//			usuarioDAO.encriptar("ds");
+			Usuario usuario=usuarioDAO.cargar(usuariop,clavep);
+			request.getServletContext().setAttribute("usuarioActualId", usuario.getId());
 //			if(usuario!=null && usuario.getClave().equals(clavep)){
 			if(usuario!=null){
 				//todo ok. tengo que crear una sesion

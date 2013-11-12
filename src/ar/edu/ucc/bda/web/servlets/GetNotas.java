@@ -93,7 +93,7 @@ public class GetNotas extends HttpServlet {
 		Connection cn=(Connection)getServletContext().getAttribute(Constantes.NOMBRE_CONEXION);
 //		ArrayList<Usuario> ses=(ArrayList<Usuario>)request.getServletContext().getAttribute("sesiones");
 		//OBTENGO EL USUARIO PARA SACAR LAS NOTAS DE ESE ESPECIFICO
-		String usuarioActual=request.getServletContext().getAttribute("usuarioActual").toString();
+		String usuarioActual=request.getServletContext().getAttribute("usuarioActualId").toString();
 		NotasDAO notas=new NotasDAO(cn);
 		System.out.println("Le mando el usuario: "+usuarioActual);
 		
