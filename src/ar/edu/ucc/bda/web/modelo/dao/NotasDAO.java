@@ -19,9 +19,8 @@ public class NotasDAO {
 
 	private Connection cn;
 
-	public NotasDAO(Connection cn) {
-		this.cn = cn;
-		
+	public NotasDAO() {
+		cn=Coneccion.getConnection();
 	}
 
 //	public List<List<String>> load(String usuario) throws JSONException {

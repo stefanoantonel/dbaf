@@ -22,11 +22,11 @@ public class GuardaNota extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Connection cn=(Connection)getServletContext().getAttribute(Constantes.NOMBRE_CONEXION);
+		//Connection cn=(Connection)getServletContext().getAttribute(Constantes.NOMBRE_CONEXION);
 		String nota=request.getParameter("nota");
 		String id=request.getParameter("id");
 		System.out.println("NotaCambiada: "+nota+" Id: "+id);
-		NotasDAO dao=new NotasDAO(cn);
+		NotasDAO dao=new NotasDAO();
 		boolean a=dao.update(nota, id);
 		if(a==true){
 			System.out.println("Todo ok guardados");

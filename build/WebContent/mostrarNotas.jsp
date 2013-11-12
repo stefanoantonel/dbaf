@@ -4,37 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-
-	<style type="text/css">
-	body {
-		color: orange;
-		text-align: justify;
-	}
-	</style>
-	
 	<title>Block de Notas</title>
 	<script src="css/js/jquery-1.9.1.js"></script>
 	<link href="dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link rel="stylesheet" href="./css/estilos.css" type="text/css" />
 	 <script src="dist/js/bootstrap.min.js"></script>
-	
-	
-	<style type="text/css">
-	body{
-	text-align:center;
-	}
-	textarea {
-		font-family: Verdana;
-		display: block;
-	}
-	div.textarea{
-		border-width:thin;
-		border-style: solid;
-		border-color: black;
-		width: 20em;
-		list-style: inherit;
-	}
-	</style>
-
 
 <script type="text/javascript">
 
@@ -60,32 +34,42 @@
 
 		$.each(not, function(indice,json){
 			
-			console.log("value: "+json.value+" lista: "+json.lista);
+			/* console.log("value: "+json.value+" lista: "+json.lista);
 			var comienzoDiv="<div style=\"vertical-align: top; color: light-red; border-style: dotted;\" >";
 			var check="<input type=\"checkbox\" style=\"vertical-align: middle;\" "+esLista(json.lista)+"/>";
 			console.log("esLista: "+esLista(json.lista));
-			var area="<textarea class=\"textarea\" id="+json.id+" title=\"Creada: "+json.agregada+" Modificada: "+json.modificada+"\" style=\"display:inline\"> "+json.value+"</textarea>";
+			var area="<textarea class=\"textarea\" id="+$('#yourElementId').prop('title', 'your new title');+" title=\"Creada: "+json.agregada+" Modificada: "+json.modificada+"\" style=\"display:inline\"> "+json.value+"</textarea>";
 			//var area="<div contenteditable=\"true\" class=\"tooltip\" class=\"textarea\" id="+json.id+" wrap=\"hard\" title=\"Creada: "+json.agregada+" Modificada: "+json.modificada+"\" style=\"display:inline\"> "+json.value+"</div>";
 			//var boton="<input class=\"btn  btn-info btn-large\" class=\"botonEliminar\" value=\"Elliminar\" type=\"button\" />";
 			var boton="<button title=\"Eliminar nota\"  class=\"btn\" type=\"button\" class=\"botonEliminar\" class=\"close\" >&times;</button>";
 			
 			var enter="<div style=\"display:block;\"/>";
-			var finDiv="</div><br/>";
+			var finDiv="</div><br/>"; */
 			
-			$("body").last().append(comienzoDiv+check+area+boton+enter+finDiv);
+			//$("body").last().append(comienzoDiv+check+area+boton+enter+finDiv);
+			
+			
+			$("#bloque").append("<iframe src=\"./nota.jsp\"></iframe> </br>");
+			
+		//	$("#nota").attr("id",json.id);
+			$("#aa").attr("text", "new title value");
 		
 		});
 		
 
 		
 		$("#agregar").click(function(){
+			
+		//	$('#myModal').modal(options);
+			
 			$.ajax({
 	   		     url: "CrearNota",
 	   		     success:function(datos,status,jqXHR){
 						//cuadno no le envian nada funciona como get y sino como set.
 						console.log("Nota creada");
 						$.get('GetNotas', function(data) {
-					        $("body").html(data);
+							var a=$("#bloque").html();
+		    		    	$("#bloque").html(a+datos);
 					    });
 	   		     }
   		     });
@@ -155,6 +139,11 @@
 		<input id="agregar" class="btn" type="button" value="Agregar Nota" style="display:block;" align="middle"/>
 		<br/>
 	</div>
-	
+
+	<div class="centrar" id="bloque" name="bloque">
+			<!--  ACA van todas las notas del notas.jsp -->
+			
+    </div><!-- /.modal-dialog -->
+		
 </body>
 </html>

@@ -23,11 +23,11 @@ public class GuardarNotaLista extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Connection cn=(Connection)getServletContext().getAttribute(Constantes.NOMBRE_CONEXION);
+	//	Connection cn=(Connection)getServletContext().getAttribute(Constantes.NOMBRE_CONEXION);
 		String estado=request.getParameter("lista");
 		String id=request.getParameter("id");
 		
-		NotasDAO dao=new NotasDAO(cn);
+		NotasDAO dao=new NotasDAO();
 		boolean a=dao.updateLista(estado, id);
 		if(a==true){
 			System.out.println("Todo ok notaLista");

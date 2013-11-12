@@ -90,11 +90,11 @@ public class GetNotas extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Connection cn=(Connection)getServletContext().getAttribute(Constantes.NOMBRE_CONEXION);
+		//Connection cn=(Connection)getServletContext().getAttribute(Constantes.NOMBRE_CONEXION);
 //		ArrayList<Usuario> ses=(ArrayList<Usuario>)request.getServletContext().getAttribute("sesiones");
 		//OBTENGO EL USUARIO PARA SACAR LAS NOTAS DE ESE ESPECIFICO
 		String usuarioActual=request.getServletContext().getAttribute("usuarioActualId").toString();
-		NotasDAO notas=new NotasDAO(cn);
+		NotasDAO notas=new NotasDAO();
 		System.out.println("Le mando el usuario: "+usuarioActual);
 		
 //		List<List<String>> distintasNotas=null;
@@ -132,7 +132,9 @@ public class GetNotas extends HttpServlet {
 //		}
 		if(distintasNotas!=null){
 			request.getSession().setAttribute("notas", distintasNotas);
+			
 			despachar("despache desde GetNotas", request, response);
+			//response.sendRedirect("/dbaf/nota.jsp");
 		}
 		else
 			System.out.println("error en GetNotas");

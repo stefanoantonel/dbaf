@@ -26,9 +26,13 @@ public class ContenidoRandom extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		//response.sendRedirect("/dbaf/nota.jsp");
 		
-		response.setContentType("text/html");	
+		
+		response.setContentType("text/html");
 		response.getWriter().print("<input type=\"text\" value=\""+Math.random()+"\"<br/>");
 	}
 
 }
+
+

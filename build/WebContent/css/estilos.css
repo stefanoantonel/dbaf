@@ -1,0 +1,23 @@
+@CHARSET "ISO-8859-1";
+
+centrar
+	{
+		margin: 0 auto; width: 800px;
+	}
+	
+	
+body{
+	text-align:center;
+	}
+	textarea {
+		font-family: Verdana;
+		display: block;
+	}
+	div.textarea{
+		border-width:thin;
+		border-style: solid;
+		border-color: black;
+		width: 20em;
+		list-style: inherit;
+	}
+	
