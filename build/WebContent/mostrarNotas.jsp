@@ -31,7 +31,8 @@
 	$(document).on("ready",function(){
 
 		var not = ${notas};
-
+		var notaAnt=$("#nota");
+		var idd=30;
 		$.each(not, function(indice,json){
 			console.log(indice);
 			/* console.log("value: "+json.value+" lista: "+json.lista);
@@ -49,8 +50,25 @@
 			//$("body").last().append(comienzoDiv+check+area+boton+enter+finDiv);<<<<<<< HEAD
 			//$("#bloque").append($("#nota"));
 			//console.log($("#agregar").attr("id"," "+indice+" "));
-			$("body").last().append($("#agregar").attr("name"," "+indice+" "));
-			console.log($());
+			//$("body").last().append($("#agregar").attr("id"," "+indice+" "));
+			var a1=notaAnt.clone();
+			a1.attr("hidden",false);
+			a1.attr("id",json.id);
+			a1.attr("title","Creada: "+json.agregada+" Modificada: "+json.modificada+"");
+			//$(a1.modal-titl)
+			
+			/*  esLista(json.lista)*/
+			
+			//request.getServletContext().setAttribute("usuarioActualId", usuario.getId());
+			$("body").last().append(a1);
+			//notaAnt=$("body").last();
+			console.log(a1);
+			idd=idd+2;
+			var titulo=$("#"+json.id).find("h4").text(json.value);//.filter("[class='modal-title']").text(json.value);
+			console.log("id json"+json.id);
+			$("#"+json.id).find("h4").attr("id",json.id);
+			//console.log($("#"+json.id+"").text());
+			
 			
 			/* 
 =======
@@ -107,8 +125,10 @@
 		
 		
 		$(".textarea").blur(function() {
-			var notaCamb=$(this).val();
+			var notaCamb=$(this).text();
+			console.log("nota cambiada"+notaCamb);
 			var notaId=$(this).attr("id");
+			console.log("id nota "+notaId);
 			$("#cambio").val($(this).val());
 			$.ajax({
 	   		     url: "GuardaNota?nota="+notaCamb+"&id="+notaId+"",
@@ -120,6 +140,7 @@
 				
 		
 		$("input:checkbox").click(function(){
+		
 			var estado=$(this).is(":checked");
 			var id=$(this).next().attr("id");
 			console.log("cambio: "+estado+" id:"+id);
@@ -149,12 +170,24 @@
 
 	<div align="center" style="vertical-align:top;  "> 
 		
-		<input id="agregar" class="btn" type="button" value="Agregar Nota" style="display:block;" align="middle"/>
+		<input id="agregar" class="btn" type="button" value="Agregar Nota" style="display:block;" align="middle" name="11" />
+		<input id="agregar" class="btn" type="button" value="Agregar Nota" style="display:block;" align="middle" name="22"/>
 		<br/>
 	</div>
 
 
-	
+	<div class="centrar" class ="nota" name="nota" id="nota" hidden="true">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button"  class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h4 class="textarea" class="modal-title" name="aa" id="titulo" contenteditable="true" >Modal title</h4>
+		      </div>
+		      <div class="modal-body" id="cuerpo" contenteditable="true">
+		        <p>One fine body&hellip;</p>
+		      </div>
+		     
+		    </div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
 		
 </body>
 </html>
