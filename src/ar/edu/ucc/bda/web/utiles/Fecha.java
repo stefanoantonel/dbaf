@@ -3,6 +3,7 @@ package ar.edu.ucc.bda.web.utiles;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class Fecha {
@@ -36,6 +37,19 @@ public class Fecha {
 		Calendar c1=obtenerFecha(fecha1);
 		Calendar c2=obtenerFecha(fecha2);
 		return c1.compareTo(c2);
+	}
+	
+	public boolean mayorFechaActual (String fecha)
+	{
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		Fecha f=new Fecha();
+		int comparacion=f.compararFecha(dateFormat.format(date), fecha);
+		if(comparacion>0)
+			return true;
+		
+		return false;
+		
 	}
 	
 }

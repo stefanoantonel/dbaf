@@ -10,7 +10,8 @@
 </head>
 <body>
 	<div>${requestScope.eliminado}</div><br/>
-	<br/><br/><br/><br/><br/><br/><br/>
+	<div align="center"><b>${requestScope.mnjActivado}</b></div><br/>
+	<br/><br/>
 	<div align="center" >
 		<!-- <a href="agregarCliente.jsp">Agregar Cliente</a> -->
 		<!--  <a href="AgregarCliente">Agregar Cliente</a><br/>-->

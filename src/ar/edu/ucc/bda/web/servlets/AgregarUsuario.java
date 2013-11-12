@@ -17,6 +17,7 @@ import ar.edu.ucc.bda.web.modelo.Usuario;
 import ar.edu.ucc.bda.web.modelo.dao.IUsuarioDAO;
 import ar.edu.ucc.bda.web.modelo.dao.UsuarioDAO;
 import ar.edu.ucc.bda.web.utiles.Constantes;
+import ar.edu.ucc.bda.web.utiles.Email;
 
 @WebServlet("/agregarUsuario")
 public class AgregarUsuario extends HttpServlet {
@@ -49,15 +50,17 @@ public class AgregarUsuario extends HttpServlet {
 				int clave=Integer.parseInt(clave1);
 				Usuario nuevo=new Usuario(usuariop, clave1,email,"");
 				
-				Connection cn=(Connection)getServletContext().getAttribute(Constantes.NOMBRE_CONEXION);
-				IUsuarioDAO usuarioDAO=new UsuarioDAO(cn); //uso la interfaz y uso la implementacion especifica de usuarioDAO. Esto usa polimorfismp
+				IUsuarioDAO usuarioDAO=new UsuarioDAO(); //uso la interfaz y uso la implementacion especifica de usuarioDAO. Esto usa polimorfismp
 				try {
 					if(usuarioDAO.agregar(nuevo)==true){
 						String mensaje=" <div class=\"alert alert-error\"> <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a>"
 						    		+ "<strong>Revise su email para confirmar</strong> </div>";
 						//String volver="<a href=\"menu.jsp\">Volver al menu</a>";
 						//request.setAttribute("volver", volver); //el "msj" es el nombre con el que guardo la variable en la tabla
-							
+						System.out.println("email: "+email);
+						Email e = new Email("florenciabonansea@gmail.com", "extlpphhgovsmnqh", email, "Activar cuenta");
+						String error =e.send();
+						
 						despachar(mensaje, request, response);
 					}
 					else{
@@ -73,7 +76,7 @@ public class AgregarUsuario extends HttpServlet {
 			}
 			catch (NumberFormatException e){
 				String mensaje=" <div class=\"alert alert-error\"> <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a>"
-			    		+ "<strong>Contraseña debe ser solo numeros</strong> </div>";
+			    		+ "<strong>Datos incorrectos</strong> </div>";
 				despachar(mensaje, request, response);
 				
 			}
