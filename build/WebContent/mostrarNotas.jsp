@@ -31,9 +31,11 @@
 	$(document).on("ready",function(){
 
 		var not = ${notas};
-
+		var i=1;
+		var a=$("#nota");
+		var bloque=  $("#bloque");
 		$.each(not, function(indice,json){
-			
+
 			/* console.log("value: "+json.value+" lista: "+json.lista);
 			var comienzoDiv="<div style=\"vertical-align: top; color: light-red; border-style: dotted;\" >";
 			var check="<input type=\"checkbox\" style=\"vertical-align: middle;\" "+esLista(json.lista)+"/>";
@@ -47,18 +49,20 @@
 			var finDiv="</div><br/>"; */
 			
 			//$("body").last().append(comienzoDiv+check+area+boton+enter+finDiv);
+	
+			var b=a;
+			console.log("id) b:   "+ b.attr("id"));
+			
+			b.attr('name', 'nota'+i);
+			b.attr('id', 'nota'+i);
 			
 			
-			$("#bloque").append("<iframe src=\"./nota.jsp\"></iframe> </br>");
 			
-		//	$('#nota').attr('id', 'first6');
-		//	$("#aa").text("text");
+			bloque.last().append(b);
 		
-			$('#nota').each(function(){
-				  if(this.id){
-				    this.id = this.id+"1";
-				  }
-				});
+			console.log("i---"+ i);
+
+			i++;
 		});
 		
 
@@ -146,7 +150,18 @@
 	</div>
 
 	<div class="centrar" id="bloque" name="bloque">
-			<!--  ACA van todas las notas del notas.jsp -->
+	    <div class="centrar" name="nota" id="nota" >
+		    <div class="modal-content" >
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h4 class="modal-title" name="aa" id="aa">Modal title</h4>
+		      </div>
+		      <div class="modal-body">
+		        <p>One fine body&hellip;</p>
+		      </div>
+		     
+		    </div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
 			
     </div><!-- /.modal-dialog -->
 		
