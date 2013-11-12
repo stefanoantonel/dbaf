@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Block de Notas</title>
-	<script src="css/js/jquery-1.9.1.js"></script>
-	<link href="dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
-	<link rel="stylesheet" href="./css/estilos.css" type="text/css" />
-	 <script src="dist/js/bootstrap.min.js"></script>
+<title>Block de Notas</title>
+<script src="css/js/jquery-1.9.1.js"></script>
+<link href="dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link rel="stylesheet" href="./css/estilos.css" type="text/css" />
+<script src="dist/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
 
@@ -33,7 +33,7 @@
 		var not = ${notas};
 
 		$.each(not, function(indice,json){
-			
+			console.log(indice);
 			/* console.log("value: "+json.value+" lista: "+json.lista);
 			var comienzoDiv="<div style=\"vertical-align: top; color: light-red; border-style: dotted;\" >";
 			var check="<input type=\"checkbox\" style=\"vertical-align: middle;\" "+esLista(json.lista)+"/>";
@@ -47,13 +47,10 @@
 			var finDiv="</div><br/>"; */
 			
 			//$("body").last().append(comienzoDiv+check+area+boton+enter+finDiv);
-			
-			
-			$("#bloque").append("<iframe src=\"./nota.jsp\"></iframe> </br>");
-			
-		//	$("#nota").attr("id",json.id);
-			$("#aa").attr("text", "new title value");
-		
+			//$("#bloque").append($("#nota"));
+			//console.log($("#agregar").attr("id"," "+indice+" "));
+			$("body").last().append($("#agregar").attr("name"," "+indice+" "));
+			console.log($());
 		});
 		
 
@@ -140,10 +137,8 @@
 		<br/>
 	</div>
 
-	<div class="centrar" id="bloque" name="bloque">
-			<!--  ACA van todas las notas del notas.jsp -->
-			
-    </div><!-- /.modal-dialog -->
+
+	
 		
 </body>
 </html>
