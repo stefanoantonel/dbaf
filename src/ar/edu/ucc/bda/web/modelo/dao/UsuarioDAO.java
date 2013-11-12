@@ -34,12 +34,16 @@ public class UsuarioDAO implements IUsuarioDAO {
 			PreparedStatement stm=cn.prepareStatement(sql);
 			stm.setString(1,nombre);
 			stm.setString(2, clave);
-			
 			ResultSet rs=stm.executeQuery();
-			
 			if(rs.next()){
 //				String nom, String cla,String mail)
-				resultado=new Usuario(rs.getString("usuario"),rs.getString("clave"),rs.getString("mail"),rs.getString("id"));
+				
+				String nombrep=rs.getString("usuario");
+				String clavep=rs.getString("clave");
+				String mail=rs.getString("mail");
+				String id=rs.getString("id");
+				String activada=rs.getString("cuentaActivada");
+				resultado=new Usuario(nombrep,clavep,mail,id);
 				
 				System.out.println("clave en string: "+resultado.getClave());
 			}
