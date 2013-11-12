@@ -72,11 +72,16 @@ public class UsuarioDAO implements IUsuarioDAO {
 			else{
 				System.out.println("usuario DAO cargar dio null");
 				estado=0; //no esta
+				resultado=new Usuario("","","","");
+				resultado.setEstado(estado);
 			}
 		} catch (SQLException e) {
 			System.out.println("error usuarioDAO");
 			e.printStackTrace();
-			estado=-1; //error
+			resultado=new Usuario("","","","");
+			estado=-1;
+			resultado.setEstado(estado);
+			 //error
 			//throw new PersistenciaException(); //relanzo la persistencia con otro nombre
 			
 		}
