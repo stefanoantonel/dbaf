@@ -43,17 +43,25 @@ public class UpdateUsuario extends HttpServlet {
 			String nueva1=request.getParameter("claveN1");
 			String nueva2=request.getParameter("claveN2");
 			if(nueva1.equals(nueva2)){ //si las nuevas coinciden
-				Connection cn=(Connection)getServletContext().getAttribute(Constantes.NOMBRE_CONEXION);
-				UsuarioDAO dao=new UsuarioDAO(cn);
-				Usuario nuevo=new Usuario(nombre, nueva1, "", "");
-				try {
-					dao.modificar(nuevo);
-					String mensaje=" <div class=\"alert alert-error\"> <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a>"
-				    		+ "<strong>Clave cambiada con exito</strong> </div>";
-					despacharLogin(mensaje, request, response);
-				} catch (PersistenciaException e) {
-					e.printStackTrace();
+				if(!nueva1.equals(vieja)){
+					Connection cn=(Connection)getServletContext().getAttribute(Constantes.NOMBRE_CONEXION);
+					UsuarioDAO dao=new UsuarioDAO(cn);
+					Usuario nuevo=new Usuario(nombre, nueva1, "", "");
+					try {
+						dao.modificar(nuevo);
+						String mensaje=" <div class=\"alert alert-error\"> <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a>"
+					    		+ "<strong>Clave cambiada con exito</strong> </div>";
+						despacharLogin(mensaje, request, response);
+					} catch (PersistenciaException e) {
+						e.printStackTrace();
+					}
 				}
+				else{ //si coincide la nueva con la antigua
+					String mensaje=" <div class=\"alert alert-error\"> <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a>"
+				    		+ "<strong>Cambie la clave</strong> </div>";
+					despachar(mensaje, request, response);
+				}
+				
 			}
 			else{
 				String mensaje=" <div class=\"alert alert-error\"> <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a>"
