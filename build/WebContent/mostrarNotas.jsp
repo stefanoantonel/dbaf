@@ -15,7 +15,7 @@
 	<title>Block de Notas</title>
 	<script src="css/js/jquery-1.9.1.js"></script>
 	<link href="dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
-	
+	 <script src="dist/js/bootstrap.min.js"></script>
 	
 	
 	<style type="text/css">
@@ -66,7 +66,8 @@
 			console.log("esLista: "+esLista(json.lista));
 			var area="<textarea class=\"textarea\" id="+json.id+" title=\"Creada: "+json.agregada+" Modificada: "+json.modificada+"\" style=\"display:inline\"> "+json.value+"</textarea>";
 			//var area="<div contenteditable=\"true\" class=\"tooltip\" class=\"textarea\" id="+json.id+" wrap=\"hard\" title=\"Creada: "+json.agregada+" Modificada: "+json.modificada+"\" style=\"display:inline\"> "+json.value+"</div>";
-			var boton="<input class=\"btn  btn-info btn-large\" class=\"botonEliminar\" value=\"Elliminar\" type=\"button\" />";
+			//var boton="<input class=\"btn  btn-info btn-large\" class=\"botonEliminar\" value=\"Elliminar\" type=\"button\" />";
+			var boton="<button title=\"Eliminar nota\" type=\"button\" class=\"botonEliminar\" class=\"close\" >&times;</button>";
 			var enter="<div style=\"display:block;\"/>";
 			var finDiv="</div><br/>";
 			
@@ -90,7 +91,7 @@
 		});
 		
 		
-		$("input.botonEliminar").click(function(){
+		$(".botonEliminar").click(function(){
 			//alert($(this).prev().val());
 			var id=$(this).prev().attr("id");
 			console.log("id nota prev"+id);

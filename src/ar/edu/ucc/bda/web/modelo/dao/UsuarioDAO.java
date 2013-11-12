@@ -44,7 +44,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 				String id=rs.getString("id");
 				String activada=rs.getString("cuentaActivada");
 				resultado=new Usuario(nombrep,clavep,mail,id);
-				
+					
 				System.out.println("clave en string: "+resultado.getClave());
 			}
 			else{
