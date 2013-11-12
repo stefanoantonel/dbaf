@@ -6,12 +6,12 @@ import java.sql.PreparedStatement;
 import ar.edu.ucc.bda.web.modelo.Cliente;
 import ar.edu.ucc.bda.web.utiles.Constantes;
 
-public class ClienteDAO {
+public class ClienteDAO{
 
 	Connection con;
 	
-	public ClienteDAO(Connection c){
-		this.con=c;
+	public ClienteDAO(){
+		con = Coneccion.getConnection();  
 	}
 	public boolean agregar(Cliente cli){
 		 try{
