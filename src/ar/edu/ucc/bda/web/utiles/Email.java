@@ -1,4 +1,4 @@
-package ar.edu.ucc.bda.web.modelo;
+package ar.edu.ucc.bda.web.utiles;
 
  import java.util.Properties;
 
@@ -15,14 +15,20 @@ import javax.mail.internet.MimeMessage;
  //objeto Propierties donde pondremos los parametros del servidor
  private Properties props;
 
- public Email(String vuser, String vpass, String vdestino, String vsubject, String vmensaje) {
+ public Email(String vuser, String vpass, String vdestino, String vsubject) {
  user = vuser;
  pass = vpass;
  destino = vdestino;
  subject = vsubject;
- mensaje = vmensaje;
- props = new Properties();
- 
+
+    StringBuilder link = new StringBuilder();
+	link.append("<form action=\"http://localhost:8080/dbaf/activar?mail=florenciabonansea@gmail.com\" method=\"post\"> <div name=\"mail\"  id=\"mail\" style=\"display:none\"  value=\"florenciabonansea@gmail.com\">");
+	link.append("florenciabonansea@gmail.com");
+	link.append("</div>  <input type=\"submit\" value=\"Activar\" /></form>");
+	
+	mensaje =link.toString();
+	
+	 props = new Properties();
  }
  //metodo para poner las parametros necesarios
  private void setProps() {
@@ -39,6 +45,7 @@ import javax.mail.internet.MimeMessage;
  }
  
 public String send() {
+	setProps();
  String error;
  try {
  //objeto session - setearemos los parametros.
@@ -122,10 +129,18 @@ public void setUser(String user) {
 public static void main(String[] args) {
 
 	//"extlpphhgovsmnqh"
-	Email e = new Email("florenciabonansea@gmail.com", "extlpphhgovsmnqh", "florenciabonansea@gmail.com", "prueba", "BDA A A A");
-	e.setProps();
+	
+	StringBuilder link = new StringBuilder();
+	link.append("<form action=\"http://localhost:8080/dbaf/activar?mail=florenciabonansea@gmail.com\" method=\"post\"> <div name=\"mail\"  id=\"mail\" style=\"display:none\"  value=\"florenciabonansea@gmail.com\">");
+	link.append("florenciabonansea@gmail.com");
+	link.append("</div>  <input type=\"submit\" value=\"Activar\" /></form>");
+	
+
+	Email e = new Email("florenciabonansea@gmail.com", "extlpphhgovsmnqh", "florenciabonansea@gmail.com", "prueba");
+	//e.setProps();
 	String error =e.send();
-	System.out.println("error "+error);
+	if(error!="")
+		System.out.println("error "+error);
 	 
 }
 

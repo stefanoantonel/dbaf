@@ -45,7 +45,7 @@ public class UpdateUsuario extends HttpServlet {
 			if(nueva1.equals(nueva2)){ //si las nuevas coinciden
 				if(!nueva1.equals(vieja)){
 					Connection cn=(Connection)getServletContext().getAttribute(Constantes.NOMBRE_CONEXION);
-					UsuarioDAO dao=new UsuarioDAO(cn);
+					UsuarioDAO dao=new UsuarioDAO();
 					Usuario nuevo=new Usuario(nombre, nueva1, "", "");
 					try {
 						dao.modificar(nuevo);

@@ -24,8 +24,8 @@ public class UsuarioDAO implements IUsuarioDAO {
 	     
 	}
 	
-	public UsuarioDAO(Connection cn){
-		this.cn=cn;
+	public UsuarioDAO(){
+		this.cn=Coneccion.getConnection();
 			
 	}
 	//esto es cargar en memoria al usuario NO agregar
@@ -168,7 +168,54 @@ public class UsuarioDAO implements IUsuarioDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public Usuario getUsuarioByEmail(String email)
+	{
+		StringBuilder sql=new StringBuilder();
+		sql.append("Select * from usuarios where mail=? ");
+		Usuario us=null;
+		String usuario="";
+		String fecha="";
+		String id="";
+		try {
+			PreparedStatement stm=cn.prepareStatement(sql.toString());
+			stm.setString(1,email);
+			System.out.println(stm.toString());
+			ResultSet rs=stm.executeQuery();
+			while(rs.next()){
+				usuario=rs.getString("usuario");
+				fecha=rs.getString("fecha_creacion");
+				id=rs.getString("id");
+				
+			}
+		} catch (SQLException e) {
+			System.out.println("error getUsuarioByEmail en usuarioDAO");
+			e.printStackTrace();
+		}
 
+		us= new Usuario(id,usuario,fecha);
+		
+		return us;
+		
+	}
+
+	public boolean activar(Usuario us)
+	{
+		StringBuilder sql=new StringBuilder();
+		sql.append(" update usuarios set cuentaActivada=1 where id=?");
+		try {
+			PreparedStatement stm=cn.prepareStatement(sql.toString());
+			stm.setString(1,us.getId());
+			System.out.println(stm.toString());
+			stm.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			System.out.println("error activar en usuarioDAO");
+			e.printStackTrace();
+			return false;
+			
+		}
+	}
 
 
 }

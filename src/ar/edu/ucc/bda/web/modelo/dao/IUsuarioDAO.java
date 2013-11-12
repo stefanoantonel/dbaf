@@ -17,5 +17,7 @@ public interface IUsuarioDAO {
 	public boolean modificar(Usuario usuario)throws PersistenciaException;
 	public String encriptar(String clave);
 	public String desencriptar(String clave);
+	public Usuario getUsuarioByEmail (String email);
+	public boolean activar(Usuario us)throws PersistenciaException;
 
 }
