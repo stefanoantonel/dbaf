@@ -67,7 +67,7 @@
 			var area="<textarea class=\"textarea\" id="+json.id+" title=\"Creada: "+json.agregada+" Modificada: "+json.modificada+"\" style=\"display:inline\"> "+json.value+"</textarea>";
 			//var area="<div contenteditable=\"true\" class=\"tooltip\" class=\"textarea\" id="+json.id+" wrap=\"hard\" title=\"Creada: "+json.agregada+" Modificada: "+json.modificada+"\" style=\"display:inline\"> "+json.value+"</div>";
 			//var boton="<input class=\"btn  btn-info btn-large\" class=\"botonEliminar\" value=\"Elliminar\" type=\"button\" />";
-			var boton="<button title=\"Eliminar nota\" type=\"button\" class=\"botonEliminar\" class=\"close\" >&times;</button>";
+			var boton="<button title=\"Eliminar nota\"  class=\"btn\" type=\"button\" class=\"botonEliminar\" class=\"close\" >&times;</button>";
 			var enter="<div style=\"display:block;\"/>";
 			var finDiv="</div><br/>";
 			
