@@ -48,7 +48,7 @@ public class Login extends HttpServlet {
 
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		String usuariop=request.getParameter("usuario");
 		String clavep=request.getParameter("clave");
 		
@@ -58,8 +58,9 @@ public class Login extends HttpServlet {
 		Connection cn=(Connection)getServletContext().getAttribute(Constantes.NOMBRE_CONEXION);
 		IUsuarioDAO usuarioDAO=new UsuarioDAO(cn); //uso la interfaz y uso la implementacion especifica de usuarioDAO. Esto usa polimorfismp
 		try {
-//			usuarioDAO.encriptar("ds");
-			Usuario usuario=usuarioDAO.cargar(usuariop,clavep);
+
+			int estado=-1; //me va a traer el estado del usuario (Activado, caduco, etc)
+			Usuario usuario=usuarioDAO.cargar(usuariop,clavep, estado);
 			request.getServletContext().setAttribute("usuarioActualId", usuario.getId());
 //			if(usuario!=null && usuario.getClave().equals(clavep)){
 			if(usuario!=null){
@@ -74,17 +75,12 @@ public class Login extends HttpServlet {
 							
 						}
 				}
-				
-				
-				
 				if(yaEsta==0){
 					ses.add(usuario);
 					HttpSession s = request.getSession(true); //false que si la sesion ya existe que no me la cree. Me la crea y graba ese usuario en el contexto de la sesion
 					//tiene un sesion creada y tien un atributo con el nnombre de usuario (esto es loq ue checkeamos en el filtro)
 					s.setAttribute(Constantes.usuario, usuario);
-				
 					response.sendRedirect("menu.jsp");
-				
 				}
 				else{
 					String mensaje=" <div class=\"alert alert-error\"> <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a>"

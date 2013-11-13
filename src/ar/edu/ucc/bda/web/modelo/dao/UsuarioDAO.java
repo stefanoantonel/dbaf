@@ -1,9 +1,13 @@
 package ar.edu.ucc.bda.web.modelo.dao;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import ar.edu.ucc.bda.web.modelo.PersistenciaException;
 import ar.edu.ucc.bda.web.modelo.Usuario;
@@ -24,7 +28,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 			
 	}
 	//esto es cargar en memoria al usuario NO agregar
-	public Usuario cargar(String nombre,String clave) throws PersistenciaException{
+	public Usuario cargar(String nombre,String clave,int estado) throws PersistenciaException{
 //		INSERT INTO usuarios VALUES('usuario',AES_ENCRYPT('contraseña','llave'),3);
 //		SELECT * FROM usuarios where clave=AES_ENCRYPT('contraseña','llave');
 		String sql="SELECT * FROM usuarios WHERE usuario=? and clave=AES_ENCRYPT('pass',?)";
@@ -32,28 +36,41 @@ public class UsuarioDAO implements IUsuarioDAO {
 		Usuario resultado=null;
 		try {
 			PreparedStatement stm=cn.prepareStatement(sql);
-			stm.setString(1,nombre);
+			stm.setString(1, nombre);
 			stm.setString(2, clave);
 			ResultSet rs=stm.executeQuery();
-			if(rs.next()){
-//				String nom, String cla,String mail)
-				
+			if(rs.next()){				
 				String nombrep=rs.getString("usuario");
 				String clavep=rs.getString("clave");
 				String mail=rs.getString("mail");
 				String id=rs.getString("id");
 				String activada=rs.getString("cuentaActivada");
+				Date expiracion=rs.getDate("fecha_expiracion");
+				if(activada.equals("1")){
+					estado=1; //todo ok 
+				}
+				else{
+					estado=2; //falta activar 
+				}
+				//Calendar.getInstance().compareTo(Calendar.getInstance())
+				DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+				Date date = new Date();
+				System.out.println(dateFormat.format("dia actual: "+date));
+				//Date.valueOf(expiracion).compareTo(Date.this.);
+				int comparacion=date.compareTo(expiracion);
+				System.out.println(comparacion);
 				resultado=new Usuario(nombrep,clavep,mail,id);
 					
 				System.out.println("clave en string: "+resultado.getClave());
 			}
 			else{
 				System.out.println("usuario DAO cargar dio null");
-				
+				estado=0; //no esta
 			}
 		} catch (SQLException e) {
 			System.out.println("error usuarioDAO");
 			e.printStackTrace();
+			estado=-1; //error
 			throw new PersistenciaException(); //relanzo la persistencia con otro nombre
 			
 		}
