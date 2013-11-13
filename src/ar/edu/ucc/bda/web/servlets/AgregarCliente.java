@@ -49,7 +49,8 @@ public class AgregarCliente extends HttpServlet {
 		*/
 		Cliente c = new Cliente();
 		c.setCliente(cliente);
-		c.setIdZona(Integer.parseInt(idZona2));
+		//c.setIdZona(Integer.parseInt(idZona2));
+		
 		c.setCuentaHabilitada(cuentaHabilitada==null || cuentaHabilitada.equals("0") ? false :true);
 		
 		String mensaje = c.datosValidos();
@@ -91,9 +92,9 @@ public class AgregarCliente extends HttpServlet {
 //		}
 		
 		
-		Connection con =(Connection)getServletContext().getAttribute(Constantes.NOMBRE_CONEXION);
+		//Connection con =(Connection)getServletContext().getAttribute(Constantes.NOMBRE_CONEXION);
 		
-		ClienteDAO dao=new ClienteDAO(con);
+		ClienteDAO dao=new ClienteDAO();
 		
 //		mensaje="Cliente ok";
 //		despachar(mensaje2HTML(mensaje),request,response);

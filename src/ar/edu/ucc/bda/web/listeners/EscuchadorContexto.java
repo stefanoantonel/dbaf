@@ -3,7 +3,6 @@ package ar.edu.ucc.bda.web.listeners;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -15,8 +14,8 @@ import javax.servlet.annotation.WebListener;
 import javax.sql.DataSource;
 
 import ar.edu.ucc.bda.web.modelo.Usuario;
+import ar.edu.ucc.bda.web.modelo.dao.Coneccion;
 import ar.edu.ucc.bda.web.utiles.Constantes;
-import ar.edu.ucc.bda.web.utiles.ListaSesion;
 
 // a nivel de aplicacion , cuando le doy de baja a tomcat
 @WebListener
@@ -41,6 +40,7 @@ public class EscuchadorContexto implements ServletContextListener {
 						.lookup("java:comp/env/jdbc/practico");
 				Connection cn = fuenteDatos.getConnection();
 				
+				Coneccion c = new Coneccion(cn);
 				sc.setAttribute(Constantes.NOMBRE_CONEXION,cn);
 				
 				//System.out.println("conecxion exitosa");

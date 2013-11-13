@@ -36,8 +36,7 @@ public class UpdateUsuario extends HttpServlet {
 		String nueva2=request.getParameter("claveN2");
 		Connection cn=(Connection)getServletContext().getAttribute(Constantes.NOMBRE_CONEXION);
 		UsuarioDAO dao=new UsuarioDAO(cn);
-		Usuario
-		dao.
+		
 	}
 
 }

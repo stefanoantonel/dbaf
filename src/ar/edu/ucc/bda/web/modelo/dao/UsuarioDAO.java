@@ -62,6 +62,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 				else{
 					estado=2; //falta activar 
 				}
+
 				
 				resultado=new Usuario(nombrep,clavep,mail,id);
 				resultado.setEstado(estado);
