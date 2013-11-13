@@ -1,8 +1,6 @@
 package ar.edu.ucc.bda.web.servlets;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,13 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import ar.edu.ucc.bda.web.modelo.PersistenciaException;
 import ar.edu.ucc.bda.web.modelo.Usuario;
 import ar.edu.ucc.bda.web.modelo.dao.IUsuarioDAO;
 import ar.edu.ucc.bda.web.modelo.dao.UsuarioDAO;
-import ar.edu.ucc.bda.web.utiles.Constantes;
 import ar.edu.ucc.bda.web.utiles.Email;
 
 @WebServlet("/agregarUsuario")
@@ -39,6 +35,8 @@ public class AgregarUsuario extends HttpServlet {
 		String clave2=request.getParameter("clave2");
 		
 		String email=request.getParameter("mail");
+		Email em = new Email("florenciabonansea@gmail.com", "extlpphhgovsmnqh", email, "Activar cuenta");
+		String error =em.send();
 		
 		if(!clave1.equals(clave2)){
 			despachar("Error: Claves no coinciden", request, response);
@@ -58,8 +56,8 @@ public class AgregarUsuario extends HttpServlet {
 						//String volver="<a href=\"menu.jsp\">Volver al menu</a>";
 						//request.setAttribute("volver", volver); //el "msj" es el nombre con el que guardo la variable en la tabla
 						System.out.println("email: "+email);
-						Email e = new Email("florenciabonansea@gmail.com", "extlpphhgovsmnqh", email, "Activar cuenta");
-						String error =e.send();
+						
+						
 						
 						despachar(mensaje, request, response);
 					}
