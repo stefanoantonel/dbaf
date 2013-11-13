@@ -45,7 +45,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 				String mail=rs.getString("mail");
 				String id=rs.getString("id");
 				String activada=rs.getString("cuentaActivada");
-				Date expiracion=rs.getDate("fecha_expiracion");
+				String expiracion=rs.getString("fecha_expiracion");
 				if(activada.equals("1")){
 					estado=1; //todo ok 
 				}
@@ -57,8 +57,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 				Date date = new Date();
 				System.out.println(dateFormat.format("dia actual: "+date));
 				//Date.valueOf(expiracion).compareTo(Date.this.);
-				int comparacion=date.compareTo(expiracion);
-				System.out.println(comparacion);
+				
 				resultado=new Usuario(nombrep,clavep,mail,id);
 					
 				System.out.println("clave en string: "+resultado.getClave());
