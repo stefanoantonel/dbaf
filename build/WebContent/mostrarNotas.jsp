@@ -20,11 +20,10 @@ $(document).on("ready",function(){
 	notaOriginal=$("#nota");
 	notaTemplate=notaOriginal.clone();
 	//var not = ${notas};
-	
+	//console.log(notaTemplate);
 	armarNota(not);
 
 	$("#agregar").click(function(){
-
 		$.ajax({
    		     url: "CrearNota",
    		     success:function(datos,status,jqXHR){
@@ -32,110 +31,119 @@ $(document).on("ready",function(){
    		    		console.log("Nota creada");
 					$.get('getNotas', function(data) {
 						//var a=$("body").html();
-						console.log("agregar ajax"+data);
+						//console.log("agregar ajax"+data);
 	    		    	$("body").html(data);
 				    });
    		     }
 		     });
 	});
 	
-	
-	$(".botonEliminar").click(function(){
-		//alert($(this).prev().val());
-
-		var id=$(this).closest(".nota").attr("id");
-		console.log("id nota prev"+id);
-		$('#'+id).remove();
-
-		 $.ajax({
-   		     url: "EliminarNota?id="+id+"",
-   		     success:function(datos,status,jqXHR){
-					//cuadno no le envian nada funciona como get y sino como set.
-					console.log("Nota eliminada");
-   		     }
-		     });
-		     
+	asignarEliminar();
 		
-	});
-	
 	
 	
 	$(".textarea").blur(function() {
 		var notaCamb=$(this).text();
-		console.log("nota cambiada"+notaCamb);
+		//console.log("nota cambiada"+notaCamb);
 		//var notaId=$(this).attr("id");
 		var notaId=$(this).closest(".nota").attr("id");
+		console.log("cambio: "+notaCamb+" id:"+notaId);
 		//$(this).parent(".nota");
-		console.log("id nota "+notaId);
+		//console.log("id nota "+notaId);
 		$("#cambio").val($(this).val());
 		$.ajax({
    		     url: "GuardaNota?nota="+notaCamb+"&id="+notaId+"",
    		     success:function(datos,status,jqXHR){
 					console.log("Nota guardada");
    		     }
-		     });
+		});
 	});
 			
 	
 	$("input:checkbox").click(function(){
 	
 		var estado=$(this).is(":checked");
-		var id=$(this).next().attr("id");
+		//console.log("estado:"+estado);
+		var id=$(this).closest(".nota").attr("id");
 		console.log("cambio: "+estado+" id:"+id);
 		estado = (estado==true) ? "1" : "0";
-		console.log("dsp if estado:"+estado);
+		//console.log("dsp if estado:"+estado);
 		$.ajax({
    		     url: "GuardarNotaLista?lista="+estado+"&id="+id+"",
    		     success:function(datos,status,jqXHR){
-					
 					console.log("Nota realizada");
    		     }
-		     });
+		});
 		
 	});
 	
 	 var idElem= Math.ceil(Math.random()*1000000);
-	autocompletar("#texto","getNotas",2,function(item)
-			{
-				armarNota(item);
-			}
-	    ,idElem); 
+	autocompletar("#texto","getNotas",2,function(item){
+											armarNota(item);
+										},idElem); 
 });
 	
 	
 	
 	function esLista(lista){
 
-		var lis="";
+		
 		if(lista!=null){
 			if(lista=="1"){
-				lis=" checked=\"checked\" ";
+				return true;
 			}
 			else
-				lis="";
+				return false;
 			
 		}
-		return lis;
+		
+		
 	}
 	
+	
+	
+	function asignarEliminar(){
+		//console.log("entro al asignarElimianr");
+		$(".botonEliminar").click(function(){
+			//alert($(this).prev().val());
+
+			var id=$(this).closest(".nota").attr("id");
+			//console.log("id nota prev"+id);
+			$('#'+id).remove();
+
+			 $.ajax({
+	   		     url: "EliminarNota?id="+id+"",
+	   		     success:function(datos,status,jqXHR){
+						//cuadno no le envian nada funciona como get y sino como set.
+						console.log("Nota eliminada");
+	   		     }
+			     });
+			     
+			
+		});
+	}
 	
 	 function armarNota(not)
 	 {
 		 var notaAnt=notaTemplate;
-		 console.log("nota Template: "+notaAnt);
+		 //console.log("nota Template: "+notaAnt);
 		 $.each(not, function(indice,json){
-				console.log(indice);
+				//console.log(indice);
 				
 				var a1=notaAnt.clone();
 				a1.attr("hidden",false);
 				a1.attr("id",json.id);
 				a1.attr("title","Creada: "+json.agregada+" Modificada: "+json.modificada+"");
-
+				
 				$("body").last().append(a1);
 				
 				$("#"+json.id).find("h4").text(json.value);
-				console.log("jason id: "+json.id);
-				console.log("jason value: "+json.value);
+				
+				$("#"+json.id).find(".checkbox").attr("checked",esLista(json.lista) );
+				//$("#"+json.id).find(".checkbox").attr("checked",a);
+				//console.log($("#"+json.id).find(".checkbox").attr("checked"));
+				//console.log("jason id: "+json.id);
+				//console.log("jason value: "+json.value);
 				//.filter("[class='modal-title']").text(json.value);
 				//console.log("id json"+json.id);
 
@@ -150,24 +158,23 @@ $(document).on("ready",function(){
 		//console.log("elemento: "+elem.val());
 		elem.keyup(function(evt){
 			//var idDiv="divAutocomplete"+idElem;
-			console.log("elemento: "+elem.val());
-			$(".nota").remove();
+			//console.log("elemento: "+elem.val());
+			//$(".nota").remove();
 			if(elem.val().length>=minLetras){
 				
 				$.ajax({
 					url:url,
 					data:{ texto:elem.val() }, //texto que escribimos
 					success: function (datos,status,jqXHR){
-						console.log("datos ajax: "+datos);
+						//console.log("datos ajax: "+datos);
 					
 						//$(".nota").empty();
 						$(".nota").remove();
-
+						
 								if(clickCallback && typeof clickCallback !== "undefined")
-								{	console.log("datos antes de la funcion: "+datos);
+								{	//console.log("datos antes de la funcion: "+datos);
 									clickCallback(datos);
 								}	
-
 					}
 				});
 				
@@ -175,26 +182,21 @@ $(document).on("ready",function(){
 			else{
 				$.ajax({
 					url:url,
-					data:{texto:null }, //texto que escribimos
+					data:{texto:""}, //texto que escribimos
 					success: function (datos,status,jqXHR){
-						console.log("datos ajax: "+datos);
+						//console.log("datos ajax else: "+datos);
 					
 						//$(".nota").empty();
-						$(".nota").remove();
-
+						$(".nota").remove();						
 								if(clickCallback && typeof clickCallback !== "undefined")
-								{	console.log("datos antes de la funcion: "+datos);
+								{	//console.log("datos antes de la funcion: "+datos);
 									clickCallback(datos);
-								}	
-
+									asignarEliminar();
+								}
 					}
 				});
 			}
-
-			
-			
 		}); 
-	 
 
 	 }
 	
@@ -218,24 +220,26 @@ $(document).on("ready",function(){
 	<div>   <!-- AUTOCOMPLETAR              -->
 		<input type="text" id="texto" />
 		<div id="salida"></div>
-	</div>
+
 	<div  class ="centrar nota" id="nota" hidden="true" >
 
 	
 		    <div class="modal-content">
 		     
-		      <div class="modal-header">
+		      <div class="modal-header" style="background: #F5DD94;">
 		      	<input type="checkbox" class="checkbox" aria-hidden="true" />
 		        <button type="button"  class="cruz close botonEliminar " data-dismiss="modal" aria-hidden="true">&times;</button>
 
-		        <h4 class="textarea modal-title" class="" name="aa" id="titulo" contenteditable="true" >Modal title</h4>
+		        <h4 class="textarea modal-title titulo" class="" name="aa" id="titulo" contenteditable="true" >Modal title</h4>
 		      </div>
-		      <div class="modal-body" id="cuerpo" contenteditable="true">
+		      <div class="modal-body" id="cuerpo"  style="background: #F7F5EA;" contenteditable="true">
 		        <p>One fine body&hellip;</p>
 		      </div>
 		     
 		    </div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
+	
+	
 		
 </body>
 </html>

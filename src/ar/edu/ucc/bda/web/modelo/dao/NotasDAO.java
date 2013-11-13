@@ -75,21 +75,22 @@ public class NotasDAO {
 			if(rs.next()){
 				JSONObject nota=new JSONObject();
 				nota.put("id",rs.getString("id") );
-				nota.put("value", rs.getString("nota"));
+				nota.put("value", rs.getString("titulo"));
 				nota.put("lista", rs.getString("lista"));
 				nota.put("agregada", rs.getString("fecha_agregada"));
 				nota.put("modificada", rs.getString("fecha_modificada"));
-				
+				nota.put("cuerpo", rs.getString("cuerpo"));
 				notas.put(nota);
 				//descripciones.add(rs.getString("nota"));
 				while(rs.next()){
 					nota=new JSONObject();
 //					descripciones.add(rs.getString("nota"));
 					nota.put("id",rs.getString("id") );
-					nota.put("value", rs.getString("nota"));
+					nota.put("value", rs.getString("titulo"));
 					nota.put("lista", rs.getString("lista"));
 					nota.put("agregada", rs.getString("fecha_agregada"));
 					nota.put("modificada", rs.getString("fecha_modificada"));
+					nota.put("cuerpo", rs.getString("cuerpo"));
 					notas.put(nota);
 				}
 				System.out.println();
@@ -123,10 +124,11 @@ public class NotasDAO {
 			if(rs.next()){
 				JSONObject nota=new JSONObject();
 				nota.put("id",rs.getString("id") );
-				nota.put("value", rs.getString("nota"));
+				nota.put("value", rs.getString("titulo"));
 				nota.put("lista", rs.getString("lista"));
 				nota.put("agregada", rs.getString("fecha_agregada"));
 				nota.put("modificada", rs.getString("fecha_modificada"));
+				nota.put("cuerpo", rs.getString("cuerpo"));
 				
 				notas.put(nota);
 				//descripciones.add(rs.getString("nota"));
@@ -134,10 +136,11 @@ public class NotasDAO {
 					nota=new JSONObject();
 //					descripciones.add(rs.getString("nota"));
 					nota.put("id",rs.getString("id") );
-					nota.put("value", rs.getString("nota"));
+					nota.put("value", rs.getString("titlo"));
 					nota.put("lista", rs.getString("lista"));
 					nota.put("agregada", rs.getString("fecha_agregada"));
 					nota.put("modificada", rs.getString("fecha_modificada"));
+					nota.put("cuerpo", rs.getString("cuerpo"));
 					notas.put(nota);
 				}
 				System.out.println();
@@ -159,7 +162,7 @@ public class NotasDAO {
 	}
 	public boolean update(String nota, String id){	
 		try {
-			String sql="UPDATE `practico`.`notas` SET `nota`='"+nota+"' WHERE `id`='"+id+"' ";
+			String sql="UPDATE `practico`.`notas` SET `titulo`='"+nota+"' WHERE `id`='"+id+"' ";
 			PreparedStatement stm=cn.prepareStatement(sql);
 			stm.executeUpdate();
 			return true;
