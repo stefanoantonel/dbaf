@@ -51,8 +51,6 @@ public class Login extends HttpServlet {
 		
 		request.getServletContext().setAttribute("usuarioActual", usuariop);
 		
-		
-		
 		System.out.println("guardo el usuario: " +usuariop);
 
 		IUsuarioDAO usuarioDAO=new UsuarioDAO(); //uso la interfaz y uso la implementacion especifica de usuarioDAO. Esto usa polimorfismp
@@ -122,8 +120,8 @@ public class Login extends HttpServlet {
 				}
 			}
 			
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception e1) {
+			e1.printStackTrace();
 		}
 		
         

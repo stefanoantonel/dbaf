@@ -109,8 +109,11 @@
 		
 		$(".botonEliminar").click(function(){
 			//alert($(this).prev().val());
+			var elim=$(this);
+			
 			var id=$(this).closest(".nota").attr("id");
 			console.log("id nota prev"+id);
+			$("#"+id).remove();
 			 $.ajax({
 	   		     url: "EliminarNota?id="+id+"",
 	   		     success:function(datos,status,jqXHR){

@@ -10,6 +10,10 @@ import javax.mail.internet.MimeMessage;
 import javax.activation.*;
 
  public class Email {
+	 
+	 public Email(){
+		 System.out.println("d");
+	 }
  
 // partes del mail declaradas como privadas
  private String user, pass, destino, subject, mensaje;
