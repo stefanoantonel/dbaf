@@ -42,7 +42,7 @@ $(document).on("ready",function(){
 		
 	
 	
-	$(".textarea").blur(function() {
+	$(".textareaTitulo").blur(function() {
 		var notaCamb=$(this).text();
 		//console.log("nota cambiada"+notaCamb);
 		//var notaId=$(this).attr("id");
@@ -52,7 +52,30 @@ $(document).on("ready",function(){
 		//console.log("id nota "+notaId);
 		$("#cambio").val($(this).val());
 		$.ajax({
-   		     url: "GuardaNota?nota="+notaCamb+"&id="+notaId+"",
+   		     url: "GuardaNota?titulo="+notaCamb+"&id="+notaId+"",
+   		     success:function(datos,status,jqXHR){
+					console.log("Nota guardada");
+   		     }
+		});
+	});
+	
+
+	/* $(".textareaCuerpo").click( function () { 
+	   // do something here
+	   console.log ("click p");
+	}); */
+	$(".textareaCuerpo").blur(function() {
+		//console.log("blur P");
+		var notaCamb=$(this).text();
+		//console.log("nota cambiada"+notaCamb);
+		//var notaId=$(this).attr("id");
+		var notaId=$(this).closest(".nota").attr("id");
+		console.log("cambio: "+notaCamb+" id:"+notaId);
+		//$(this).parent(".nota");
+		//console.log("id nota "+notaId);
+		$("#cambio").val($(this).val());
+		$.ajax({
+   		     url: "GuardaNota?cuerpo="+notaCamb+"&id="+notaId+"",
    		     success:function(datos,status,jqXHR){
 					console.log("Nota guardada");
    		     }
@@ -136,8 +159,8 @@ $(document).on("ready",function(){
 				a1.attr("title","Creada: "+json.agregada+" Modificada: "+json.modificada+"");
 				
 				$("body").last().append(a1);
-				
-				$("#"+json.id).find("h4").text(json.value);
+				$("#"+json.id).find("p").text(json.cuerpo);
+				$("#"+json.id).find("h4").text(json.titulo);
 				
 				$("#"+json.id).find(".checkbox").attr("checked",esLista(json.lista) );
 				//$("#"+json.id).find(".checkbox").attr("checked",a);
@@ -230,10 +253,10 @@ $(document).on("ready",function(){
 		      	<input type="checkbox" class="checkbox" aria-hidden="true" />
 		        <button type="button"  class="cruz close botonEliminar " data-dismiss="modal" aria-hidden="true">&times;</button>
 
-		        <h4 class="textarea modal-title titulo" class="" name="aa" id="titulo" contenteditable="true" >Modal title</h4>
+		        <h4 class="textareaTitulo modal-title titulo" class="" name="aa" id="titulo" contenteditable="true" >Modal title</h4>
 		      </div>
-		      <div class="modal-body" id="cuerpo"  style="background: #F7F5EA;" contenteditable="true">
-		        <p>One fine body&hellip;</p>
+		      <div class="modal-body" id="cuerpo"  style="background: #F7F5EA;">
+		        <p class="textareaCuerpo"  contenteditable="true" >One fine body&hellip;</p>
 		      </div>
 		     
 		    </div><!-- /.modal-content -->

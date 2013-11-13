@@ -75,7 +75,7 @@ public class NotasDAO {
 			if(rs.next()){
 				JSONObject nota=new JSONObject();
 				nota.put("id",rs.getString("id") );
-				nota.put("value", rs.getString("titulo"));
+				nota.put("titulo", rs.getString("titulo"));
 				nota.put("lista", rs.getString("lista"));
 				nota.put("agregada", rs.getString("fecha_agregada"));
 				nota.put("modificada", rs.getString("fecha_modificada"));
@@ -86,7 +86,7 @@ public class NotasDAO {
 					nota=new JSONObject();
 //					descripciones.add(rs.getString("nota"));
 					nota.put("id",rs.getString("id") );
-					nota.put("value", rs.getString("titulo"));
+					nota.put("titulo", rs.getString("titulo"));
 					nota.put("lista", rs.getString("lista"));
 					nota.put("agregada", rs.getString("fecha_agregada"));
 					nota.put("modificada", rs.getString("fecha_modificada"));
@@ -114,7 +114,7 @@ public class NotasDAO {
 	public JSONArray load(String usuario,String notaParaBuscar) throws JSONException {
 		List<String> descripciones=new ArrayList<>();
 //		String sql="SELECT * FROM notas WHERE usuario=?";
-		String sql="SELECT * FROM notas WHERE usuarios_id=? AND nota like '%"+ notaParaBuscar+"%'";
+		String sql="SELECT * FROM notas WHERE usuarios_id=? AND (titulo like '%"+ notaParaBuscar+"%' OR cuerpo like '%"+ notaParaBuscar+"%')";
 		Usuario resultado=null;
 		JSONArray notas=new JSONArray();
 		try {
@@ -124,7 +124,7 @@ public class NotasDAO {
 			if(rs.next()){
 				JSONObject nota=new JSONObject();
 				nota.put("id",rs.getString("id") );
-				nota.put("value", rs.getString("titulo"));
+				nota.put("titulo", rs.getString("titulo"));
 				nota.put("lista", rs.getString("lista"));
 				nota.put("agregada", rs.getString("fecha_agregada"));
 				nota.put("modificada", rs.getString("fecha_modificada"));
@@ -136,7 +136,7 @@ public class NotasDAO {
 					nota=new JSONObject();
 //					descripciones.add(rs.getString("nota"));
 					nota.put("id",rs.getString("id") );
-					nota.put("value", rs.getString("titlo"));
+					nota.put("titulo", rs.getString("titulo"));
 					nota.put("lista", rs.getString("lista"));
 					nota.put("agregada", rs.getString("fecha_agregada"));
 					nota.put("modificada", rs.getString("fecha_modificada"));
@@ -160,9 +160,22 @@ public class NotasDAO {
 		//System.out.println("UsuarioDAO: resultado ="+resultado+"");
 		return notas;
 	}
-	public boolean update(String nota, String id){	
+	public boolean updateTitulo(String nota,String id){	
 		try {
 			String sql="UPDATE `practico`.`notas` SET `titulo`='"+nota+"' WHERE `id`='"+id+"' ";
+			PreparedStatement stm=cn.prepareStatement(sql);
+			stm.executeUpdate();
+			return true;
+		} 
+		catch (SQLException e) {
+			System.out.println("error en save notas");
+			return false;
+		}
+	}
+	
+	public boolean updateCuerpo(String nota,String id){	
+		try {
+			String sql="UPDATE `practico`.`notas` SET `cuerpo`='"+nota+"' WHERE `id`='"+id+"' ";
 			PreparedStatement stm=cn.prepareStatement(sql);
 			stm.executeUpdate();
 			return true;
@@ -189,7 +202,7 @@ public class NotasDAO {
 
 	public boolean insert(String usuario){
 		try {
-			String sql="INSERT INTO `practico`.`notas`(`nota`,`usuarios_id`,`fecha_agregada`) VALUES('','"+usuario+"',CURDATE()) ";
+			String sql="INSERT INTO `practico`.`notas`(`titulo`,`cuerpo`,`usuarios_id`,`fecha_agregada`) VALUES('','','"+usuario+"',CURDATE()) ";
 			PreparedStatement stm=cn.prepareStatement(sql);
 			System.out.println(sql);
 			stm.executeUpdate();
