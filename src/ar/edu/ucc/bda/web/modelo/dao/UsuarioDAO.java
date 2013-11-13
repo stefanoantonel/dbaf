@@ -71,10 +71,15 @@ public class UsuarioDAO implements IUsuarioDAO {
 	
 	public boolean agregar(Usuario usuario) throws PersistenciaException{
 		
-		String sql="INSERT INTO practico.usuarios(usuario,clave,mail,cuentaActivada,fecha_creacion) VALUES (?,AES_ENCRYPT('pass','"+usuario.getClave()+"'),?,'0',CURDATE())";
+		String claveEnc=encriptar(usuario.getClave());
+		StringBuilder sql=new StringBuilder();
+				sql.append(" INSERT INTO practico.usuarios(usuario,clave,mail,cuentaActivada,fecha_creacion)");
+				sql.append(" VALUES (?,");
+				sql.append(" "+claveEnc+" ");
+				sql.append(",?,'0',CURDATE())");
 		Usuario resultado=null;
 		try {
-			PreparedStatement stm=cn.prepareStatement(sql);
+			PreparedStatement stm=cn.prepareStatement(sql.toString());
 			stm.setString(1,usuario.getNombre());
 //			String c=encriptar(usuario.getClave());
 //			stm.set(2,c);
