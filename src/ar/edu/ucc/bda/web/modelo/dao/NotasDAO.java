@@ -109,6 +109,54 @@ public class NotasDAO {
 		//System.out.println("UsuarioDAO: resultado ="+resultado+"");
 		return notas;
 	}
+	
+	public JSONArray load(String usuario,String notaParaBuscar) throws JSONException {
+		List<String> descripciones=new ArrayList<>();
+//		String sql="SELECT * FROM notas WHERE usuario=?";
+		String sql="SELECT * FROM notas WHERE usuarios_id=? AND nota like '%"+ notaParaBuscar+"%'";
+		Usuario resultado=null;
+		JSONArray notas=new JSONArray();
+		try {
+			PreparedStatement stm=cn.prepareStatement(sql);
+			stm.setString(1,usuario);
+			ResultSet rs=stm.executeQuery();
+			if(rs.next()){
+				JSONObject nota=new JSONObject();
+				nota.put("id",rs.getString("id") );
+				nota.put("value", rs.getString("nota"));
+				nota.put("lista", rs.getString("lista"));
+				nota.put("agregada", rs.getString("fecha_agregada"));
+				nota.put("modificada", rs.getString("fecha_modificada"));
+				
+				notas.put(nota);
+				//descripciones.add(rs.getString("nota"));
+				while(rs.next()){
+					nota=new JSONObject();
+//					descripciones.add(rs.getString("nota"));
+					nota.put("id",rs.getString("id") );
+					nota.put("value", rs.getString("nota"));
+					nota.put("lista", rs.getString("lista"));
+					nota.put("agregada", rs.getString("fecha_agregada"));
+					nota.put("modificada", rs.getString("fecha_modificada"));
+					notas.put(nota);
+				}
+				System.out.println();
+			}
+			else{
+				System.out.println("usuario DAO dio null");
+				
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("error usuarioDAO");
+			e.printStackTrace();
+//			throw new PersistenciaException(); //relanzo la persistencia con otro nombre
+			
+		}
+		
+		//System.out.println("UsuarioDAO: resultado ="+resultado+"");
+		return notas;
+	}
 	public boolean update(String nota, String id){	
 		try {
 			String sql="UPDATE `practico`.`notas` SET `nota`='"+nota+"' WHERE `id`='"+id+"' ";

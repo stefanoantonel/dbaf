@@ -44,7 +44,7 @@ public class CrearNota extends HttpServlet {
 	
 	private void despachar (String mensaje, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		RequestDispatcher rd = getServletContext().getRequestDispatcher("/GetNotas");
+		RequestDispatcher rd = getServletContext().getRequestDispatcher("/getNotas");
 		rd.forward(request, response);
 		
 	}

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import ar.edu.ucc.bda.web.modelo.Usuario;
 import ar.edu.ucc.bda.web.utiles.Constantes;
 
+
 /**
  * Servlet Filter implementation class FireWallFilter
  */
@@ -100,7 +101,7 @@ public class FireWallFilter implements Filter {
 		//agregamos lo que no queremos proteger. por ejemplo el log porque si lo protejo no podria logearme si no estoy logueado
 		//la la URI termina con algo de lo de abajo lo dejo pasar, no lo restrinjo
 		noProtegidos=("/login.jsp,/Login,/agregarUsuario.jsp,/agregarUsuario,.html,.css,.gif,.ico," +
-				".js,.jpg,ListaZona,/modificarUsuario.jsp,modificarUsuario.jsp,/updateUsuario,/activar").toLowerCase().split(","); //separo en array antes y dsp del ,
+				".js,.jpg,ListaZona,/modificarUsuario.jsp,modificarUsuario.jsp,/updateUsuario,/activar,activarUs.jsp").toLowerCase().split(","); //separo en array antes y dsp del ,
 	}
 
 }

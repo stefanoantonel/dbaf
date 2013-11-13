@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import ar.edu.ucc.bda.web.modelo.PersistenciaException;
 import ar.edu.ucc.bda.web.modelo.Usuario;
+import javax.mail.internet.*;
 
 @WebServlet("/activarUsuario")
 public class ActivarUsuario extends HttpServlet {

@@ -21,7 +21,7 @@
 		<a style="color: red;" href="demoJQueryUI.html" class="btn btn-info btn-large pink" >Buscar Cliente</a><br/><br/>
 		<a style="color: red;" href="login.jsp" class="btn btn-info  btn-large">Login</a><br/><br/>
 		<a style="color: red;" href="ListaClienteJNDI" class="btn btn-info  btn-large">Mostrar Lista Cliente</a><br/><br/>
-		<a style="color: red;" href="GetNotas" class="btn btn-info  btn-large">Mostrar Notas Guardadas</a><br/><br/>
+		<a style="color: red;" href="getNotas" class="btn btn-info  btn-large">Mostrar Notas Guardadas</a><br/><br/>
 	</div>
 </body>
 </html>
