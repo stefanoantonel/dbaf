@@ -32,13 +32,16 @@ public class UsuarioDAO implements IUsuarioDAO {
 	public Usuario cargar(String nombre,String clave) throws PersistenciaException{
 //		INSERT INTO usuarios VALUES('usuario',AES_ENCRYPT('contraseña','llave'),3);
 //		SELECT * FROM usuarios where clave=AES_ENCRYPT('contraseña','llave');
-		String sql="SELECT * FROM usuarios WHERE usuario=? and clave=AES_ENCRYPT('pass',?)";
+		StringBuilder sql=new StringBuilder();
+		sql.append("SELECT * FROM usuarios WHERE usuario=? and clave=");
+		sql.append(desencriptar(clave));
+		
 		int estado;
 		Usuario resultado=null;
 		try {
-			PreparedStatement stm=cn.prepareStatement(sql);
+			PreparedStatement stm=cn.prepareStatement(sql.toString());
 			stm.setString(1, nombre);
-			stm.setString(2, clave);
+			//stm.setString(2, clave);
 			ResultSet rs=stm.executeQuery();
 			if(rs.next()){				
 				String nombrep=rs.getString("usuario");
@@ -165,8 +168,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 	@Override
 	public String desencriptar(String clave) {
-		// TODO Auto-generated method stub
-		return null;
+		return "AES_ENCRYPT('pass',"+clave+")";
 	}
 	
 	public Usuario getUsuarioByEmail(String email)
