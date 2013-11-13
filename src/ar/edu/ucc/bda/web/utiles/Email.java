@@ -7,6 +7,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.activation.*;
 
  public class Email {
  
@@ -126,23 +127,23 @@ public void setUser(String user) {
  
 
 
-public static void main(String[] args) {
-
-	//"extlpphhgovsmnqh"
-	
-	StringBuilder link = new StringBuilder();
-	link.append("<form action=\"http://localhost:8080/dbaf/activar?mail=florenciabonansea@gmail.com\" method=\"post\"> <div name=\"mail\"  id=\"mail\" style=\"display:none\"  value=\"florenciabonansea@gmail.com\">");
-	link.append("florenciabonansea@gmail.com");
-	link.append("</div>  <input type=\"submit\" value=\"Activar\" /></form>");
-	
-
-	Email e = new Email("florenciabonansea@gmail.com", "extlpphhgovsmnqh", "florenciabonansea@gmail.com", "prueba");
-	//e.setProps();
-	String error =e.send();
-	if(error!="")
-		System.out.println("error "+error);
-	 
-}
+//public static void main(String[] args) {
+//
+//	//"extlpphhgovsmnqh"
+//	
+//	StringBuilder link = new StringBuilder();
+//	link.append("<form action=\"http://localhost:8080/dbaf/activar?mail=florenciabonansea@gmail.com\" method=\"post\"> <div name=\"mail\"  id=\"mail\" style=\"display:none\"  value=\"florenciabonansea@gmail.com\">");
+//	link.append("florenciabonansea@gmail.com");
+//	link.append("</div>  <input type=\"submit\" value=\"Activar\" /></form>");
+//	
+//
+//	Email e = new Email("florenciabonansea@gmail.com", "extlpphhgovsmnqh", "florenciabonansea@gmail.com", "prueba");
+//	//e.setProps();
+//	String error =e.send();
+//	if(error!="")
+//		System.out.println("error "+error);
+//	 
+//}
 
 
 

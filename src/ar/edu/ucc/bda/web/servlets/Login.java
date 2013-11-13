@@ -54,7 +54,7 @@ public class Login extends HttpServlet {
 		
 		
 		System.out.println("guardo el usuario: " +usuariop);
-		Connection cn=(Connection)getServletContext().getAttribute(Constantes.NOMBRE_CONEXION);
+
 		IUsuarioDAO usuarioDAO=new UsuarioDAO(); //uso la interfaz y uso la implementacion especifica de usuarioDAO. Esto usa polimorfismp
 		try {
 			
