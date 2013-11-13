@@ -1,7 +1,7 @@
 package ar.edu.ucc.bda.web.servlets;
 
 import java.io.IOException;
-
+import ar.edu.ucc.bda.web.utiles.Email;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +13,8 @@ import ar.edu.ucc.bda.web.modelo.PersistenciaException;
 import ar.edu.ucc.bda.web.modelo.Usuario;
 import ar.edu.ucc.bda.web.modelo.dao.IUsuarioDAO;
 import ar.edu.ucc.bda.web.modelo.dao.UsuarioDAO;
-import ar.edu.ucc.bda.web.utiles.Email;
+import javax.mail.Address;
+
 
 @WebServlet("/agregarUsuario")
 public class AgregarUsuario extends HttpServlet {
@@ -35,8 +36,13 @@ public class AgregarUsuario extends HttpServlet {
 		String clave2=request.getParameter("clave2");
 		
 		String email=request.getParameter("mail");
-		Email em = new Email("florenciabonansea@gmail.com", "extlpphhgovsmnqh", email, "Activar cuenta");
-		String error =em.send();
+		
+		//Email em = new Email();
+		Email.main(null);
+	
+		//Email em = new Email("florenciabonansea@gmail.com", "extlpphhgovsmnqh", email, "Activar cuenta");
+		//String error =em.send();
+		//System.out.println("error: "+error);
 		
 		if(!clave1.equals(clave2)){
 			despachar("Error: Claves no coinciden", request, response);

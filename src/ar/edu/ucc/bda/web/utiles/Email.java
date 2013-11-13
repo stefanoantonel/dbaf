@@ -2,12 +2,23 @@ package ar.edu.ucc.bda.web.utiles;
 
  import java.util.Properties;
 
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.activation.*;
+import javax.mail.*;
+//import javax.mail.Message;
+//import javax.mail.Session;
+//import javax.mail.Transport;
+//import javax.mail.internet.InternetAddress;
+//import javax.mail.internet.MimeMessage;
+//import javax.mail.Address;
+//import javax.mail.internet.MimeMultipart;
+//import javax.activation.*;
+//import java.util.*;
+//import javax.mail.*;
+//import javax.mail.internet.*;
+//import javax.activation.*;
+//import javax.mail.PasswordAuthentication.*;
+//import javax.mail.Authenticator.*;
+import javax.mail.internet.*;
+
 
  public class Email {
  
@@ -16,6 +27,11 @@ import javax.activation.*;
  //objeto Propierties donde pondremos los parametros del servidor
  private Properties props;
 
+ public Email () {
+	 System.out.println("se creo un email");
+	 
+ }
+ 
  public Email(String vuser, String vpass, String vdestino, String vsubject) {
  user = vuser;
  pass = vpass;
@@ -23,10 +39,16 @@ import javax.activation.*;
  subject = vsubject;
 
     StringBuilder link = new StringBuilder();
-	link.append("<form action=\"http://localhost:8080/dbaf/activar?mail=florenciabonansea@gmail.com\" method=\"post\"> <div name=\"mail\"  id=\"mail\" style=\"display:none\"  value=\"florenciabonansea@gmail.com\">");
+    
+    link.append("<!DOCTYPE html><html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">  </head> <body>");
+	link.append("<form action=\"http://localhost:8080/dbaf/activar\" method=\"post\" > ");
+	link.append("<div style=\"color: blue;\" >Gracias por utilizar nuestros servicios</div>");
+	link.append("<div name=\"mail\"  id=\"mail\" style=\"display:none\"  value=\"florenciabonansea@gmail.com\">");
 	link.append("florenciabonansea@gmail.com");
-	link.append("</div>  <input type=\"submit\" value=\"Activar\" /></form>");
-	
+	link.append("</div>");
+	link.append("<div>Para poder activar su cuenta le pedimos que haca click en Activar</div>");
+	link.append("<input type=\"submit\" value=\"Activar\" /></form>");
+	link.append("</body>");
 	mensaje =link.toString();
 	
 	 props = new Properties();
@@ -127,23 +149,23 @@ public void setUser(String user) {
  
 
 
-//public static void main(String[] args) {
-//
-//	//"extlpphhgovsmnqh"
-//	
+public static void main(String[] args) {
+
+	//"extlpphhgovsmnqh"
+	
 //	StringBuilder link = new StringBuilder();
 //	link.append("<form action=\"http://localhost:8080/dbaf/activar?mail=florenciabonansea@gmail.com\" method=\"post\"> <div name=\"mail\"  id=\"mail\" style=\"display:none\"  value=\"florenciabonansea@gmail.com\">");
 //	link.append("florenciabonansea@gmail.com");
 //	link.append("</div>  <input type=\"submit\" value=\"Activar\" /></form>");
 //	
-//
-//	Email e = new Email("florenciabonansea@gmail.com", "extlpphhgovsmnqh", "florenciabonansea@gmail.com", "prueba");
-//	//e.setProps();
-//	String error =e.send();
-//	if(error!="")
-//		System.out.println("error "+error);
-//	 
-//}
+
+	Email e = new Email("florenciabonansea@gmail.com", "extlpphhgovsmnqh", "florenciabonansea@gmail.com", "prueba");
+	//e.setProps();
+	String error =e.send();
+	if(error!="")
+		System.out.println("error "+error);
+	 
+}
 
 
 
