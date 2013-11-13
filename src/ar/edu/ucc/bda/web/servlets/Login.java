@@ -64,7 +64,7 @@ public class Login extends HttpServlet {
 			request.getServletContext().setAttribute("usuarioActualId", usuario.getId());
 //			if(usuario!=null && usuario.getClave().equals(clavep)){
 			if(usuario!=null){
-				//todo ok. tengo que crear una sesion
+				//todo OK. tengo que crear una sesion
 				System.out.println("antes de crear la sesion");
 				ArrayList<Usuario> ses=(ArrayList<Usuario>)request.getServletContext().getAttribute("sesiones");
 				int t,yaEsta=0;
