@@ -3,8 +3,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="css/js/jquery-1.9.1.js"></script>
+<link href="dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link rel="stylesheet" href="./css/estilos.css" type="text/css" />
+<script src="dist/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+
 </head>
 <body>
 
@@ -13,17 +18,24 @@
 <div align="center">
 <div id="scope" align="center">${requestScope.msj}</div>
 	<form action="updateUsuario">
+		<br>
+		Cambio de password
 		<br/><br/><br/>
 		<div>
-			Escriba la clave antigua:
-			<input type="password" placeholder="Escriba clave antigua"  name="claveV" />
+			
+			<input type="password"  class="btn btn-default" placeholder="Escriba su clave actual"  name="claveV" />
 		</div>
+		<br>
 		<div>
-			Escriba su clave nueva
-			<input type="password" placeholder="Escriba su nueva clave"  name="claveN1" />
-			<input type="password" placeholder="Repita clave nueva"  name="claveN2" />
-			<input type="submit" value="Cambiar clave" />
+			
+			<input type="password" class="btn btn-default" placeholder="Escriba su nueva clave"  name="claveN1" />
+			<br>
+			<input type="password" class="btn btn-default" placeholder="Repita nueva clave"  name="claveN2" />
+			
+			
 		</div>
+		<br/>
+		<input type="submit" class="btn btn-default" style="background:#63d2f8" value="Cambiar clave" />
 	</form>
 </div>
 
