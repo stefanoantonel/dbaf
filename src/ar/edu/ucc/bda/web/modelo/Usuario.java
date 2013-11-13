@@ -6,7 +6,7 @@ public class Usuario {
 	String email;
 	String clave;
 	String id;
-
+	int estado;
 
 	public Usuario(String nom, String cla,String mail,String ident) {
 		super();
@@ -54,6 +54,16 @@ public class Usuario {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+
+	public int getEstado() {
+		return estado;
+	}
+
+
+	public void setEstado(int estado) {
+		this.estado = estado;
 	}
 	
 

@@ -99,7 +99,7 @@ public class FireWallFilter implements Filter {
 		//Es como el constructor...
 		//agregamos lo que no queremos proteger. por ejemplo el log porque si lo protejo no podria logearme si no estoy logueado
 		//la la URI termina con algo de lo de abajo lo dejo pasar, no lo restrinjo
-		noProtegidos=("/login.jsp,/Login,/agregarUsuario.jsp,/agregarUsuario,.html,.css,.gif,.ico,.js,.jpg,ListaZona").toLowerCase().split(","); //separo en array antes y dsp del ,
+		noProtegidos=("/login.jsp,/Login,/agregarUsuario.jsp,/agregarUsuario,.html,.css,.gif,.ico,.js,.jpg,ListaZona,/modificarUsuario.jsp").toLowerCase().split(","); //separo en array antes y dsp del ,
 	}
 
 }
