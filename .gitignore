@@ -3,3 +3,5 @@
 #################
 context.xml
 build\WebContent\META-INF\context.xml
+*.class
+
