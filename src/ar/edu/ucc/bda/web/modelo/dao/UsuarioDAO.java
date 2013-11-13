@@ -11,6 +11,7 @@ import java.util.Date;
 
 import ar.edu.ucc.bda.web.modelo.PersistenciaException;
 import ar.edu.ucc.bda.web.modelo.Usuario;
+import ar.edu.ucc.bda.web.utiles.Fecha;
 
 public class UsuarioDAO implements IUsuarioDAO {
 
@@ -28,11 +29,11 @@ public class UsuarioDAO implements IUsuarioDAO {
 			
 	}
 	//esto es cargar en memoria al usuario NO agregar
-	public Usuario cargar(String nombre,String clave,int estado) throws PersistenciaException{
+	public Usuario cargar(String nombre,String clave) throws PersistenciaException{
 //		INSERT INTO usuarios VALUES('usuario',AES_ENCRYPT('contraseña','llave'),3);
 //		SELECT * FROM usuarios where clave=AES_ENCRYPT('contraseña','llave');
 		String sql="SELECT * FROM usuarios WHERE usuario=? and clave=AES_ENCRYPT('pass',?)";
-		
+		int estado;
 		Usuario resultado=null;
 		try {
 			PreparedStatement stm=cn.prepareStatement(sql);
@@ -48,17 +49,22 @@ public class UsuarioDAO implements IUsuarioDAO {
 				String expiracion=rs.getString("fecha_expiracion");
 				if(activada.equals("1")){
 					estado=1; //todo ok 
+					
+					//me fijo si expiro la fecha 
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+					Date date = new Date();
+					Fecha f=new Fecha();
+					int comparacion=f.compararFecha(dateFormat.format(date), expiracion); //primera anterioir a segunda = -1
+					if(comparacion>=0){
+						estado=3; //expiro
+					}
 				}
 				else{
 					estado=2; //falta activar 
 				}
-				//Calendar.getInstance().compareTo(Calendar.getInstance())
-				DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-				Date date = new Date();
-				System.out.println(dateFormat.format("dia actual: "+date));
-				//Date.valueOf(expiracion).compareTo(Date.this.);
 				
 				resultado=new Usuario(nombrep,clavep,mail,id);
+				resultado.setEstado(estado);
 					
 				System.out.println("clave en string: "+resultado.getClave());
 			}
@@ -70,7 +76,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 			System.out.println("error usuarioDAO");
 			e.printStackTrace();
 			estado=-1; //error
-			throw new PersistenciaException(); //relanzo la persistencia con otro nombre
+			//throw new PersistenciaException(); //relanzo la persistencia con otro nombre
 			
 		}
 		
@@ -115,7 +121,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 
 	
 	public boolean modificar(Usuario usuario) throws PersistenciaException{
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 	@Override
@@ -133,5 +139,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 
 }
