@@ -21,11 +21,7 @@ import javax.mail.internet.*;
 
 
  public class Email {
-	 
-	 public Email(){
-		 System.out.println("d");
-	 }
- 
+
 // partes del mail declaradas como privadas
  private String user, pass, destino, subject, mensaje;
  //objeto Propierties donde pondremos los parametros del servidor
