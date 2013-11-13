@@ -29,8 +29,8 @@
 		<br />
 		<form action="agregarUsuario"  method="post">
 			Ingrese Nombre: <input id="nombre" name="nombre" type="text" value="" style="display: list-item;" />
-			Ingrese Clave: <input id="clave1" name="clave1" type="text" value="" style="display: list-item;" />
-			Repita Clave: <input id="clave2" name="clave2" type="text" value="" style="display: list-item;"/>
+			Ingrese Clave: <input id="clave1" name="clave1" type="password" value="" style="display: list-item;" />
+			Repita Clave: <input id="clave2" name="clave2" type="password" value="" style="display: list-item;"/>
 			Ingrese Mail: <input id="mail" name="mail" type="text" value="" style="display: list-item;"/>
 			  
 			<!-- Tenemos que hacer un campo que sea para que el usuario tenga que cambiar la cuenta  -->

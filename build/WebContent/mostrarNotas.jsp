@@ -96,11 +96,11 @@
 			$.ajax({
 	   		     url: "CrearNota",
 	   		     success:function(datos,status,jqXHR){
-						//cuadno no le envian nada funciona como get y sino como set.
-						console.log("Nota creada");
+						
+	   		    		console.log("Nota creada");
 						$.get('GetNotas', function(data) {
-							var a=$("#bloque").html();
-		    		    	$("#bloque").html(a+datos);
+							//var a=$("body").html();
+		    		    	$("body").html(data);
 					    });
 	   		     }
   		     });
@@ -159,6 +159,13 @@
 			
 		});
 		
+		
+		var idElem=Math.ceil(Math.random()*10000); 
+		autocompletar("#texto","getDatos",2,function(item){
+			$("#salida").html("Cliente: "+item.descripcion+ "<br/>Fecha: "+item.otro.fecha);
+		},idElem);
+		
+		
 
 	});
 </script>
@@ -174,17 +181,19 @@
 	<div align="center" style="vertical-align:top;  "> 
 		
 		<input id="agregar" class="btn" type="button" value="Agregar Nota" style="display:block;" align="middle" name="11" />
-		<input id="agregar" class="btn" type="button" value="Agregar Nota" style="display:block;" align="middle" name="22"/>
 		<br/>
 	</div>
-
-
-	<div  class ="nota j centrar " id="nota" hidden="true" >
+	<div>
+		<input type="text" id="texto" >
+		<div id="salida"></div>
+	</div>
+	<div  class ="centrar nota" id="nota" hidden="true" >
 	
 		    <div class="modal-content">
+		     
 		      <div class="modal-header">
-		      	<input type="checkbox" class="check" aria-hidden="true" style="vertical-align: middle"; />
-		        <button type="button"  class="close botonEliminar" data-dismiss="modal" aria-hidden="true">&times;</button>
+		      	<input type="checkbox" class="checkbox" aria-hidden="true" />
+		        <button type="button"  class="cruz close botonEliminar " data-dismiss="modal" aria-hidden="true">&times;</button>
 		        <h4 class="textarea modal-title" class="" name="aa" id="titulo" contenteditable="true" >Modal title</h4>
 		      </div>
 		      <div class="modal-body" id="cuerpo" contenteditable="true">
