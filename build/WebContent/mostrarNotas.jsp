@@ -13,28 +13,16 @@
 <script type="text/javascript">
 
 var not = ${sessionScope.notas}
+var notaTemplate;
 
 $(document).on("ready",function(){
 
+	notaOriginal=$("#nota");
+	notaTemplate=notaOriginal.clone();
 	//var not = ${notas};
-	var notaAnt=$("#nota");
 	
-	$.each(not, function(indice,json){
-		console.log(indice);
+	armarNota(not);
 
-		var a1=notaAnt.clone();
-		a1.attr("hidden",false);
-		a1.attr("id",json.id);
-		a1.attr("title","Creada: "+json.agregada+" Modificada: "+json.modificada+"");
-
-		$("body").last().append(a1);			
-		var titulo=$("#"+json.id).find("h4").text(json.value);//.filter("[class='modal-title']").text(json.value);
-		//console.log("id json"+json.id);
-
-	});
-	
-
-	
 	$("#agregar").click(function(){
 
 		$.ajax({
@@ -108,10 +96,10 @@ $(document).on("ready",function(){
 	
 	 var idElem= Math.ceil(Math.random()*1000000);
 	autocompletar("#texto","getNotas",2,function(item)
-	{
-		console.log("item: "+item.value);
-	$("#salida").html("Titulo: "+item.value);	
-	},idElem); 
+			{
+				armarNota(item);
+			}
+	    ,idElem); 
 });
 	
 	
@@ -131,22 +119,40 @@ $(document).on("ready",function(){
 	}
 	
 	
+	 function armarNota(not)
+	 {
+		 var notaAnt=notaTemplate;
+		 console.log("nota Template: "+notaAnt);
+		 $.each(not, function(indice,json){
+				console.log(indice);
+				
+				var a1=notaAnt.clone();
+				a1.attr("hidden",false);
+				a1.attr("id",json.id);
+				a1.attr("title","Creada: "+json.agregada+" Modificada: "+json.modificada+"");
+
+				$("body").last().append(a1);
+				
+				$("#"+json.id).find("h4").text(json.value);
+				console.log("jason id: "+json.id);
+				console.log("jason value: "+json.value);
+				//.filter("[class='modal-title']").text(json.value);
+				//console.log("id json"+json.id);
+
+			});
+	 }
+	
 	
 
 	 function autocompletar (elemento, url, minLetras, clickCallback, idElem){
 		
 		 var elem = $(elemento);
-		console.log("elemento: "+elem.attr("id"));
+		//console.log("elemento: "+elem.val());
 		elem.keyup(function(evt){
-			var idDiv="divAutocomplete"+idElem;
+			//var idDiv="divAutocomplete"+idElem;
+			console.log("elemento: "+elem.val());
+			$(".nota").remove();
 			if(elem.val().length>=minLetras){
-				
-				    if($("#"+idDiv))
-				    	$("#"+idDiv).remove();
-
-				var pos=elem.position();
-				var top=pos.top+elem.outerHeight();
-				var posDiv="width: "+elem.outerWidht+" px; top: "+top+" px; left: "+pos.left+" px";
 				
 				$.ajax({
 					url:url,
@@ -154,41 +160,38 @@ $(document).on("ready",function(){
 					success: function (datos,status,jqXHR){
 						console.log("datos ajax: "+datos);
 					
-						$("body").append('<div class="contenedorLista" style="display:none;'+posDiv+'" id="'+idDiv+'"><ul class="lista-autocompletar"></ul></div>');
-						var ul=$("ul",$("#"+idDiv));
-						
-						
-						$(datos).each(function(indice, objeto){
-							//
-							//$(datos).each(function(indice, objeto){
-							var idItem=idDiv+indice+'item';
-							ul.append('<li class="item_autocompletar" id="'+idItem+'">'+objeto.value+'</li>');
-							
-							$("#"+idItem).click(function(evento){
-									
-							
+						//$(".nota").empty();
+						$(".nota").remove();
+
 								if(clickCallback && typeof clickCallback !== "undefined")
-									clickCallback(objeto);
-								elem.val(objeto.value);
-								$("#"+idDiv).hide(300);
-								$("#"+idDiv).remove();
-								evento.preventDefault();
-								
-							});
-							
-						});
-						$("#"+idDiv).show();
-						
-					
-					//console.log("datos "+ not);
+								{	console.log("datos antes de la funcion: "+datos);
+									clickCallback(datos);
+								}	
+
 					}
 				});
 				
-			} else {
-
-				if($("#"+idDiv))
-			    	$("#"+idDiv).remove();
 			}
+			else{
+				$.ajax({
+					url:url,
+					data:{texto:null }, //texto que escribimos
+					success: function (datos,status,jqXHR){
+						console.log("datos ajax: "+datos);
+					
+						//$(".nota").empty();
+						$(".nota").remove();
+
+								if(clickCallback && typeof clickCallback !== "undefined")
+								{	console.log("datos antes de la funcion: "+datos);
+									clickCallback(datos);
+								}	
+
+					}
+				});
+			}
+
+			
 			
 		}); 
 	 

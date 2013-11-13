@@ -78,7 +78,7 @@ public class GetNotas extends HttpServlet {
 		JSONArray distintasNotas=null;
 		try {
 			
-			if( notaBuscar==null ||notaBuscar.equals("-1")){
+			if( notaBuscar==null ||notaBuscar.equals("undefined")||notaBuscar.equals("-1")){
 				System.out.println("entro a buscar todas");
 				distintasNotas = notas.load(usuarioActual);
 				System.out.println("notas todas"+distintasNotas);
@@ -90,7 +90,7 @@ public class GetNotas extends HttpServlet {
 				distintasNotas = notas.load(usuarioActual,notaBuscar);
 				System.out.println("notas filtradas"+distintasNotas);
 				response.setContentType("application/json");
-				response.getWriter().println(distintasNotas.toString());
+				response.getWriter().println(distintasNotas);
 				
 			}
 			
