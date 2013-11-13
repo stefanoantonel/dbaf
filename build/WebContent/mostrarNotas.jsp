@@ -109,9 +109,17 @@
 		
 		$(".botonEliminar").click(function(){
 			//alert($(this).prev().val());
+<<<<<<< HEAD
 			var id=$(this).closest(".nota").attr("id");
 			console.log("id nota prev"+id);
 			$('#'+id).remove();
+=======
+			var elim=$(this);
+			
+			var id=$(this).closest(".nota").attr("id");
+			console.log("id nota prev"+id);
+			$("#"+id).remove();
+>>>>>>> d00bb6bf715c5bdd4121b1df9e89c64c05c71d4b
 			 $.ajax({
 	   		     url: "EliminarNota?id="+id+"",
 	   		     success:function(datos,status,jqXHR){
@@ -183,17 +191,28 @@
 		<input id="agregar" class="btn" type="button" value="Agregar Nota" style="display:block;" align="middle" name="11" />
 		<br/>
 	</div>
+<<<<<<< HEAD
 	<div>
 		<input type="text" id="texto" >
 		<div id="salida"></div>
 	</div>
 	<div  class ="centrar nota" id="nota" hidden="true" >
+=======
+
+
+	<div  class ="nota j centrar " id="nota" hidden="true" >
+>>>>>>> d00bb6bf715c5bdd4121b1df9e89c64c05c71d4b
 	
 		    <div class="modal-content">
 		     
 		      <div class="modal-header">
+<<<<<<< HEAD
 		      	<input type="checkbox" class="checkbox" aria-hidden="true" />
 		        <button type="button"  class="cruz close botonEliminar " data-dismiss="modal" aria-hidden="true">&times;</button>
+=======
+		      	<input type="checkbox" class="check" aria-hidden="true" style="vertical-align: middle"; />
+		        <button type="button"  class="close botonEliminar" data-dismiss="modal" aria-hidden="true">&times;</button>
+>>>>>>> d00bb6bf715c5bdd4121b1df9e89c64c05c71d4b
 		        <h4 class="textarea modal-title" class="" name="aa" id="titulo" contenteditable="true" >Modal title</h4>
 		      </div>
 		      <div class="modal-body" id="cuerpo" contenteditable="true">

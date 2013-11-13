@@ -1,12 +1,9 @@
 package ar.edu.ucc.bda.web.servlets;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import javax.crypto.Cipher;
-import javax.crypto.CipherOutputStream;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,11 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import ar.edu.ucc.bda.web.modelo.PersistenciaException;
 import ar.edu.ucc.bda.web.modelo.Usuario;
 import ar.edu.ucc.bda.web.modelo.dao.IUsuarioDAO;
 import ar.edu.ucc.bda.web.modelo.dao.UsuarioDAO;
 import ar.edu.ucc.bda.web.utiles.Constantes;
+import ar.edu.ucc.bda.web.utiles.Email;
 
 @WebServlet("/login")
 public class Login extends HttpServlet {
@@ -53,8 +50,6 @@ public class Login extends HttpServlet {
 		String clavep=request.getParameter("clave");
 		
 		request.getServletContext().setAttribute("usuarioActual", usuariop);
-		
-		
 		
 		System.out.println("guardo el usuario: " +usuariop);
 
@@ -125,8 +120,8 @@ public class Login extends HttpServlet {
 				}
 			}
 			
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception e1) {
+			e1.printStackTrace();
 		}
 		
         
