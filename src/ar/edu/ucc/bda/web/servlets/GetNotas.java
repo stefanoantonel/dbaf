@@ -26,7 +26,7 @@ import ar.edu.ucc.bda.web.utiles.Constantes;
 /**
  * Servlet implementation class GetNotas
  */
-@WebServlet("/GetNotas")
+@WebServlet("/getNotas")
 public class GetNotas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -49,42 +49,7 @@ public class GetNotas extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		// TODO Auto-generated method stub
-//		Connection cn=(Connection)getServletContext().getAttribute(Constantes.NOMBRE_CONEXION);
-////		ArrayList<Usuario> ses=(ArrayList<Usuario>)request.getServletContext().getAttribute("sesiones");
-//		//OBTENGO EL USUARIO PARA SACAR LAS NOTAS DE ESE ESPECIFICO
-//		String usuarioActual=request.getServletContext().getAttribute("usuarioActual").toString();
-//		NotasDAO notas=new NotasDAO(cn);
-//		System.out.println("Le mando el usuario: "+usuarioActual);
-//		JSONArray distintasNotas = null;
-//		try {
-//			distintasNotas = notas.load(usuarioActual);
-//		} catch (JSONException e1) {
-//			
-//			e1.printStackTrace();
-//		}
-////		List<String> distintasNotas =notas.load(usuarioActual);
-//		if(distintasNotas!=null){
-//			for (int i = 0; i < distintasNotas.length(); ++i) {
-//			    JSONObject rec;
-//				try {
-//					rec = distintasNotas.getJSONObject(i);
-//					
-//					System.out.println(rec.get("id"));
-//				    System.out.println(rec.get("value"));
-//				} catch (JSONException e) {
-//					
-//					e.printStackTrace();
-//				}
-//			    
-//			    // ...
-//			}
-//		}
-//		
-//		request.getSession().setAttribute("notas", distintasNotas);
-//		despachar("despache desde GetNotas", request, response);
-//	}
+
 	
 	
 	
@@ -92,7 +57,11 @@ public class GetNotas extends HttpServlet {
 		// TODO Auto-generated method stub
 		//Connection cn=(Connection)getServletContext().getAttribute(Constantes.NOMBRE_CONEXION);
 //		ArrayList<Usuario> ses=(ArrayList<Usuario>)request.getServletContext().getAttribute("sesiones");
-		//OBTENGO EL USUARIO PARA SACAR LAS NOTAS DE ESE ESPECIFICO
+		//OBTENGO EL UerSUARIO PARA SACAR LAS NOTAS DE ESE ESPECIFICO
+		String notaBuscar=request.getParameter("texto");
+		
+		
+		System.out.println("parametro de ajax: "+notaBuscar);
 		String usuarioActual=request.getServletContext().getAttribute("usuarioActualId").toString();
 		NotasDAO notas=new NotasDAO();
 		System.out.println("Le mando el usuario: "+usuarioActual);
@@ -108,7 +77,24 @@ public class GetNotas extends HttpServlet {
 		
 		JSONArray distintasNotas=null;
 		try {
-			distintasNotas = notas.load(usuarioActual);
+			
+			if( notaBuscar==null ||notaBuscar.equals("-1")){
+				System.out.println("entro a buscar todas");
+				distintasNotas = notas.load(usuarioActual);
+				System.out.println("notas todas"+distintasNotas);
+				request.getSession().setAttribute("notas", distintasNotas);
+				despachar("despache desde GetNotas", request, response);
+			}
+			else{
+				System.out.println("entro con parametro");
+				distintasNotas = notas.load(usuarioActual,notaBuscar);
+				System.out.println("notas filtradas"+distintasNotas);
+				response.setContentType("application/json");
+				response.getWriter().println(distintasNotas.toString());
+				
+			}
+			
+			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -131,10 +117,12 @@ public class GetNotas extends HttpServlet {
 //			}
 //		}
 		if(distintasNotas!=null){
-			request.getSession().setAttribute("notas", distintasNotas);
 			
-			despachar("despache desde GetNotas", request, response);
+			
 			//response.sendRedirect("/dbaf/nota.jsp");
+//			response.
+			
+			
 		}
 		else
 			System.out.println("error en GetNotas");

@@ -12,9 +12,112 @@
 
 <script type="text/javascript">
 
+var not = ${sessionScope.notas}
+
+$(document).on("ready",function(){
+
+	//var not = ${notas};
+	var notaAnt=$("#nota");
+	
+	$.each(not, function(indice,json){
+		console.log(indice);
+
+		var a1=notaAnt.clone();
+		a1.attr("hidden",false);
+		a1.attr("id",json.id);
+		a1.attr("title","Creada: "+json.agregada+" Modificada: "+json.modificada+"");
+
+		$("body").last().append(a1);			
+		var titulo=$("#"+json.id).find("h4").text(json.value);//.filter("[class='modal-title']").text(json.value);
+		//console.log("id json"+json.id);
+
+	});
+	
+
+	
+	$("#agregar").click(function(){
+
+		$.ajax({
+   		     url: "CrearNota",
+   		     success:function(datos,status,jqXHR){
+					
+   		    		console.log("Nota creada");
+					$.get('getNotas', function(data) {
+						//var a=$("body").html();
+						console.log("agregar ajax"+data);
+	    		    	$("body").html(data);
+				    });
+   		     }
+		     });
+	});
+	
+	
+	$(".botonEliminar").click(function(){
+		//alert($(this).prev().val());
+
+		var id=$(this).closest(".nota").attr("id");
+		console.log("id nota prev"+id);
+		$('#'+id).remove();
+
+		 $.ajax({
+   		     url: "EliminarNota?id="+id+"",
+   		     success:function(datos,status,jqXHR){
+					//cuadno no le envian nada funciona como get y sino como set.
+					console.log("Nota eliminada");
+   		     }
+		     });
+		     
+		
+	});
+	
+	
+	
+	$(".textarea").blur(function() {
+		var notaCamb=$(this).text();
+		console.log("nota cambiada"+notaCamb);
+		//var notaId=$(this).attr("id");
+		var notaId=$(this).closest(".nota").attr("id");
+		//$(this).parent(".nota");
+		console.log("id nota "+notaId);
+		$("#cambio").val($(this).val());
+		$.ajax({
+   		     url: "GuardaNota?nota="+notaCamb+"&id="+notaId+"",
+   		     success:function(datos,status,jqXHR){
+					console.log("Nota guardada");
+   		     }
+		     });
+	});
+			
+	
+	$("input:checkbox").click(function(){
+	
+		var estado=$(this).is(":checked");
+		var id=$(this).next().attr("id");
+		console.log("cambio: "+estado+" id:"+id);
+		estado = (estado==true) ? "1" : "0";
+		console.log("dsp if estado:"+estado);
+		$.ajax({
+   		     url: "GuardarNotaLista?lista="+estado+"&id="+id+"",
+   		     success:function(datos,status,jqXHR){
+					
+					console.log("Nota realizada");
+   		     }
+		     });
+		
+	});
+	
+	 var idElem= Math.ceil(Math.random()*1000000);
+	autocompletar("#texto","getNotas",2,function(item)
+	{
+		console.log("item: "+item.value);
+	$("#salida").html("Titulo: "+item.value);	
+	},idElem); 
+});
+	
+	
 	
 	function esLista(lista){
-		//console.log("listaFunc= "+ lista);
+
 		var lis="";
 		if(lista!=null){
 			if(lista=="1"){
@@ -27,155 +130,72 @@
 		return lis;
 	}
 	
+	
+	
 
-	$(document).on("ready",function(){
-
-		var not = ${notas};
-		var notaAnt=$("#nota");
-		var idd=30;
-		$.each(not, function(indice,json){
-			console.log(indice);
-			/* console.log("value: "+json.value+" lista: "+json.lista);
-			var comienzoDiv="<div style=\"vertical-align: top; color: light-red; border-style: dotted;\" >";
-			var check="<input type=\"checkbox\" style=\"vertical-align: middle;\" "+esLista(json.lista)+"/>";
-			console.log("esLista: "+esLista(json.lista));
-			var area="<textarea class=\"textarea\" id="+$('#yourElementId').prop('title', 'your new title');+" title=\"Creada: "+json.agregada+" Modificada: "+json.modificada+"\" style=\"display:inline\"> "+json.value+"</textarea>";
-			//var area="<div contenteditable=\"true\" class=\"tooltip\" class=\"textarea\" id="+json.id+" wrap=\"hard\" title=\"Creada: "+json.agregada+" Modificada: "+json.modificada+"\" style=\"display:inline\"> "+json.value+"</div>";
-			//var boton="<input class=\"btn  btn-info btn-large\" class=\"botonEliminar\" value=\"Elliminar\" type=\"button\" />";
-			var boton="<button title=\"Eliminar nota\"  class=\"btn\" type=\"button\" class=\"botonEliminar\" class=\"close\" >&times;</button>";
-			
-			var enter="<div style=\"display:block;\"/>";
-			var finDiv="</div><br/>"; */
-			
-			//$("body").last().append(comienzoDiv+check+area+boton+enter+finDiv);<<<<<<< HEAD
-			//$("#bloque").append($("#nota"));
-			//console.log($("#agregar").attr("id"," "+indice+" "));
-			//$("body").last().append($("#agregar").attr("id"," "+indice+" "));
-			var a1=notaAnt.clone();
-			a1.attr("hidden",false);
-			a1.attr("id",json.id);
-			a1.attr("title","Creada: "+json.agregada+" Modificada: "+json.modificada+"");
-			//$(a1.modal-titl)
-			
-			/*  esLista(json.lista)*/
-			
-			//request.getServletContext().setAttribute("usuarioActualId", usuario.getId());
-			$("body").last().append(a1);
-			//notaAnt=$("body").last();
-			//console.log(a1);
-			
-			var titulo=$("#"+json.id).find("h4").text(json.value);//.filter("[class='modal-title']").text(json.value);
-			console.log("id json"+json.id);
-			//$("#"+json.id).find("h4").attr("id",json.id);
-			//console.log($("#"+json.id+"").text());
-			
-			//+esLista(json.lista)+"
-			/* 
-=======
-			
-			
-			$("#bloque").append("<iframe src=\"./nota.jsp\"></iframe> </br>");
-			
-		//	$('#nota').attr('id', 'first6');
-		//	$("#aa").text("text");
+	 function autocompletar (elemento, url, minLetras, clickCallback, idElem){
 		
-			$('#nota').each(function(){
-				  if(this.id){
-				    this.id = this.id+"1";
-				  }
-				});
->>>>>>> cdee02d51274b480d2c07993f21ba6866594c6bd */
-		});
-		
-
-		
-		$("#agregar").click(function(){
-			
-		//	$('#myModal').modal(options);
-			
-			$.ajax({
-	   		     url: "CrearNota",
-	   		     success:function(datos,status,jqXHR){
-						
-	   		    		console.log("Nota creada");
-						$.get('GetNotas', function(data) {
-							//var a=$("body").html();
-		    		    	$("body").html(data);
-					    });
-	   		     }
-  		     });
-		});
-		
-		
-		$(".botonEliminar").click(function(){
-			//alert($(this).prev().val());
-<<<<<<< HEAD
-			var id=$(this).closest(".nota").attr("id");
-			console.log("id nota prev"+id);
-			$('#'+id).remove();
-=======
-			var elim=$(this);
-			
-			var id=$(this).closest(".nota").attr("id");
-			console.log("id nota prev"+id);
-			$("#"+id).remove();
->>>>>>> d00bb6bf715c5bdd4121b1df9e89c64c05c71d4b
-			 $.ajax({
-	   		     url: "EliminarNota?id="+id+"",
-	   		     success:function(datos,status,jqXHR){
-						//cuadno no le envian nada funciona como get y sino como set.
-						console.log("Nota eliminada");
-	   		     }
- 		     });
- 		     
-			
-		});
-		
-		
-		
-		$(".textarea").blur(function() {
-			var notaCamb=$(this).text();
-			console.log("nota cambiada"+notaCamb);
-			//var notaId=$(this).attr("id");
-			var notaId=$(this).closest(".nota").attr("id");
-			//$(this).parent(".nota");
-			console.log("id nota "+notaId);
-			$("#cambio").val($(this).val());
-			$.ajax({
-	   		     url: "GuardaNota?nota="+notaCamb+"&id="+notaId+"",
-	   		     success:function(datos,status,jqXHR){
-						console.log("Nota guardada");
-	   		     }
-   		     });
-		});
+		 var elem = $(elemento);
+		console.log("elemento: "+elem.attr("id"));
+		elem.keyup(function(evt){
+			var idDiv="divAutocomplete"+idElem;
+			if(elem.val().length>=minLetras){
 				
-		
-		$("input:checkbox").click(function(){
-		
-			var estado=$(this).is(":checked");
-			var id=$(this).next().attr("id");
-			console.log("cambio: "+estado+" id:"+id);
-			estado = (estado==true) ? "1" : "0";
-			console.log("dsp if estado:"+estado);
-			$.ajax({
-	   		     url: "GuardarNotaLista?lista="+estado+"&id="+id+"",
-	   		     success:function(datos,status,jqXHR){
-						
-						console.log("Nota realizada");
-	   		     }
-   		     });
-			
-		});
-		
-		
-		var idElem=Math.ceil(Math.random()*10000); 
-		autocompletar("#texto","getDatos",2,function(item){
-			$("#salida").html("Cliente: "+item.descripcion+ "<br/>Fecha: "+item.otro.fecha);
-		},idElem);
-		
-		
+				    if($("#"+idDiv))
+				    	$("#"+idDiv).remove();
 
-	});
+				var pos=elem.position();
+				var top=pos.top+elem.outerHeight();
+				var posDiv="width: "+elem.outerWidht+" px; top: "+top+" px; left: "+pos.left+" px";
+				
+				$.ajax({
+					url:url,
+					data:{ texto:elem.val() }, //texto que escribimos
+					success: function (datos,status,jqXHR){
+						console.log("datos ajax: "+datos);
+					
+						$("body").append('<div class="contenedorLista" style="display:none;'+posDiv+'" id="'+idDiv+'"><ul class="lista-autocompletar"></ul></div>');
+						var ul=$("ul",$("#"+idDiv));
+						
+						
+						$(datos).each(function(indice, objeto){
+							//
+							//$(datos).each(function(indice, objeto){
+							var idItem=idDiv+indice+'item';
+							ul.append('<li class="item_autocompletar" id="'+idItem+'">'+objeto.value+'</li>');
+							
+							$("#"+idItem).click(function(evento){
+									
+							
+								if(clickCallback && typeof clickCallback !== "undefined")
+									clickCallback(objeto);
+								elem.val(objeto.value);
+								$("#"+idDiv).hide(300);
+								$("#"+idDiv).remove();
+								evento.preventDefault();
+								
+							});
+							
+						});
+						$("#"+idDiv).show();
+						
+					
+					//console.log("datos "+ not);
+					}
+				});
+				
+			} else {
+
+				if($("#"+idDiv))
+			    	$("#"+idDiv).remove();
+			}
+			
+		}); 
+	 
+
+	 }
+	
+	
 </script>
 
 
@@ -191,28 +211,20 @@
 		<input id="agregar" class="btn" type="button" value="Agregar Nota" style="display:block;" align="middle" name="11" />
 		<br/>
 	</div>
-<<<<<<< HEAD
-	<div>
-		<input type="text" id="texto" >
+
+	<div>   <!-- AUTOCOMPLETAR              -->
+		<input type="text" id="texto" />
 		<div id="salida"></div>
 	</div>
 	<div  class ="centrar nota" id="nota" hidden="true" >
-=======
 
-
-	<div  class ="nota j centrar " id="nota" hidden="true" >
->>>>>>> d00bb6bf715c5bdd4121b1df9e89c64c05c71d4b
 	
 		    <div class="modal-content">
 		     
 		      <div class="modal-header">
-<<<<<<< HEAD
 		      	<input type="checkbox" class="checkbox" aria-hidden="true" />
 		        <button type="button"  class="cruz close botonEliminar " data-dismiss="modal" aria-hidden="true">&times;</button>
-=======
-		      	<input type="checkbox" class="check" aria-hidden="true" style="vertical-align: middle"; />
-		        <button type="button"  class="close botonEliminar" data-dismiss="modal" aria-hidden="true">&times;</button>
->>>>>>> d00bb6bf715c5bdd4121b1df9e89c64c05c71d4b
+
 		        <h4 class="textarea modal-title" class="" name="aa" id="titulo" contenteditable="true" >Modal title</h4>
 		      </div>
 		      <div class="modal-body" id="cuerpo" contenteditable="true">
