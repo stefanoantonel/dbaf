@@ -62,14 +62,14 @@
 			//request.getServletContext().setAttribute("usuarioActualId", usuario.getId());
 			$("body").last().append(a1);
 			//notaAnt=$("body").last();
-			console.log(a1);
-			idd=idd+2;
+			//console.log(a1);
+			
 			var titulo=$("#"+json.id).find("h4").text(json.value);//.filter("[class='modal-title']").text(json.value);
 			console.log("id json"+json.id);
-			$("#"+json.id).find("h4").attr("id",json.id);
+			//$("#"+json.id).find("h4").attr("id",json.id);
 			//console.log($("#"+json.id+"").text());
 			
-			
+			//+esLista(json.lista)+"
 			/* 
 =======
 			
@@ -109,7 +109,7 @@
 		
 		$(".botonEliminar").click(function(){
 			//alert($(this).prev().val());
-			var id=$(this).prev().attr("id");
+			var id=$(this).closest(".nota").attr("id");
 			console.log("id nota prev"+id);
 			 $.ajax({
 	   		     url: "EliminarNota?id="+id+"",
@@ -127,7 +127,9 @@
 		$(".textarea").blur(function() {
 			var notaCamb=$(this).text();
 			console.log("nota cambiada"+notaCamb);
-			var notaId=$(this).attr("id");
+			//var notaId=$(this).attr("id");
+			var notaId=$(this).closest(".nota").attr("id");
+			//$(this).parent(".nota");
 			console.log("id nota "+notaId);
 			$("#cambio").val($(this).val());
 			$.ajax({
@@ -176,11 +178,13 @@
 	</div>
 
 
-	<div class="centrar" class ="nota" name="nota" id="nota" hidden="true">
+	<div  class ="nota j centrar " id="nota" hidden="true" >
+	
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <button type="button"  class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		        <h4 class="textarea" class="modal-title" name="aa" id="titulo" contenteditable="true" >Modal title</h4>
+		      	<input type="checkbox" class="check" aria-hidden="true" style="vertical-align: middle"; />
+		        <button type="button"  class="close botonEliminar" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h4 class="textarea modal-title" class="" name="aa" id="titulo" contenteditable="true" >Modal title</h4>
 		      </div>
 		      <div class="modal-body" id="cuerpo" contenteditable="true">
 		        <p>One fine body&hellip;</p>
