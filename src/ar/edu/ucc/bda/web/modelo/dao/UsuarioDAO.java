@@ -122,8 +122,31 @@ public class UsuarioDAO implements IUsuarioDAO {
 
 	
 	public boolean modificar(Usuario usuario) throws PersistenciaException{
+		String claveEnc=encriptar(usuario.getClave()); //encripto la clave nueva
+		StringBuilder sql=new StringBuilder();
+		sql.append(" UPDATE usuarios SET clave= ");
+		sql.append(" "+claveEnc+" ");
+		sql.append(" ,fecha_expiracion= CURDATE()+ INTERVAL '30' day");
+		sql.append(" WHERE usuario=?");
+		Usuario resultado=null;
+		try {
+			PreparedStatement stm=cn.prepareStatement(sql.toString());
+			stm.setString(1,usuario.getNombre());
+//			String c=encriptar(usuario.getClave());
+//			stm.set(2,c);
+			//stm.setString(2,usuario.getEmail());
+			
+			
+			System.out.println(stm.toString());
+			stm.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			System.out.println("error agregar usuario en usuarioDAO");
+			e.printStackTrace();
+			return false;
+			
+		}
 		
-		return false;
 	}
 	@Override
 	public Usuario cargar(String nombre) throws PersistenciaException {

@@ -7,13 +7,23 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+
+
 <div align="center">
+<div id="scope" align="center">${requestScope.msj}</div>
 	<form action="updateUsuario">
-		Escriba la clave antigua:
-		<input type="password" placeholder="Escriba clave antigua"  name="claveV" />
-		Escriba su clave nueva
-		<input type="password" placeholder="Escriba su nueva clave"  name="claveN1" />
-		<input type="password" placeholder="Repita clave nueva"  name="claveN2" />
+		<br/><br/><br/>
+		<div>
+			Escriba la clave antigua:
+			<input type="password" placeholder="Escriba clave antigua"  name="claveV" />
+		</div>
+		<div>
+			Escriba su clave nueva
+			<input type="password" placeholder="Escriba su nueva clave"  name="claveN1" />
+			<input type="password" placeholder="Repita clave nueva"  name="claveN2" />
+			<input type="submit" value="Cambiar clave" />
+		</div>
 	</form>
 </div>
 
