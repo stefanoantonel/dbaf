@@ -34,7 +34,7 @@ public class ActivarUsuario extends HttpServlet {
 			if(us.activar())
 			 	{	//TODO OK
 					mnj="<div class=\"alert alert-success\"> Usuario activado correctamente</div>";
-					request.setAttribute("mnjActivado", mnj);
+					request.setAttribute("msj", mnj);
 					rd = getServletContext().getRequestDispatcher("/menu.jsp");
 				}
 
