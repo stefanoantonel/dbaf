@@ -68,7 +68,7 @@ $(document).on("ready",function(){
 		
 		
 	}
-	
+	//asignarAgregar();
 	
 	function asignarTodo(){
 		asignarTextarea();
@@ -152,6 +152,24 @@ $(document).on("ready",function(){
 							//console.log("agregar ajax"+data);
 		    		    	$("body").html(data);
 					    });
+						
+						/* $.ajax({
+							url:"getNotas",
+							data:{ texto:"" }, //traer todas y encontrar la ultima
+							success: function (datos,status,jqXHR){
+								//console.log("datos ajax: "+datos);
+							
+								//$(".nota").empty();
+								$(".nota").remove();
+								
+										if(clickCallback && typeof clickCallback !== "undefined")
+										{	//console.log("datos antes de la funcion: "+datos);
+											clickCallback(datos);
+											asignarEliminar();
+											asignarTodo();
+										}	
+							}
+						}); */
 	   		     }
 			     });
 		});
@@ -278,7 +296,7 @@ $(document).on("ready",function(){
 	<div>   <!-- AUTOCOMPLETAR              -->
 		<input type="text" id="texto" />
 		<div id="salida"></div>
-
+	<br>
 	<div  class ="centrar nota" id="nota" hidden="true" >
 
 	
