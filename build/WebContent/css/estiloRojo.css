@@ -29,7 +29,11 @@ padding-bottom: 10px;
 	background: #F0DFE2;
 }
 
+.cabeceraPrincipal
+{
+	background: url("./img/fondo_rojo.jpg") no-repeat;
 
+}
 
 
 

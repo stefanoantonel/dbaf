@@ -22,3 +22,10 @@ padding-bottom: 10px;
 {
 background: #F7F5EA;
 }
+
+
+.cabeceraPrincipal
+{
+	background: url("./img/fondo_amarillo.jpg") no-repeat;
+
+}

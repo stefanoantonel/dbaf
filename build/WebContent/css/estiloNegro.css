@@ -20,3 +20,9 @@ padding-bottom: 10px;
 {
 background: #DFDDDB;
 }
+
+.cabeceraPrincipal
+{
+	background: url("./img/fondo_negro.jpg") no-repeat;
+
+}

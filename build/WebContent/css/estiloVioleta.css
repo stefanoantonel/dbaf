@@ -26,3 +26,9 @@ padding-bottom: 10px;
 {
 	background: #F4EBF6;
 }
+
+.cabeceraPrincipal
+{
+	background: url("./img/fondo_violeta.jpg") no-repeat;
+
+}
