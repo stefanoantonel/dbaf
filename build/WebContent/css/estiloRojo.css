@@ -12,3 +12,9 @@ padding-right:10px;
 margin: 0 0 0 -10px;
 padding-bottom: 10px; 
 }
+
+.checkbox
+{
+	vertical-align:top; 
+	horizontal-align:left; 
+}
