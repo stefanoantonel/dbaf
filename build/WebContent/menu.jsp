@@ -18,24 +18,42 @@
 
 $(document).on("ready",function(){
 	
+	
+	obtenerEstilo("-1");
+	
+	
 	$("#lookFeel li").click(function() {
 	    
-		var estilo= $(this).attr('id');
+		var estiloS= $(this).attr('id');
 		//alert(estilo); // jQuery's .attr() method, same but more verbose
-	  
-	    var oldlink = document.getElementsByTagName("link").item("./css/estilo");
-		 
-        var newlink = document.createElement("link");
-        newlink.setAttribute("rel", "stylesheet");
-        newlink.setAttribute("type", "text/css");
-        newlink.setAttribute("href", "./css/estilo"+estilo+".css");
- 
-        document.getElementsByTagName("head").item(0).replaceChild(newlink, oldlink);
-	    
+		
+		obtenerEstilo(estiloS);
 	    
 	});
 
+	 
 });
+
+
+function obtenerEstilo(estiloS)
+{
+	$.ajax({
+		     url: "Estilos",
+		     data:{estiloSeleccionado: estiloS},
+		     success:function(datos,status,jqXHR){
+		    	 
+		    	 console.log("datos:"+datos);
+		    	 var oldlink = document.getElementsByTagName("link").item("./css/estilo");
+		    	 
+		         var newlink = document.createElement("link");
+		         newlink.setAttribute("rel", "stylesheet");
+		         newlink.setAttribute("type", "text/css");
+		         newlink.setAttribute("href", "./css/estilo"+datos+".css");
+
+		         document.getElementsByTagName("head").item(0).replaceChild(newlink, oldlink);
+		     }
+	     });
+}
 
 
 
@@ -52,7 +70,10 @@ $(document).on("ready",function(){
                         <li id="Rojo"><a>Rojo</a></li>
                         <li id="Verde"><a>Verde</a></li>
                         <li id="Amarillo"><a>Amarillo</a></li>
-                        <li id="Rojo"><a>?</a></li>
+                        <li id="Naranja"><a>Naranja</a></li>
+                        <li id="Blanco"><a>Blanco</a></li>
+                        <li id="Negro"><a>Negro</a></li>
+                        <li id="Violeta"><a>Violeta</a></li>
                     </ul>
                 </li>
             </ul>

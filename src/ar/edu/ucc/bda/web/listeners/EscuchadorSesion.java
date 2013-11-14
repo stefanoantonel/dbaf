@@ -31,7 +31,8 @@ public class EscuchadorSesion implements HttpSessionListener {
 
     public void sessionCreated(HttpSessionEvent arg0) {
       System.out.println("Se creo una sesion!!!");
-      
+      arg0.getSession().setAttribute("estilo", "blanco");
+      System.out.println( "estilo: "+arg0.getSession().getAttribute("estilo"));
       
      // System.out.println(ls);
     }
