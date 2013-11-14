@@ -22,110 +22,35 @@ $(document).on("ready",function(){
 	//var not = ${notas};
 	//console.log(notaTemplate);
 	armarNota(not);
-
-	$("#agregar").click(function(){
-		$.ajax({
-   		     url: "CrearNota",
-   		     success:function(datos,status,jqXHR){
-					
-   		    		console.log("Nota creada");
-					$.get('getNotas', function(data) {
-						//var a=$("body").html();
-						//console.log("agregar ajax"+data);
-	    		    	$("body").html(data);
-				    });
-   		     }
-		     });
-	});
-	
-	asignarEliminar();
-		
+	asignarTodo();
 	
 	
-	$(".textareaTitulo").blur(function() {
-		var notaCamb=$(this).text();
-		//console.log("nota cambiada"+notaCamb);
-		//var notaId=$(this).attr("id");
-		var notaId=$(this).closest(".nota").attr("id");
-		console.log("cambio: "+notaCamb+" id:"+notaId);
-		//$(this).parent(".nota");
-		//console.log("id nota "+notaId);
-		$("#cambio").val($(this).val());
-		$.ajax({
-   		     url: "GuardaNota?titulo="+notaCamb+"&id="+notaId+"",
-   		     success:function(datos,status,jqXHR){
-					console.log("Nota guardada");
-   		     }
-		});
-	});
-	
-
-	/* $(".textareaCuerpo").click( function () { 
-	   // do something here
-	   console.log ("click p");
-	}); */
-	$(".textareaCuerpo").blur(function() {
-		//console.log("blur P");
-		var notaCamb=$(this).text();
-		//console.log("nota cambiada"+notaCamb);
-		//var notaId=$(this).attr("id");
-		var notaId=$(this).closest(".nota").attr("id");
-		console.log("cambio: "+notaCamb+" id:"+notaId);
-		//$(this).parent(".nota");
-		//console.log("id nota "+notaId);
-		$("#cambio").val($(this).val());
-		$.ajax({
-   		     url: "GuardaNota?cuerpo="+notaCamb+"&id="+notaId+"",
-   		     success:function(datos,status,jqXHR){
-					console.log("Nota guardada");
-   		     }
-		});
-	});
-			
-	
-	$("input:checkbox").click(function(){
-	
-		var estado=$(this).is(":checked");
-		//console.log("estado:"+estado);
-		var id=$(this).closest(".nota").attr("id");
-		console.log("cambio: "+estado+" id:"+id);
-		estado = (estado==true) ? "1" : "0";
-		//console.log("dsp if estado:"+estado);
-		$.ajax({
-   		     url: "GuardarNotaLista?lista="+estado+"&id="+id+"",
-   		     success:function(datos,status,jqXHR){
-					console.log("Nota realizada");
-   		     }
-		});
-		
-	});
-	
-	 var idElem= Math.ceil(Math.random()*1000000);
+	var idElem= Math.ceil(Math.random()*1000000);
 	autocompletar("#texto","getNotas",2,function(item){
 											armarNota(item);
 										},idElem); 
 	
 	
 	
-$("#lookFeel li").click(function() {
-	    
-		var estilo= $(this).attr('id');
-		//alert(estilo); // jQuery's .attr() method, same but more verbose
-	  
-	    var oldlink = document.getElementsByTagName("link").item("./css/estilo");
-		 
-        var newlink = document.createElement("link");
-        newlink.setAttribute("rel", "stylesheet");
-        newlink.setAttribute("type", "text/css");
-        newlink.setAttribute("href", "./css/estilo"+estilo+".css");
- 
-        document.getElementsByTagName("head").item(0).replaceChild(newlink, oldlink);
-	    
-	    
+	$("#lookFeel li").click(function() {
+		    
+			var estilo= $(this).attr('id');
+			//alert(estilo); // jQuery's .attr() method, same but more verbose
+		  
+		    var oldlink = document.getElementsByTagName("link").item("./css/estilo");
+			 
+	        var newlink = document.createElement("link");
+	        newlink.setAttribute("rel", "stylesheet");
+	        newlink.setAttribute("type", "text/css");
+	        newlink.setAttribute("href", "./css/estilo"+estilo+".css");
+	 
+	        document.getElementsByTagName("head").item(0).replaceChild(newlink, oldlink);
+		    
+		    
+		});
+		
+		
 	});
-	
-	
-});
 	
 	
 	
@@ -145,6 +70,92 @@ $("#lookFeel li").click(function() {
 	}
 	
 	
+	function asignarTodo(){
+		asignarTextarea();
+		asignarCheckbox();
+		asignarAgregar();
+		asignarEliminar();
+		
+	}
+	
+	function asignarTextarea(){
+		$(".textareaTitulo").blur(function() {
+			var notaCamb=$(this).text();
+			//console.log("nota cambiada"+notaCamb);
+			//var notaId=$(this).attr("id");
+			var notaId=$(this).closest(".nota").attr("id");
+			console.log("cambio: "+notaCamb+" id:"+notaId);
+			//$(this).parent(".nota");
+			//console.log("id nota "+notaId);
+			$("#cambio").val($(this).val());
+			$.ajax({
+	   		     url: "GuardaNota?titulo="+notaCamb+"&id="+notaId+"",
+	   		     success:function(datos,status,jqXHR){
+						console.log("Nota guardada");
+	   		     }
+			});
+		});
+		
+
+		/* $(".textareaCuerpo").click( function () { 
+		   // do something here
+		   console.log ("click p");
+		}); */
+		$(".textareaCuerpo").blur(function() {
+			//console.log("blur P");
+			var notaCamb=$(this).text();
+			//console.log("nota cambiada"+notaCamb);
+			//var notaId=$(this).attr("id");
+			var notaId=$(this).closest(".nota").attr("id");
+			console.log("cambio: "+notaCamb+" id:"+notaId);
+			//$(this).parent(".nota");
+			//console.log("id nota "+notaId);
+			$("#cambio").val($(this).val());
+			$.ajax({
+	   		     url: "GuardaNota?cuerpo="+notaCamb+"&id="+notaId+"",
+	   		     success:function(datos,status,jqXHR){
+						console.log("Nota guardada");
+	   		     }
+			});
+		});
+	}
+	
+	
+	function asignarCheckbox(){
+		$("input:checkbox").click(function(){
+			
+			var estado=$(this).is(":checked");
+			//console.log("estado:"+estado);
+			var id=$(this).closest(".nota").attr("id");
+			console.log("cambio: "+estado+" id:"+id);
+			estado = (estado==true) ? "1" : "0";
+			//console.log("dsp if estado:"+estado);
+			$.ajax({
+	   		     url: "GuardarNotaLista?lista="+estado+"&id="+id+"",
+	   		     success:function(datos,status,jqXHR){
+						console.log("Nota realizada");
+	   		     }
+			});
+			
+		});
+	}
+	
+	function asignarAgregar(){
+		$("#agregar").click(function(){
+			$.ajax({
+	   		     url: "CrearNota",
+	   		     success:function(datos,status,jqXHR){
+						
+	   		    		console.log("Nota creada");
+						$.get('getNotas', function(data) {
+							//var a=$("body").html();
+							//console.log("agregar ajax"+data);
+		    		    	$("body").html(data);
+					    });
+	   		     }
+			     });
+		});
+	}
 	
 	function asignarEliminar(){
 		//console.log("entro al asignarElimianr");
@@ -195,7 +206,7 @@ $("#lookFeel li").click(function() {
 	 }
 	
 	
-
+	
 	 function autocompletar (elemento, url, minLetras, clickCallback, idElem){
 		
 		 var elem = $(elemento);
@@ -218,6 +229,8 @@ $("#lookFeel li").click(function() {
 								if(clickCallback && typeof clickCallback !== "undefined")
 								{	//console.log("datos antes de la funcion: "+datos);
 									clickCallback(datos);
+									asignarEliminar();
+									asignarTodo();
 								}	
 					}
 				});
@@ -236,6 +249,7 @@ $("#lookFeel li").click(function() {
 								{	//console.log("datos antes de la funcion: "+datos);
 									clickCallback(datos);
 									asignarEliminar();
+									asignarTodo();
 								}
 					}
 				});
