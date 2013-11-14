@@ -68,11 +68,11 @@ $(document).on("ready",function(){
 		<!--  <a href="AgregarCliente">Agregar Cliente</a><br/>-->
 		<a href="ListaZona" class="btnPrincipal" >Agregar Cliente</a><br/><br/>
 		<!-- <a style="color: red;" href="filtraListaCliente.html" class="btn  btn-info btn-large">Eliminar Cleinte </a><br/><br/> -->
-		<a style="color: red;" href="ListaCliente" class="btn  btn-info btn-large">Eliminar Cleinte </a><br/><br/>
-		<a style="color: red;" href="demoJQueryUI.html" class="btn btn-info btn-large pink" >Buscar Cliente</a><br/><br/>
-		<a style="color: red;" href="login.jsp" class="btn btn-info  btn-large">Login</a><br/><br/>
-		<a style="color: red;" href="ListaClienteJNDI" class="btn btn-info  btn-large">Mostrar Lista Cliente</a><br/><br/>
-		<a style="color: red;" href="getNotas" class="btn btn-info  btn-large">Notas Guardadas</a><br/><br/>
+		<a  href="ListaCliente" class="btnPrincipal">Eliminar Cleinte </a><br/><br/>
+		<a  href="demoJQueryUI.html" class="btnPrincipal" >Buscar Cliente</a><br/><br/>
+		<a  href="login.jsp" class="btnPrincipal">Login</a><br/><br/>
+		<a  href="ListaClienteJNDI" class="btnPrincipal">Mostrar Lista Cliente</a><br/><br/>
+		<a  href="getNotas" class="btnPrincipal">Notas Guardadas</a><br/><br/>
 	</div>
 </div>	
 </body>
