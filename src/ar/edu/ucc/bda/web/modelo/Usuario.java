@@ -115,7 +115,7 @@ public class Usuario {
 	}
 	
 	public void sendEmial(){
-		
+		System.out.println("se envio email a: "+getEmail());
 		Email e=new Email(getEmail());
 		e.send();
 	}

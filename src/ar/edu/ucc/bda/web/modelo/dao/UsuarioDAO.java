@@ -179,6 +179,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		String usuario="";
 		String fecha="";
 		String id="";
+		String clave="";
 		try {
 			PreparedStatement stm=cn.prepareStatement(sql.toString());
 			stm.setString(1,email);
@@ -186,8 +187,10 @@ public class UsuarioDAO implements IUsuarioDAO {
 			ResultSet rs=stm.executeQuery();
 			while(rs.next()){
 				usuario=rs.getString("usuario");
-				fecha=rs.getString("fecha_creacion");
+				clave=rs.getString("clave");
 				id=rs.getString("id");
+				//mail=rs.getString("mail");
+				fecha=rs.getString("fecha_creacion");
 				
 			}
 		} catch (SQLException e) {
@@ -196,7 +199,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		}
 
 		us= new Usuario(id,usuario,fecha);
-		
+		us.setEmail(email);
 		return us;
 		
 	}
@@ -218,6 +221,24 @@ public class UsuarioDAO implements IUsuarioDAO {
 			
 		}
 	}
+	
+	public boolean updateCreacion(Usuario us)
+	{
+		StringBuilder sql=new StringBuilder();
+		sql.append(" update usuarios set fecha_creacion=CURDATE()+ INTERVAL '1' day where id=?");
+		try {
+			PreparedStatement stm=cn.prepareStatement(sql.toString());
+			stm.setString(1,us.getId());
+			System.out.println(stm.toString());
+			stm.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			System.out.println("error activar en usuarioDAO");
+			e.printStackTrace();
+			return false;
+			
+		}
+	}
 
-
+	
 }

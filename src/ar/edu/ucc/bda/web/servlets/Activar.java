@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ar.edu.ucc.bda.web.modelo.PersistenciaException;
 import ar.edu.ucc.bda.web.modelo.Usuario;
 import ar.edu.ucc.bda.web.modelo.dao.IUsuarioDAO;
 import ar.edu.ucc.bda.web.modelo.dao.UsuarioDAO;
@@ -36,21 +37,53 @@ public class Activar extends HttpServlet {
 		
 		Fecha f = new Fecha();
 		
+		String mnj= "";
+   		RequestDispatcher rd=null;
+   		
 		if(f.mayorFechaActual(us.getFecha_creacion()))
 		{
 			//Mandar MAIL
+			us.sendEmial();
 			System.out.println("mail vencido");
+			usDAO.updateCreacion(us);
+			mnj="<div class=\"alert alert-error\"> Mail a vencido. Revise su email</div>";
+			request.setAttribute("msj", mnj);
+			rd = getServletContext().getRequestDispatcher("/login.jsp");
 		}
 		else
 		{
 			
-			request.getSession().setAttribute("usuario", us);
-			request.getSession().setAttribute("usuarioNombre", us.getNombre());
-			System.out.println("us.getNombre():   "+us.getNombre());
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/activarUsuario.jsp");
-			rd.forward(request, response);
-		}
+//			request.getSession().setAttribute("usuario", us);
+//			request.getSession().setAttribute("usuarioNombre", us.getNombre());
+//			System.out.println("us.getNombre():   "+us.getNombre());
+//			RequestDispatcher rd = getServletContext().getRequestDispatcher("/activarUsuario.jsp");
+//			rd.forward(request, response);
 			
+			//Usuario us =(Usuario)request.getSession().getAttribute("usuario");
+			
+	   		
+	   		try {
+				if(us.activar())
+				 	{	//TODO OK
+						mnj="<div class=\"alert alert-success\"> Usuario activado correctamente</div>";
+						request.setAttribute("msj", mnj);
+						rd = getServletContext().getRequestDispatcher("/login.jsp");
+					}
+
+				else
+					{
+					mnj="Error ocurrido en la activacion";
+					request.setAttribute("msj", mnj);
+					rd = getServletContext().getRequestDispatcher("/login.jsp");
+					}
+			} catch (PersistenciaException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	   		
+	   		
+		}
+		rd.forward(request, response);
 		
 	}
     
