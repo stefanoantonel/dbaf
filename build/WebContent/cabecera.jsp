@@ -65,10 +65,13 @@ function obtenerEstilo(estiloS)
 
 </head>
 <body>
-<div class="bs-example">
-  
+<div class="cabeceraPrincipal">
+</br>
+<div class="tituloArriba">
+Mis notas
+</div>
+<div class="bs-example" align="left" style="width: 200px">
             <ul role="navigation" class="nav" id="listaLookFeel">
-               
                 <li class="dropdown">
                     <a href="#" data-toggle="dropdown" class="dropdown-toggle">Look & Feel <b class="caret"></b></a>
                     <ul class="dropdown-menu" id="lookFeel">
@@ -84,5 +87,6 @@ function obtenerEstilo(estiloS)
             </ul>
           
         </div>
+ </div>
 </body>
 </html>
