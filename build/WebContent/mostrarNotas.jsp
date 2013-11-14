@@ -254,6 +254,25 @@ $("#lookFeel li").click(function() {
 		${sessionScope.notas}
 	</div>
 	
+	<div class="bs-example">
+  
+            <ul role="navigation" class="nav" id="listaLookFeel">
+               
+                <li class="dropdown">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Look & Feel <b class="caret"></b></a>
+                    <ul class="dropdown-menu" id="lookFeel">
+                        <li id="Rojo"><a>Rojo</a></li>
+                        <li id="Verde"><a>Verde</a></li>
+                        <li id="Amarillo"><a>Amarillo</a></li>
+                        <li id="Rojo"><a>?</a></li>
+                    </ul>
+                </li>
+            </ul>
+          
+        </div>
+	
+	
+	
 
 	<div align="center" style="vertical-align:top;  "> 
 		
