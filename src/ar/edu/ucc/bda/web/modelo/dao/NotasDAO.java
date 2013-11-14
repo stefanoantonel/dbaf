@@ -23,44 +23,7 @@ public class NotasDAO {
 		cn=Coneccion.getConnection();
 	}
 
-//	public List<List<String>> load(String usuario) throws JSONException {
-//		List<String> descripciones=new ArrayList<>();
-////		String sql="SELECT * FROM notas WHERE usuario=?";
-//		String sql="SELECT * FROM notas WHERE usuario_id=?";
-//		Usuario resultado=null;
-//		List<List<String>> notas=new ArrayList<>();
-//		try {
-//			PreparedStatement stm=cn.prepareStatement(sql);
-//			stm.setString(1,usuario);
-//			ResultSet rs=stm.executeQuery();
-//			
-//			if(rs.next()){
-//				descripciones.add(rs.getString("id"));
-//				descripciones.add(rs.getString("nota"));
-//				notas.add(descripciones);
-//				while(rs.next()){
-//					descripciones=new ArrayList<>();
-//					descripciones.add(rs.getString("id"));
-//					descripciones.add(rs.getString("nota"));
-//					notas.add(descripciones);
-//				}
-//				System.out.println();
-//			}
-//			else{
-//				System.out.println("usuario DAO dio null");
-//				
-//			}
-//			
-//		} catch (SQLException e) {
-//			System.out.println("error usuarioDAO");
-//			e.printStackTrace();
-////			throw new PersistenciaException(); //relanzo la persistencia con otro nombre
-//			
-//		}
-//		
-//		//System.out.println("UsuarioDAO: resultado ="+resultado+"");
-//		return notas;
-//	}
+
 	
 	public JSONArray load(String usuario) throws JSONException {
 		List<String> descripciones=new ArrayList<>();
@@ -72,33 +35,15 @@ public class NotasDAO {
 			PreparedStatement stm=cn.prepareStatement(sql);
 			stm.setString(1,usuario);
 			ResultSet rs=stm.executeQuery();
-			if(rs.next()){
-				JSONObject nota=new JSONObject();
-				nota.put("id",rs.getString("id") );
-				nota.put("titulo", rs.getString("titulo"));
-				nota.put("lista", rs.getString("lista"));
-				nota.put("agregada", rs.getString("fecha_agregada"));
-				nota.put("modificada", rs.getString("fecha_modificada"));
-				nota.put("cuerpo", rs.getString("cuerpo"));
-				notas.put(nota);
+			
 				//descripciones.add(rs.getString("nota"));
-				while(rs.next()){
-					nota=new JSONObject();
-//					descripciones.add(rs.getString("nota"));
-					nota.put("id",rs.getString("id") );
-					nota.put("titulo", rs.getString("titulo"));
-					nota.put("lista", rs.getString("lista"));
-					nota.put("agregada", rs.getString("fecha_agregada"));
-					nota.put("modificada", rs.getString("fecha_modificada"));
-					nota.put("cuerpo", rs.getString("cuerpo"));
-					notas.put(nota);
-				}
-				System.out.println();
+			while(rs.next()){
+				JSONObject nota=agregarJson(rs.getString("id"), rs.getString("titulo"),rs.getString("lista"),rs.getString("fecha_agregada"),rs.getString("fecha_modificada"), rs.getString("cuerpo") );
+				notas.put(nota);
 			}
-			else{
-				System.out.println("usuario DAO dio null");
-				
-			}
+			System.out.println();
+			
+			
 			
 		} catch (SQLException e) {
 			System.out.println("error usuarioDAO");
@@ -114,41 +59,30 @@ public class NotasDAO {
 	public JSONArray load(String usuario,String notaParaBuscar) throws JSONException {
 		List<String> descripciones=new ArrayList<>();
 //		String sql="SELECT * FROM notas WHERE usuario=?";
-		String sql="SELECT * FROM notas WHERE usuarios_id=? AND (titulo like '%"+ notaParaBuscar+"%' OR cuerpo like '%"+ notaParaBuscar+"%')";
+		String sql="SELECT * FROM notas WHERE usuarios_id=? AND (titulo like '%"+notaParaBuscar+"%' OR cuerpo like '%"+notaParaBuscar+"%')";
 		Usuario resultado=null;
 		JSONArray notas=new JSONArray();
 		try {
 			PreparedStatement stm=cn.prepareStatement(sql);
 			stm.setString(1,usuario);
+			
+			System.out.println(sql);
 			ResultSet rs=stm.executeQuery();
-			if(rs.next()){
-				JSONObject nota=new JSONObject();
-				nota.put("id",rs.getString("id") );
-				nota.put("titulo", rs.getString("titulo"));
-				nota.put("lista", rs.getString("lista"));
-				nota.put("agregada", rs.getString("fecha_agregada"));
-				nota.put("modificada", rs.getString("fecha_modificada"));
-				nota.put("cuerpo", rs.getString("cuerpo"));
+			//if(rs.next()){
 				
-				notas.put(nota);
+			//	JSONObject nota=agregarJson(rs.getString("id"), rs.getString("titulo"),rs.getString("lista"),rs.getString("fecha_agregada"),rs.getString("fecha_modificada"), rs.getString("cuerpo") );
+			//	notas.put(nota);
 				//descripciones.add(rs.getString("nota"));
-				while(rs.next()){
-					nota=new JSONObject();
-//					descripciones.add(rs.getString("nota"));
-					nota.put("id",rs.getString("id") );
-					nota.put("titulo", rs.getString("titulo"));
-					nota.put("lista", rs.getString("lista"));
-					nota.put("agregada", rs.getString("fecha_agregada"));
-					nota.put("modificada", rs.getString("fecha_modificada"));
-					nota.put("cuerpo", rs.getString("cuerpo"));
-					notas.put(nota);
-				}
-				System.out.println();
+			while(rs.next()){
+				JSONObject nota=agregarJson(rs.getString("id"), rs.getString("titulo"),rs.getString("lista"),rs.getString("fecha_agregada"),rs.getString("fecha_modificada"), rs.getString("cuerpo") );
+				notas.put(nota);
 			}
-			else{
-				System.out.println("usuario DAO dio null");
+			System.out.println();
+			//}
+			//else{
+				//System.out.println("notas load DAO dio null");
 				
-			}
+			//}
 			
 		} catch (SQLException e) {
 			System.out.println("error usuarioDAO");
@@ -160,10 +94,12 @@ public class NotasDAO {
 		//System.out.println("UsuarioDAO: resultado ="+resultado+"");
 		return notas;
 	}
-	public boolean updateTitulo(String nota,String id){	
+	public boolean updateTitulo(String titulo,String id){	
 		try {
-			String sql="UPDATE `practico`.`notas` SET `titulo`='"+nota+"' WHERE `id`='"+id+"' ";
+			String sql="UPDATE `practico`.`notas` SET `titulo`=? WHERE `id`=? ";
 			PreparedStatement stm=cn.prepareStatement(sql);
+			stm.setString(1, titulo);
+			stm.setString(2, id);
 			stm.executeUpdate();
 			return true;
 		} 
@@ -173,10 +109,12 @@ public class NotasDAO {
 		}
 	}
 	
-	public boolean updateCuerpo(String nota,String id){	
+	public boolean updateCuerpo(String cuerpo,String id){	
 		try {
-			String sql="UPDATE `practico`.`notas` SET `cuerpo`='"+nota+"' WHERE `id`='"+id+"' ";
+			String sql="UPDATE `practico`.`notas` SET `cuerpo`=? WHERE `id`=? ";
 			PreparedStatement stm=cn.prepareStatement(sql);
+			stm.setString(1, cuerpo);
+			stm.setString(2, id);
 			stm.executeUpdate();
 			return true;
 		} 
@@ -188,8 +126,10 @@ public class NotasDAO {
 	
 	public boolean updateLista(String lista, String id){	
 		try {
-			String sql="UPDATE `practico`.`notas` SET `lista`='"+lista+"' WHERE `id`='"+id+"' ";
+			String sql="UPDATE `practico`.`notas` SET `lista`='?' WHERE `id`='?' ";
 			PreparedStatement stm=cn.prepareStatement(sql);
+			stm.setString(1, lista);
+			stm.setString(2, id);
 			System.out.println(sql);
 			stm.executeUpdate();
 			return true;
@@ -202,8 +142,10 @@ public class NotasDAO {
 
 	public boolean insert(String usuario){
 		try {
-			String sql="INSERT INTO `practico`.`notas`(`titulo`,`cuerpo`,`usuarios_id`,`fecha_agregada`) VALUES('','','"+usuario+"',CURDATE()) ";
+			String sql="INSERT INTO `practico`.`notas`(`titulo`,`cuerpo`,`usuarios_id`,`fecha_agregada`) VALUES('','',?,CURDATE() ) ";
+			
 			PreparedStatement stm=cn.prepareStatement(sql);
+			stm.setString(1, usuario);
 			System.out.println(sql);
 			stm.executeUpdate();
 			return true;
@@ -216,8 +158,9 @@ public class NotasDAO {
 	}
 	public boolean delete(String id){
 		try{
-			String sql="Delete from `practico`.`notas` where id="+id+"";
+			String sql="Delete from `practico`.`notas` where id=? ";
 			PreparedStatement stm=cn.prepareStatement(sql);
+			stm.setString(1, id);
 			System.out.println(sql);
 			stm.executeUpdate();
 			return true;
@@ -226,6 +169,16 @@ public class NotasDAO {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	private JSONObject agregarJson(String id, String titulo,String lista,String fecha_agregada,String fecha_modificada, String cuerpo ) throws JSONException{
+		JSONObject nota=new JSONObject();
+		nota.put("id",id );
+		nota.put("titulo",titulo);
+		nota.put("lista", lista);
+		nota.put("agregada", fecha_agregada);
+		nota.put("modificada", fecha_modificada);
+		nota.put("cuerpo", cuerpo);
+		return nota;
 	}
 	
 }
