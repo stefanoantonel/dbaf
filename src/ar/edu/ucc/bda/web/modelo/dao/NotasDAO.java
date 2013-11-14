@@ -28,7 +28,7 @@ public class NotasDAO {
 	public JSONArray load(String usuario) throws JSONException {
 		List<String> descripciones=new ArrayList<>();
 //		String sql="SELECT * FROM notas WHERE usuario=?";
-		String sql="SELECT * FROM notas WHERE usuarios_id=?";
+		String sql="SELECT * FROM notas WHERE usuarios_id=? ";
 		Usuario resultado=null;
 		JSONArray notas=new JSONArray();
 		try {
@@ -46,7 +46,7 @@ public class NotasDAO {
 			
 			
 		} catch (SQLException e) {
-			System.out.println("error usuarioDAO");
+			System.out.println("error load solo");
 			e.printStackTrace();
 //			throw new PersistenciaException(); //relanzo la persistencia con otro nombre
 			
@@ -85,7 +85,7 @@ public class NotasDAO {
 			//}
 			
 		} catch (SQLException e) {
-			System.out.println("error usuarioDAO");
+			System.out.println("error load con parametros");
 			e.printStackTrace();
 //			throw new PersistenciaException(); //relanzo la persistencia con otro nombre
 			
@@ -104,7 +104,7 @@ public class NotasDAO {
 			return true;
 		} 
 		catch (SQLException e) {
-			System.out.println("error en save notas");
+			System.out.println("error en update titulo notas");
 			return false;
 		}
 	}
@@ -119,23 +119,24 @@ public class NotasDAO {
 			return true;
 		} 
 		catch (SQLException e) {
-			System.out.println("error en save notas");
+			System.out.println("error en update cuerpo notas");
 			return false;
 		}
 	}
 	
 	public boolean updateLista(String lista, String id){	
 		try {
-			String sql="UPDATE `practico`.`notas` SET `lista`='?' WHERE `id`='?' ";
+			String sql="UPDATE `practico`.`notas` SET `lista`=? WHERE `id`=? ";
 			PreparedStatement stm=cn.prepareStatement(sql);
 			stm.setString(1, lista);
 			stm.setString(2, id);
+			
 			System.out.println(sql);
 			stm.executeUpdate();
 			return true;
 		} 
 		catch (SQLException e) {
-			System.out.println("error en save notas");
+			System.out.println("error en update lista notas");
 			return false;
 		}
 	}
@@ -152,7 +153,7 @@ public class NotasDAO {
 		} 
 		catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("error en save notas");
+			System.out.println("error en insertar notas sola");
 			return false;
 		}
 	}

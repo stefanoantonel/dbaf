@@ -26,7 +26,7 @@ public class GuardarNotaLista extends HttpServlet {
 	//	Connection cn=(Connection)getServletContext().getAttribute(Constantes.NOMBRE_CONEXION);
 		String estado=request.getParameter("lista");
 		String id=request.getParameter("id");
-		
+		System.out.println("me guardarNotaLista estado: "+estado+" id "+id);
 		NotasDAO dao=new NotasDAO();
 		boolean a=dao.updateLista(estado, id);
 		if(a==true){

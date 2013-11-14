@@ -130,7 +130,9 @@ $(document).on("ready",function(){
 			console.log("cambio: "+estado+" id:"+id);
 			estado = (estado==true) ? "1" : "0";
 			//console.log("dsp if estado:"+estado);
+			console.log("GuardarNotaLista?lista="+estado+"&id="+id+"");
 			$.ajax({
+				
 	   		     url: "GuardarNotaLista?lista="+estado+"&id="+id+"",
 	   		     success:function(datos,status,jqXHR){
 						console.log("Nota realizada");
