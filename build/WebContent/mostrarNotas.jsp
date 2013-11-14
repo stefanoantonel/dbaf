@@ -19,57 +19,36 @@ $(document).on("ready",function(){
 
 	notaOriginal=$("#nota");
 	notaTemplate=notaOriginal.clone();
-	//var not = ${notas};
-	//console.log(notaTemplate);
+	
 	armarNota(not);
 	asignarAgregar();
 	asignarTodo();
 	
-	
 	var idElem= Math.ceil(Math.random()*1000000);
-	autocompletar("#texto","getNotas",2,function(item){
-											armarNota(item);
-										},idElem); 
-	
-	
+	autocompletar("#texto","getNotas",2,function(item){	armarNota(item); } ,idElem); 
 	
 	$("#lookFeel li").click(function() {
 		    
 			var estilo= $(this).attr('id');
-			//alert(estilo); // jQuery's .attr() method, same but more verbose
-		  
 		    var oldlink = document.getElementsByTagName("link").item("./css/estilo");
-			 
 	        var newlink = document.createElement("link");
 	        newlink.setAttribute("rel", "stylesheet");
 	        newlink.setAttribute("type", "text/css");
 	        newlink.setAttribute("href", "./css/estilo"+estilo+".css");
-	 
 	        document.getElementsByTagName("head").item(0).replaceChild(newlink, oldlink);
 		    
-		    
 		});
-		
-		
 	});
 	
-	
-	
 	function esLista(lista){
-
-		
 		if(lista!=null){
 			if(lista=="1"){
 				return true;
 			}
 			else
 				return false;
-			
 		}
-		
-		
 	}
-	//asignarAgregar();
 	
 	function asignarTodo(){
 		asignarTextarea();
@@ -82,12 +61,8 @@ $(document).on("ready",function(){
 	function asignarTextarea(){
 		$(".textareaTitulo").blur(function() {
 			var notaCamb=$(this).text();
-			//console.log("nota cambiada"+notaCamb);
-			//var notaId=$(this).attr("id");
 			var notaId=$(this).closest(".nota").attr("id");
 			console.log("cambio: "+notaCamb+" id:"+notaId);
-			//$(this).parent(".nota");
-			//console.log("id nota "+notaId);
 			$("#cambio").val($(this).val());
 			$.ajax({
 	   		     url: "GuardaNota?titulo="+notaCamb+"&id="+notaId+"",
@@ -97,20 +72,10 @@ $(document).on("ready",function(){
 			});
 		});
 		
-
-		/* $(".textareaCuerpo").click( function () { 
-		   // do something here
-		   console.log ("click p");
-		}); */
 		$(".textareaCuerpo").blur(function() {
-			//console.log("blur P");
 			var notaCamb=$(this).text();
-			//console.log("nota cambiada"+notaCamb);
-			//var notaId=$(this).attr("id");
 			var notaId=$(this).closest(".nota").attr("id");
 			console.log("cambio: "+notaCamb+" id:"+notaId);
-			//$(this).parent(".nota");
-			//console.log("id nota "+notaId);
 			$("#cambio").val($(this).val());
 			$.ajax({
 	   		     url: "GuardaNota?cuerpo="+notaCamb+"&id="+notaId+"",
@@ -121,73 +86,52 @@ $(document).on("ready",function(){
 		});
 	}
 	
-	
 	function asignarCheckbox(){
 		$("input:checkbox").click(function(){
-			
 			var estado=$(this).is(":checked");
-			//console.log("estado:"+estado);
 			var id=$(this).closest(".nota").attr("id");
 			console.log("cambio: "+estado+" id:"+id);
 			estado = (estado==true) ? "1" : "0";
-			//console.log("dsp if estado:"+estado);
 			console.log("GuardarNotaLista?lista="+estado+"&id="+id+"");
 			$.ajax({
-				
 	   		     url: "GuardarNotaLista?lista="+estado+"&id="+id+"",
 	   		     success:function(datos,status,jqXHR){
 						console.log("Nota realizada");
 	   		     }
 			});
-			
 		});
 	}
 	
 	function asignarAgregar(){
 		$("#agregar").click(function(){
 			$.ajax({
-	   		     url: "CrearNota",
-	   		     success:function(datos,status,jqXHR){
-	   		    		console.log("Nota creada");
-	   		    		armarNota(datos);
-	   		    		console.log("datos dsp agregar"+datos.cuerpo);
-	   		    		asignarTodo();
-	   		    		//asignarEliminar();
-						//asignarTodo();
-						
-	   		     }
-			     });
+	   		    url: "CrearNota",
+	   		    success:function(datos,status,jqXHR){
+   		    		console.log("Nota creada");
+   		    		armarNota(datos);
+   		    		console.log("datos dsp agregar"+datos.cuerpo);
+   		    		asignarTodo();
+	   		    }
+			});
 		});
 	}
 	
 	function asignarEliminar(){
-		//console.log("entro al asignarElimianr");
 		$(".botonEliminar").click(function(){
-			//alert($(this).prev().val());
-
 			var id=$(this).closest(".nota").attr("id");
-			//console.log("id nota prev"+id);
 			$('#'+id).remove();
-
-			 $.ajax({
+			$.ajax({
 	   		     url: "EliminarNota?id="+id+"",
 	   		     success:function(datos,status,jqXHR){
-						//cuadno no le envian nada funciona como get y sino como set.
 						console.log("Nota eliminada");
 	   		     }
-			     });
-			     
-			
+			});
 		});
 	}
 	
-	 function armarNota(not)
-	 {
+	function armarNota(not){
 		 var notaAnt=notaTemplate;
-		 //console.log("nota Template: "+notaAnt);
-		 $.each(not, function(indice,json){
-				//console.log(indice);
-				
+		 $.each(not, function(indice,json){	
 				var a1=notaAnt.clone();
 				a1.attr("hidden",false);
 				a1.attr("id",json.id);
@@ -198,76 +142,35 @@ $(document).on("ready",function(){
 				$("#"+json.id).find("h4").text(json.titulo);
 				
 				$("#"+json.id).find(".checkbox").attr("checked",esLista(json.lista) );
-				//$("#"+json.id).find(".checkbox").attr("checked",a);
-				//console.log($("#"+json.id).find(".checkbox").attr("checked"));
-				//console.log("jason id: "+json.id);
-				//console.log("jason value: "+json.value);
-				//.filter("[class='modal-title']").text(json.value);
-				//console.log("id json"+json.id);
-
-			});
+				
+				});
 	 }
 	 
 	 function armarNotaPrimero(not)
 	 {
 		 var notaAnt=notaTemplate;
-		 //console.log("nota Template: "+notaAnt);
 		 $.each(not, function(indice,json){
-				//console.log(indice);
-				
 				var a1=notaAnt.clone();
 				a1.attr("hidden",false);
 				a1.attr("id",json.id);
 				a1.attr("title","Creada: "+json.agregada+" Modificada: "+json.modificada+"");
-				
-				//$("body").html(a1+bod);
-				//$("body").text(a1+bod);
-				//console.log(a1);
-				//var ant=$("antes.nota");
-				
-				//console.log(ant);
-				//ant.append(a1);
 				$("body").append(a1);
-				
-				//$(".nota").last().append(a1);
-				
 				$("#"+json.id).find("p").text(json.cuerpo);
 				$("#"+json.id).find("h4").text(json.titulo);
-				
 				$("#"+json.id).find(".checkbox").attr("checked",esLista(json.lista) );
-				//$("#"+json.id).find(".checkbox").attr("checked",a);
-				//console.log($("#"+json.id).find(".checkbox").attr("checked"));
-				//console.log("jason id: "+json.id);
-				//console.log("jason value: "+json.value);
-				//.filter("[class='modal-title']").text(json.value);
-				//console.log("id json"+json.id);
-				
 			});
 	 }
-	
-	
-	
 	 function autocompletar (elemento, url, minLetras, clickCallback, idElem){
 		
-		 var elem = $(elemento);
-		//console.log("elemento: "+elem.val());
+		var elem = $(elemento);
 		elem.keyup(function(evt){
-			//var idDiv="divAutocomplete"+idElem;
-			//console.log("elemento: "+elem.val());
-			//$(".nota").remove();
 			if(elem.val().length>=minLetras){
-				
 				$.ajax({
 					url:url,
 					data:{ texto:elem.val() }, //texto que escribimos
 					success: function (datos,status,jqXHR){
-						//console.log("datos ajax: "+datos);
-					
-						//$(".nota").empty();
 						$(".nota").remove();
-						
-								if(clickCallback && typeof clickCallback !== "undefined")
-								{	//console.log("datos antes de la funcion: "+datos);
+								if(clickCallback && typeof clickCallback !== "undefined"){
 									clickCallback(datos);
 									asignarEliminar();
 									asignarTodo();
@@ -279,14 +182,10 @@ $(document).on("ready",function(){
 			else{
 				$.ajax({
 					url:url,
-					data:{texto:""}, //texto que escribimos
+					data:{texto:""},
 					success: function (datos,status,jqXHR){
-						//console.log("datos ajax else: "+datos);
-					
-						//$(".nota").empty();
 						$(".nota").remove();						
-								if(clickCallback && typeof clickCallback !== "undefined")
-								{	//console.log("datos antes de la funcion: "+datos);
+								if(clickCallback && typeof clickCallback !== "undefined"){	
 									clickCallback(datos);
 									asignarEliminar();
 									asignarTodo();
