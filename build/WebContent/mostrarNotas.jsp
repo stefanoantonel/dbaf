@@ -22,6 +22,7 @@ $(document).on("ready",function(){
 	//var not = ${notas};
 	//console.log(notaTemplate);
 	armarNota(not);
+	asignarAgregar();
 	asignarTodo();
 	
 	
@@ -73,7 +74,7 @@ $(document).on("ready",function(){
 	function asignarTodo(){
 		asignarTextarea();
 		asignarCheckbox();
-		asignarAgregar();
+		//asignarAgregar();
 		asignarEliminar();
 		
 	}
@@ -147,31 +148,13 @@ $(document).on("ready",function(){
 			$.ajax({
 	   		     url: "CrearNota",
 	   		     success:function(datos,status,jqXHR){
-						
 	   		    		console.log("Nota creada");
-						$.get('getNotas', function(data) {
-							//var a=$("body").html();
-							//console.log("agregar ajax"+data);
-		    		    	$("body").html(data);
-					    });
+	   		    		armarNota(datos);
+	   		    		console.log("datos dsp agregar"+datos.cuerpo);
+	   		    		asignarTodo();
+	   		    		//asignarEliminar();
+						//asignarTodo();
 						
-						/* $.ajax({
-							url:"getNotas",
-							data:{ texto:"" }, //traer todas y encontrar la ultima
-							success: function (datos,status,jqXHR){
-								//console.log("datos ajax: "+datos);
-							
-								//$(".nota").empty();
-								$(".nota").remove();
-								
-										if(clickCallback && typeof clickCallback !== "undefined")
-										{	//console.log("datos antes de la funcion: "+datos);
-											clickCallback(datos);
-											asignarEliminar();
-											asignarTodo();
-										}	
-							}
-						}); */
 	   		     }
 			     });
 		});
@@ -222,6 +205,43 @@ $(document).on("ready",function(){
 				//.filter("[class='modal-title']").text(json.value);
 				//console.log("id json"+json.id);
 
+			});
+	 }
+	 
+	 function armarNotaPrimero(not)
+	 {
+		 var notaAnt=notaTemplate;
+		 //console.log("nota Template: "+notaAnt);
+		 $.each(not, function(indice,json){
+				//console.log(indice);
+				
+				var a1=notaAnt.clone();
+				a1.attr("hidden",false);
+				a1.attr("id",json.id);
+				a1.attr("title","Creada: "+json.agregada+" Modificada: "+json.modificada+"");
+				
+				//$("body").html(a1+bod);
+				//$("body").text(a1+bod);
+				//console.log(a1);
+				//var ant=$("antes.nota");
+				
+				//console.log(ant);
+				//ant.append(a1);
+				$("body").append(a1);
+				
+				//$(".nota").last().append(a1);
+				
+				$("#"+json.id).find("p").text(json.cuerpo);
+				$("#"+json.id).find("h4").text(json.titulo);
+				
+				$("#"+json.id).find(".checkbox").attr("checked",esLista(json.lista) );
+				//$("#"+json.id).find(".checkbox").attr("checked",a);
+				//console.log($("#"+json.id).find(".checkbox").attr("checked"));
+				//console.log("jason id: "+json.id);
+				//console.log("jason value: "+json.value);
+				//.filter("[class='modal-title']").text(json.value);
+				//console.log("id json"+json.id);
+				
 			});
 	 }
 	
@@ -318,6 +338,8 @@ $(document).on("ready",function(){
 		<input type="text" id="texto" />
 		<div id="salida"></div>
 	<br>
+	
+	<div id="antes.nota"> </div>
 	<div  class ="centrar nota" id="nota" hidden="true" >
 
 	

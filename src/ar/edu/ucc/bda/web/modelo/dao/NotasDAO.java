@@ -56,6 +56,37 @@ public class NotasDAO {
 		return notas;
 	}
 	
+	public JSONArray loadUltima() throws JSONException {
+		List<String> descripciones=new ArrayList<>();
+//		String sql="SELECT * FROM notas WHERE usuario=?";
+		String sql="SELECT * FROM notas WHERE id=(	SELECT MAX(id) FROM notas	) ";
+		Usuario resultado=null;
+		JSONArray notas=new JSONArray();
+		try {
+			PreparedStatement stm=cn.prepareStatement(sql);
+			
+			ResultSet rs=stm.executeQuery();
+			
+				//descripciones.add(rs.getString("nota"));
+			while(rs.next()){
+				JSONObject nota=agregarJson(rs.getString("id"), rs.getString("titulo"),rs.getString("lista"),rs.getString("fecha_agregada"),rs.getString("fecha_modificada"), rs.getString("cuerpo") );
+				notas.put(nota);
+			}
+			System.out.println();
+			
+			
+			
+		} catch (SQLException e) {
+			System.out.println("error load solo");
+			e.printStackTrace();
+//			throw new PersistenciaException(); //relanzo la persistencia con otro nombre
+			
+		}
+		
+		//System.out.println("UsuarioDAO: resultado ="+resultado+"");
+		return notas;
+	}
+	
 	public JSONArray load(String usuario,String notaParaBuscar) throws JSONException {
 		List<String> descripciones=new ArrayList<>();
 //		String sql="SELECT * FROM notas WHERE usuario=?";
