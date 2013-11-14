@@ -1,3 +1,7 @@
 @CHARSET "ISO-8859-1";
 
-.prueba {color: red;}
+.TituloPrincipal {color: red;}
+
+.boton {color: black;
+		background: gray;}
+

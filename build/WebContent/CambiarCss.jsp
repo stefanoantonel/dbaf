@@ -14,7 +14,7 @@
 $(document).on("ready",function(){
 	$("#btn_verde").click(function(){
 		console.log("boton verde");
-		 var oldlink = document.getElementsByTagName("link").item("./css/estiloRojo.css");
+		 var oldlink = document.getElementsByTagName("link").item("./css/estilo");
 		 
 	        var newlink = document.createElement("link");
 	        newlink.setAttribute("rel", "stylesheet");
@@ -30,7 +30,7 @@ $(document).on("ready",function(){
 
 <body>
 
-<div class="prueba">HOLAAAAAAAAAAAAAA </div>
+<div class="TituloPrincipal">HOLAAAAAAAAAAAAAA </div>
 <button id="btn_verde" name="btn_verde">Verde</button>
 
 </body>

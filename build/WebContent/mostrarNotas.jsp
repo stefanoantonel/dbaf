@@ -104,6 +104,27 @@ $(document).on("ready",function(){
 	autocompletar("#texto","getNotas",2,function(item){
 											armarNota(item);
 										},idElem); 
+	
+	
+	
+$("#lookFeel li").click(function() {
+	    
+		var estilo= $(this).attr('id');
+		//alert(estilo); // jQuery's .attr() method, same but more verbose
+	  
+	    var oldlink = document.getElementsByTagName("link").item("./css/estilo");
+		 
+        var newlink = document.createElement("link");
+        newlink.setAttribute("rel", "stylesheet");
+        newlink.setAttribute("type", "text/css");
+        newlink.setAttribute("href", "./css/estilo"+estilo+".css");
+ 
+        document.getElementsByTagName("head").item(0).replaceChild(newlink, oldlink);
+	    
+	    
+	});
+	
+	
 });
 	
 	

@@ -1,27 +1,79 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>MENU</title>
-		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-		<link href="css/ui-lightness/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" media="screen"> 
+<title>Block de Notas</title>
+<link rel="stylesheet" href="./css/estiloVerde.css" type="text/css" />
+<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="./css/js/bootstrap.min.js"></script>
+<style type="text/css">
+	.bs-example{
+    	margin: 20px;
+    }
+</style>
+<script type="text/javascript">
+
+
+$(document).on("ready",function(){
+	
+	$("#lookFeel li").click(function() {
+	    
+		var estilo= $(this).attr('id');
+		//alert(estilo); // jQuery's .attr() method, same but more verbose
+	  
+	    var oldlink = document.getElementsByTagName("link").item("./css/estilo");
+		 
+        var newlink = document.createElement("link");
+        newlink.setAttribute("rel", "stylesheet");
+        newlink.setAttribute("type", "text/css");
+        newlink.setAttribute("href", "./css/estilo"+estilo+".css");
+ 
+        document.getElementsByTagName("head").item(0).replaceChild(newlink, oldlink);
+	    
+	    
+	});
+
+});
+
+
+
+</script>
 </head>
 <body>
+<div class="bs-example">
+  
+            <ul role="navigation" class="nav" id="listaLookFeel">
+               
+                <li class="dropdown">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Look & Feel <b class="caret"></b></a>
+                    <ul class="dropdown-menu" id="lookFeel">
+                        <li id="Rojo"><a>Rojo</a></li>
+                        <li id="Verde"><a>Verde</a></li>
+                        <li id="Amarillo"><a>Amarillo</a></li>
+                        <li id="Rojo"><a>?</a></li>
+                    </ul>
+                </li>
+            </ul>
+          
+        </div>
+
+<div id="bloquePrincipal" nombre="bloquePrincipal">
 	<div>${requestScope.eliminado}</div><br/>
 	<div align="center"><b>${requestScope.mnjActivado}</b></div><br/>
 	<br/><br/>
 	<div align="center" >
 		<!-- <a href="agregarCliente.jsp">Agregar Cliente</a> -->
 		<!--  <a href="AgregarCliente">Agregar Cliente</a><br/>-->
-		<a style="color: red;" href="ListaZona" class="btn btn-info btn-large pink" >Agregar Cliente</a><br/><br/>
+		<a href="ListaZona" class="btnPrincipal" >Agregar Cliente</a><br/><br/>
 		<!-- <a style="color: red;" href="filtraListaCliente.html" class="btn  btn-info btn-large">Eliminar Cleinte </a><br/><br/> -->
 		<a style="color: red;" href="ListaCliente" class="btn  btn-info btn-large">Eliminar Cleinte </a><br/><br/>
 		<a style="color: red;" href="demoJQueryUI.html" class="btn btn-info btn-large pink" >Buscar Cliente</a><br/><br/>
 		<a style="color: red;" href="login.jsp" class="btn btn-info  btn-large">Login</a><br/><br/>
 		<a style="color: red;" href="ListaClienteJNDI" class="btn btn-info  btn-large">Mostrar Lista Cliente</a><br/><br/>
-		<a style="color: red;" href="getNotas" class="btn btn-info  btn-large">Mostrar Notas Guardadas</a><br/><br/>
+		<a style="color: red;" href="getNotas" class="btn btn-info  btn-large">Notas Guardadas</a><br/><br/>
 	</div>
+</div>	
 </body>
 </html>
