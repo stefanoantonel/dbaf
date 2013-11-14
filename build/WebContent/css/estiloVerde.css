@@ -9,13 +9,13 @@
 		}
 		
 .btnPrincipal{
-background: url("img/boton.gif");
-display:block;
-color:#555555;
-font-weight:900;
-height:30px;
-line-height:29px;
-margin-bottom:14px;
-text-decoration:none;
-width:191px; 
+	background: url("./img/boton_rojo.jpg") no-repeat;
+/*background: url("./img/boton_web.jpg") no-repeat;*/
+background-size: 100% 100%;
+color: white;
+padding-top: 10px;
+padding-left:10px;
+padding-right:10px;
+margin: 0 0 0 -10px;
+padding-bottom: 10px; 
 }
