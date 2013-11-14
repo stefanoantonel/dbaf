@@ -1,0 +1,13 @@
+@CHARSET "ISO-8859-1";
+
+
+.btnPrincipal{
+background: url("./img/boton_amarillo.jpg") no-repeat;
+background-size: 100% 100%;
+color: gray;
+padding-top: 10px;
+padding-left:10px;
+padding-right:10px;
+margin: 0 0 0 -10px;
+padding-bottom: 10px; 
+}

@@ -1,16 +1,8 @@
 @CHARSET "ISO-8859-1";
 
-.TituloPrincipal {color: green;}
-
-.btn.boton {color: white;
-		background: gray;
-		font: italic;
-		
-		}
-		
 .btnPrincipal{
 /*background: url("./img/boton_verde.jpg") no-repeat;*/
-background: url("./img/boton_verde.jpg") no-repeat;
+background: url("./img/boton_amarillo.jpg") no-repeat;
 background-size: 100% 100%;
 color: gray;
 padding-top: 10px;
