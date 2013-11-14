@@ -212,7 +212,8 @@ $(document).on("ready",function(){
 
 	<div align="center" style="vertical-align:top;  "> 
 		
-		<input id="agregar" class="btn" type="button" value="Agregar Nota" style="display:block;" align="middle" name="11" />
+		<!--  input id="agregar" class="btnPrincipal" type="button" value="Agregar Nota" style="display:block;" align="middle" name="11" />-->
+		<a id="agregar" class="btnPrincipal" >Agregar Cliente</a><br/><br/>
 		<br/>
 	</div>
 
@@ -227,13 +228,13 @@ $(document).on("ready",function(){
 	
 		    <div class="modal-content">
 		     
-		      <div class="modal-header" style="background: #F5DD94;">
+		      <div class="modal-header notaHeader">
 		      	<input type="checkbox" class="checkbox" aria-hidden="true" />
 		        <button type="button"  class="cruz close botonEliminar " data-dismiss="modal" aria-hidden="true">&times;</button>
 
 		        <h4 class="textareaTitulo modal-title titulo" class="" name="aa" id="titulo" contenteditable="true" >Modal title</h4>
 		      </div>
-		      <div class="modal-body" id="cuerpo"  style="background: #F7F5EA;">
+		      <div class="modal-body notaBody" id="cuerpo">
 		        <p class="textareaCuerpo"  contenteditable="true" >One fine body&hellip;</p>
 		      </div>
 		     
