@@ -204,7 +204,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 	public boolean activar(Usuario us)
 	{
 		StringBuilder sql=new StringBuilder();
-		sql.append(" update usuarios set cuentaActivada=1 where id=?");
+		sql.append(" update usuarios set cuentaActivada=1, fecha_expiracion=CURDATE()+ INTERVAL '30' day where id=?");
 		try {
 			PreparedStatement stm=cn.prepareStatement(sql.toString());
 			stm.setString(1,us.getId());
