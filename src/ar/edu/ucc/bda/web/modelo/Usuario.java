@@ -4,6 +4,7 @@ import java.util.Date;
 
 import ar.edu.ucc.bda.web.modelo.dao.IUsuarioDAO;
 import ar.edu.ucc.bda.web.modelo.dao.UsuarioDAO;
+import ar.edu.ucc.bda.web.utiles.Email;
 
 public class Usuario {
 	
@@ -112,5 +113,10 @@ public class Usuario {
 			return false;
 		}
 	}
-
+	
+	public void sendEmial(){
+		
+		Email e=new Email(getEmail());
+		e.send();
+	}
 }

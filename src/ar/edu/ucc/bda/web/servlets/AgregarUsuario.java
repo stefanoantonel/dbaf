@@ -38,7 +38,7 @@ public class AgregarUsuario extends HttpServlet {
 		String email=request.getParameter("mail");
 		
 		//Email em = new Email();
-		Email.main(null);
+		//Email.main(null);
 	
 		//Email em = new Email("florenciabonansea@gmail.com", "extlpphhgovsmnqh", email, "Activar cuenta");
 		//String error =em.send();
@@ -62,7 +62,7 @@ public class AgregarUsuario extends HttpServlet {
 						//String volver="<a href=\"menu.jsp\">Volver al menu</a>";
 						//request.setAttribute("volver", volver); //el "msj" es el nombre con el que guardo la variable en la tabla
 						System.out.println("email: "+email);
-						
+						nuevo.sendEmial();
 						
 						
 						despachar(mensaje, request, response);

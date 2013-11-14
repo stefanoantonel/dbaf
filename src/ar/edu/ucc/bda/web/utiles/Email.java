@@ -27,16 +27,19 @@ import javax.mail.internet.*;
  //objeto Propierties donde pondremos los parametros del servidor
  private Properties props;
 
- public Email () {
-	 System.out.println("se creo un email");
-	 
- }
+
  
- public Email(String vuser, String vpass, String vdestino, String vsubject) {
- user = vuser;
- pass = vpass;
- destino = vdestino;
- subject = vsubject;
+ public Email(String vdestino) {
+	 
+	 user = "florenciabonansea@gmail.com";
+	 pass = "extlpphhgovsmnqh";
+	 destino = vdestino;
+	 subject = "Confirmacion registro usuario";
+	// user = vuser;
+	// pass = vpass;
+	// destino = vdestino;
+	// subject = vsubject;
+	 
 
     StringBuilder link = new StringBuilder();
     
@@ -159,11 +162,11 @@ public static void main(String[] args) {
 //	link.append("</div>  <input type=\"submit\" value=\"Activar\" /></form>");
 //	
 
-	Email e = new Email("florenciabonansea@gmail.com", "extlpphhgovsmnqh", "florenciabonansea@gmail.com", "prueba");
-	//e.setProps();
-	String error =e.send();
-	if(error!="")
-		System.out.println("error "+error);
+//	Email e = new Email("florenciabonansea@gmail.com", "extlpphhgovsmnqh", "florenciabonansea@gmail.com", "prueba");
+//	//e.setProps();
+//	String error =e.send();
+//	if(error!="")
+//		System.out.println("error "+error);
 	 
 }
 
