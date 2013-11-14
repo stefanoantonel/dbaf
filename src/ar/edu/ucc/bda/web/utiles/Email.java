@@ -163,11 +163,11 @@ public static void main(String[] args) {
 //	link.append("</div>  <input type=\"submit\" value=\"Activar\" /></form>");
 //	
 
-//	Email e = new Email("florenciabonansea@gmail.com", "extlpphhgovsmnqh", "florenciabonansea@gmail.com", "prueba");
-//	//e.setProps();
-//	String error =e.send();
-//	if(error!="")
-//		System.out.println("error "+error);
+	Email e = new Email("florenciabonansea@gmail.com");
+	//e.setProps();
+	String error =e.send();
+	if(error!="")
+		System.out.println("error "+error);
 	 
 }
 

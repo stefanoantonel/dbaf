@@ -5,11 +5,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Block de Notas</title>
-<script src="css/js/jquery-1.9.1.js"></script>
+<!-- script src="css/js/jquery-1.9.1.js"></script>
 <link href="dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link rel="stylesheet" href="./css/estilos.css" type="text/css" />
 <script src="dist/js/bootstrap.min.js"></script>
-
+ -->
+ <script src="css/js/jquery-1.9.1.js"></script>
+ 
 <script type="text/javascript">
 
 var not = ${sessionScope.notas}
@@ -199,37 +201,19 @@ $(document).on("ready",function(){
 	
 	
 </script>
-
-
+<jsp:include page="cabecera.jsp" />
 </head>
 <body>
+
 	<div align="center" id="scope" style="display: none; color: red; border-style: solid;">
 		${sessionScope.notas}
 	</div>
-	
-	<div class="bs-example">
-  
-            <ul role="navigation" class="nav" id="listaLookFeel">
-               
-                <li class="dropdown">
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Look & Feel <b class="caret"></b></a>
-                    <ul class="dropdown-menu" id="lookFeel">
-                        <li id="Rojo"><a>Rojo</a></li>
-                        <li id="Verde"><a>Verde</a></li>
-                        <li id="Amarillo"><a>Amarillo</a></li>
-                        <li id="Rojo"><a>?</a></li>
-                    </ul>
-                </li>
-            </ul>
-          
-        </div>
-	
-	
-	
+
 
 	<div align="center" style="vertical-align:top;  "> 
 		
-		<input id="agregar" class="btn" type="button" value="Agregar Nota" style="display:block;" align="middle" name="11" />
+		<!--  input id="agregar" class="btnPrincipal" type="button" value="Agregar Nota" style="display:block;" align="middle" name="11" />-->
+		<a id="agregar" class="btnPrincipal" >Agregar Cliente</a><br/><br/>
 		<br/>
 	</div>
 
@@ -244,13 +228,13 @@ $(document).on("ready",function(){
 	
 		    <div class="modal-content">
 		     
-		      <div class="modal-header" style="background: #F5DD94;">
+		      <div class="modal-header notaHeader">
 		      	<input type="checkbox" class="checkbox" aria-hidden="true" />
 		        <button type="button"  class="cruz close botonEliminar " data-dismiss="modal" aria-hidden="true">&times;</button>
 
 		        <h4 class="textareaTitulo modal-title titulo" class="" name="aa" id="titulo" contenteditable="true" >Modal title</h4>
 		      </div>
-		      <div class="modal-body" id="cuerpo"  style="background: #F7F5EA;">
+		      <div class="modal-body notaBody" id="cuerpo">
 		        <p class="textareaCuerpo"  contenteditable="true" >One fine body&hellip;</p>
 		      </div>
 		     

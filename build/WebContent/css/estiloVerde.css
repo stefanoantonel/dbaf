@@ -19,3 +19,32 @@ padding-right:10px;
 margin: 0 0 0 -10px;
 padding-bottom: 10px; 
 }
+
+
+.checkbox
+{
+	vertical-align:top; 
+	horizontal-align:left; 
+}
+
+
+.notaHeader
+{
+	background: #5DD8A5;
+}
+
+.notaBody
+{
+	background: #DCEDE6;
+}
+
+.cabeceraPrincipal
+{
+	background: url("./img/fondo_verde.jpg") no-repeat;
+
+}
+.tituloArriba
+{
+	font: italic normal bold x-large/1.167em Helvetica,Arial,sans-serif;
+}
+

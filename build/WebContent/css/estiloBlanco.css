@@ -10,3 +10,13 @@ padding-right:10px;
 margin: 0 0 0 -10px;
 padding-bottom: 10px; 
 }
+
+.notaHeader
+{
+	background: #D4D3D1;
+}
+
+.notaBody
+{
+   background: #E9E7E5;
+}
