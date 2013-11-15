@@ -15,7 +15,7 @@ import ar.edu.ucc.bda.web.modelo.PersistenciaException;
 import ar.edu.ucc.bda.web.modelo.Usuario;
 import ar.edu.ucc.bda.web.utiles.Constantes;
 
-public class NotasDAO {
+public class NotasDAO implements INotasDAO {
 
 	private Connection cn;
 
@@ -56,15 +56,82 @@ public class NotasDAO {
 		return notas;
 	}
 	
-	public JSONArray loadUltima() throws JSONException {
+	
+
+
+	
+	@Override
+	public JSONArray loadHacer(String usuario) throws JSONException {
 		List<String> descripciones=new ArrayList<>();
 //		String sql="SELECT * FROM notas WHERE usuario=?";
-		String sql="SELECT * FROM notas WHERE id=(	SELECT MAX(id) FROM notas	) ";
+		String sql="SELECT * FROM notas WHERE (lista is null OR lista=0) AND usuarios_id=? ";
 		Usuario resultado=null;
 		JSONArray notas=new JSONArray();
 		try {
 			PreparedStatement stm=cn.prepareStatement(sql);
+			stm.setString(1,usuario);
+			ResultSet rs=stm.executeQuery();
 			
+				//descripciones.add(rs.getString("nota"));
+			while(rs.next()){
+				JSONObject nota=agregarJson(rs.getString("id"), rs.getString("titulo"),rs.getString("lista"),rs.getString("fecha_agregada"),rs.getString("fecha_modificada"), rs.getString("cuerpo") );
+				notas.put(nota);
+			}
+			System.out.println();
+			
+			
+			
+		} catch (SQLException e) {
+			System.out.println("error load solo");
+			e.printStackTrace();
+//			throw new PersistenciaException(); //relanzo la persistencia con otro nombre
+			
+		}
+		
+		//System.out.println("UsuarioDAO: resultado ="+resultado+"");
+		return notas;
+	}
+	
+	public JSONArray loadLista(String usuario) throws JSONException {
+		List<String> descripciones=new ArrayList<>();
+//		String sql="SELECT * FROM notas WHERE usuario=?";
+		String sql="SELECT * FROM notas WHERE usuarios_id=? AND lista=1 ";
+		Usuario resultado=null;
+		JSONArray notas=new JSONArray();
+		try {
+			PreparedStatement stm=cn.prepareStatement(sql);
+			stm.setString(1,usuario);
+			ResultSet rs=stm.executeQuery();
+			
+				//descripciones.add(rs.getString("nota"));
+			while(rs.next()){
+				JSONObject nota=agregarJson(rs.getString("id"), rs.getString("titulo"),rs.getString("lista"),rs.getString("fecha_agregada"),rs.getString("fecha_modificada"), rs.getString("cuerpo") );
+				notas.put(nota);
+			}
+			System.out.println();
+			
+			
+			
+		} catch (SQLException e) {
+			System.out.println("error load solo");
+			e.printStackTrace();
+//			throw new PersistenciaException(); //relanzo la persistencia con otro nombre
+			
+		}
+		
+		//System.out.println("UsuarioDAO: resultado ="+resultado+"");
+		return notas;
+	}
+	
+	public JSONArray loadUltima(String usuario) throws JSONException {
+		List<String> descripciones=new ArrayList<>();
+//		String sql="SELECT * FROM notas WHERE usuario=?";
+		String sql="SELECT * FROM notas WHERE id=(	SELECT MAX(id) FROM notas WHERE usuarios_id=?	) ";
+		Usuario resultado=null;
+		JSONArray notas=new JSONArray();
+		try {
+			PreparedStatement stm=cn.prepareStatement(sql);
+			stm.setString(1,usuario);
 			ResultSet rs=stm.executeQuery();
 			
 				//descripciones.add(rs.getString("nota"));
@@ -212,5 +279,8 @@ public class NotasDAO {
 		nota.put("cuerpo", cuerpo);
 		return nota;
 	}
-	
+
+
+
+
 }

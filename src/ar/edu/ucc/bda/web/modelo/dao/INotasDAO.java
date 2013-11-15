@@ -10,7 +10,10 @@ public interface INotasDAO {
 	
 	public JSONArray load(String usuario) throws JSONException;
 	
-	public JSONArray loadUltima() throws JSONException;
+	public JSONArray loadUltima(String usuario) throws JSONException;
+	
+	public JSONArray loadLista(String usuario) throws JSONException;
+	public JSONArray loadHacer(String usuario) throws JSONException;
 	
 	public JSONArray load(String usuario,String notaParaBuscar) throws JSONException;
 	
@@ -23,6 +26,8 @@ public interface INotasDAO {
 	public boolean insert(String usuario);
 	
 	public boolean delete(String id);
+
+	
 	
 	
 }

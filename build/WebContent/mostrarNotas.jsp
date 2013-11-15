@@ -144,15 +144,47 @@ $(document).on("ready",function(){
 		$(".filtro").click(function(){
 			var id=$(this).attr("id");
 			console.log("id filtro: "+id);
-			$.ajax({
-	   		    url: "CrearNota",
-	   		    success:function(datos,status,jqXHR){
-   		    		console.log("Nota creada");
-   		    		armarNota(datos);
-   		    		console.log("datos dsp agregar"+datos.cuerpo);
-   		    		asignarTodo();
-	   		    }
-			});
+			if(id=="todas"){
+				$.ajax({
+		   		    url: "FiltrarNotas",
+		   		    data: {filtro:"todas"},
+		   		    success:function(datos,status,jqXHR){
+	   		    		console.log("Filtro todas");
+	   		    		$(".nota").remove();
+	   		    		armarNota(datos);
+	   		    		//console.log("datos dsp agregar"+datos.cuerpo);
+	   		    		asignarTodo();
+		   		    }
+				});
+				
+			}
+			if(id=="hacer"){
+				$.ajax({
+		   		    url: "FiltrarNotas",
+		   		    data: {filtro:"hacer"},
+		   		    success:function(datos,status,jqXHR){
+	   		    		console.log("Filtro hacer");
+	   		    		$(".nota").remove();
+	   		    		armarNota(datos);
+	   		    		//console.log("datos dsp agregar"+datos.cuerpo);
+	   		    		asignarTodo();
+		   		    }
+				});
+			}
+			if(id=="listas"){
+				$.ajax({
+		   		    url: "FiltrarNotas",
+		   		    data: {filtro:"listas"},
+		   		    success:function(datos,status,jqXHR){
+	   		    		console.log("Filtro listas");
+	   		    		$(".nota").remove();
+	   		    		armarNota(datos);
+	   		    		//console.log("datos dsp agregar"+datos.cuerpo);
+	   		    		asignarTodo();
+		   		    }
+				});
+			}
+			
 		});
 	}
 	function asignarEliminar(){
@@ -170,8 +202,9 @@ $(document).on("ready",function(){
 	
 	function armarNota(not){
 		 var notaAnt=notaTemplate;
+		 
 		 $.each(not, function(indice,json){	
-				var a1=notaAnt.clone();
+			 var a1=notaAnt.clone();
 				a1.attr("hidden",false);
 				a1.attr("id",json.id);
 				a1.attr("title","Creada: "+json.agregada+" Modificada: "+json.modificada+"");
@@ -261,11 +294,11 @@ $(document).on("ready",function(){
 	<form>
   		<div id="radio">
 	    	<input type="radio" id="todas" name="radio" class="filtro"/>
-	    	<label for="radio1">Choice 1</label>
+	    	<label for="radio1">Todas</label>
 		    <input type="radio" id="listas" name="radio" checked="checked" class="filtro"/>
-		    <label for="radio2">Choice 2</label>
+		    <label for="radio2">Listas</label>
 		    <input type="radio" id="hacer" name="radio" class="filtro" />
-		    <label for="radio3">Choice 3</label>
+		    <label for="radio3">Hacer</label>
   		</div>
 	</form>
 	

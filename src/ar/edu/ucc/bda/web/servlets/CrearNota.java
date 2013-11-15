@@ -38,7 +38,7 @@ public class CrearNota extends HttpServlet {
 			if(a==true){
 				System.out.println("Todo ok guardados");
 			}
-			ultimaNota = dao.loadUltima();
+			ultimaNota = dao.loadUltima(usuarioActualId);
 			System.out.println("Antes devolver: "+ultimaNota);
 			response.setContentType("application/json");
 			response.getWriter().println(ultimaNota.toString());
