@@ -29,7 +29,13 @@ background: #F6EBDE;
 }
 .tituloArriba
 {
-	font: italic normal bold x-large/1.167em Helvetica,Arial,sans-serif;
+
+	font-size: 38px;
+    font-style: italic;
+    color: #333;
+    padding: 10px;
+    text-shadow: -1px -1px 0px #101010, 1px 1px 0px #505050;
+
 }
 
 
