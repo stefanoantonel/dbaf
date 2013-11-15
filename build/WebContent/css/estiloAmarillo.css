@@ -4,7 +4,7 @@
 /*background: url("./img/boton_verde.jpg") no-repeat;*/
 background: url("./img/boton_amarillo.jpg") no-repeat;
 background-size: 100% 100%;
-color: gray;
+color: white;
 padding-top: 10px;
 padding-left:10px;
 padding-right:10px;
@@ -28,4 +28,13 @@ background: #F7F5EA;
 {
 	background: url("./img/fondo_amarillo.jpg") no-repeat;
 
+}
+
+.tituloArriba
+{
+	font-size: 38px;
+    font-style: italic;
+    color: #333;
+    padding: 10px;
+    text-shadow: -1px -1px 0px #101010, 1px 1px 0px #505050;
 }

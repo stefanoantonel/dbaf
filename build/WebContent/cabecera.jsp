@@ -73,7 +73,7 @@ Mis notas
 <div class="bs-example" align="left" style="width: 200px">
             <ul role="navigation" class="nav" id="listaLookFeel">
                 <li class="dropdown">
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Look & Feel <b class="caret"></b></a>
+                    <a href="#" data-toggle="dropdown" class=" dropdown-toggle">Look & Feel <b class="caret"></b></a>
                     <ul class="dropdown-menu" id="lookFeel">
                         <li id="Rojo"><a>Rojo</a></li>
                         <li id="Verde"><a>Verde</a></li>

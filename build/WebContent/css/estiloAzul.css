@@ -10,3 +10,12 @@ padding-right:10px;
 margin: 0 0 0 -10px;
 padding-bottom: 10px; 
 }
+
+.tituloArriba
+{
+	font-size: 38px;
+    font-style: italic;
+    color: #333;
+    padding: 10px;
+    text-shadow: -1px -1px 0px #101010, 1px 1px 0px #505050;
+}
