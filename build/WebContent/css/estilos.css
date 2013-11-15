@@ -39,6 +39,8 @@ body{
 
 .tachado{
 	color:#f00;
-	text-decoration:line-through; }  
-	/* .tachado_rojo span{color:#000;} */
+	text-decoration:line-through; 
+	text-decoration: blink;  
+	/* .tachado_rojo span{color:#000;} 
+	*/
 }

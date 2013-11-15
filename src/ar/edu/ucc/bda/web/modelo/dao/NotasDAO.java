@@ -241,7 +241,7 @@ public class NotasDAO implements INotasDAO {
 
 	public boolean insert(String usuario){
 		try {
-			String sql="INSERT INTO `practico`.`notas`(`titulo`,`cuerpo`,`usuarios_id`,`fecha_agregada`) VALUES('','',?,CURDATE() ) ";
+			String sql="INSERT INTO `practico`.`notas`(`titulo`,`cuerpo`,`usuarios_id`,`fecha_agregada`,`lista`) VALUES('','',?,CURDATE(),0 ) ";
 			
 			PreparedStatement stm=cn.prepareStatement(sql);
 			stm.setString(1, usuario);
