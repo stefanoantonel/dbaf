@@ -36,3 +36,9 @@ body{
 	}
 	
 .titulo {color: white; text-shadow: black 0.1em 0.1em 0.2em; font-size: 30px;}
+
+.tachado{
+	color:#f00;
+	text-decoration:line-through; }  
+	/* .tachado_rojo span{color:#000;} */
+}

@@ -58,7 +58,7 @@ public class AgregarUsuario extends HttpServlet {
 				try {
 					if(usuarioDAO.agregar(nuevo)==true){
 						String mensaje=" <div class=\"alert alert-success\"> <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a>"
-						    		+ "<strong>Revise su email para confirmar</strong> </div>";
+						    		+ "<strong>Revise su email para confirmar - Tiene 24 hs para activar su cuenta</strong> </div>";
 						//String volver="<a href=\"menu.jsp\">Volver al menu</a>";
 						//request.setAttribute("volver", volver); //el "msj" es el nombre con el que guardo la variable en la tabla
 						System.out.println("email: "+email);
@@ -80,7 +80,7 @@ public class AgregarUsuario extends HttpServlet {
 			}
 			catch (NumberFormatException e){
 				String mensaje=" <div class=\"alert alert-error\"> <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a>"
-			    		+ "<strong>Datos incorrectos</strong> </div>";
+			    		+ "<strong>Datos incorrectos - Ingrese clave numerica</strong> </div>";
 				despachar(mensaje, request, response);
 				
 			}

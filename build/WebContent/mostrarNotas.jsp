@@ -21,9 +21,12 @@ $(document).on("ready",function(){
 
 	notaOriginal=$("#nota");
 	notaTemplate=notaOriginal.clone();
+	//$("#radio").buttonset();
 	
+	 
 	armarNota(not);
 	asignarAgregar();
+	asignarFiltro();
 	asignarTodo();
 	
 	var idElem= Math.ceil(Math.random()*1000000);
@@ -57,6 +60,7 @@ $(document).on("ready",function(){
 		asignarCheckbox();
 		//asignarAgregar();
 		asignarEliminar();
+		ordenarListas();
 		
 	}
 	
@@ -90,6 +94,7 @@ $(document).on("ready",function(){
 	
 	function asignarCheckbox(){
 		$("input:checkbox").click(function(){
+			var nota=$(this).closest(".nota");
 			var estado=$(this).is(":checked");
 			var id=$(this).closest(".nota").attr("id");
 			console.log("cambio: "+estado+" id:"+id);
@@ -101,6 +106,8 @@ $(document).on("ready",function(){
 						console.log("Nota realizada");
 	   		     }
 			});
+			ordenarListas();
+			
 		});
 	}
 	
@@ -118,6 +125,36 @@ $(document).on("ready",function(){
 		});
 	}
 	
+	function ordenarListas(){
+		
+		var todasNotas=$(".nota");
+		console.log(todasNotas);
+		$.each(todasNotas, function(indice,data){
+			notaSimple=$(data);
+			
+			var estado=notaSimple.find("input:checkbox").is(":checked");
+			
+			if(estado==true){
+				$("body").last().append(notaSimple);
+			}
+		});	
+	}
+	
+	function asignarFiltro(){
+		$(".filtro").click(function(){
+			var id=$(this).attr("id");
+			console.log("id filtro: "+id);
+			$.ajax({
+	   		    url: "CrearNota",
+	   		    success:function(datos,status,jqXHR){
+   		    		console.log("Nota creada");
+   		    		armarNota(datos);
+   		    		console.log("datos dsp agregar"+datos.cuerpo);
+   		    		asignarTodo();
+	   		    }
+			});
+		});
+	}
 	function asignarEliminar(){
 		$(".botonEliminar").click(function(){
 			var id=$(this).closest(".nota").attr("id");
@@ -144,8 +181,12 @@ $(document).on("ready",function(){
 				$("#"+json.id).find("h4").text(json.titulo);
 				
 				$("#"+json.id).find(".checkbox").attr("checked",esLista(json.lista) );
-				
-				});
+				if(esLista(json.lista)==true){ //Si esta realizada que la tache y la madne al fondo 
+					$("#"+json.id).find("h4").addClass("tachado");
+					//$("#items p")
+					/*  */
+				}
+		});
 	 }
 	 
 	 function armarNotaPrimero(not)
@@ -213,14 +254,26 @@ $(document).on("ready",function(){
 	<div align="center" style="vertical-align:top;  "> 
 		
 		<!--  input id="agregar" class="btnPrincipal" type="button" value="Agregar Nota" style="display:block;" align="middle" name="11" />-->
-		<a id="agregar" class="btnPrincipal" >Agregar Cliente</a><br/><br/>
+		<a id="agregar" class="btnPrincipal" >Agregar Nota</a><br/><br/>
 		<br/>
 	</div>
-
+	
+	<form>
+  		<div id="radio">
+	    	<input type="radio" id="todas" name="radio" class="filtro"/>
+	    	<label for="radio1">Choice 1</label>
+		    <input type="radio" id="listas" name="radio" checked="checked" class="filtro"/>
+		    <label for="radio2">Choice 2</label>
+		    <input type="radio" id="hacer" name="radio" class="filtro" />
+		    <label for="radio3">Choice 3</label>
+  		</div>
+	</form>
+	
 	<div>   <!-- AUTOCOMPLETAR              -->
 		<input type="text" id="texto" />
 		<div id="salida"></div>
 	<br>
+	</div>
 	
 	<div id="antes.nota"> </div>
 	<div  class ="centrar nota" id="nota" hidden="true" >
