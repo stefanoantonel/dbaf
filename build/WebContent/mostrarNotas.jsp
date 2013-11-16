@@ -1,20 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Block de Notas</title>
 
  
-
+<script src="css/js/jquery-1.9.1.js"></script>
 <!-- script src="css/js/jquery-1.9.1.js"></script>
 <link href="dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link rel="stylesheet" href="./css/estilos.css" type="text/css" />
 <script src="dist/js/bootstrap.min.js"></script>
  -->
- <script src="css/js/jquery-1.9.1.js"></script>
- 
+
+ <jsp:include page="cabecera.jsp" />
  
 <script type="text/javascript">
 
@@ -25,6 +25,11 @@ $(document).on("ready",function(){
 
 	notaOriginal=$("#nota");
 	notaTemplate=notaOriginal.clone();
+	console.log("inicializado");
+//	 var jq = $.noConflict();
+	// $("#datetimepicker4").Datepicker();
+	 $('.datepicker').datepicker()
+	 
 /* 
 	$(function() {
 	    $( "#radio" ).buttonset();
@@ -207,6 +212,9 @@ $(document).on("ready",function(){
 		});
 	}
 	
+
+	
+	
 	function armarNota(not){
 		 var notaAnt=notaTemplate;
 		 
@@ -281,9 +289,10 @@ $(document).on("ready",function(){
 
 	 }
 	
+
 	
 </script>
-<jsp:include page="cabecera.jsp" />
+
 </head>
 <body>
 
@@ -334,9 +343,22 @@ $(document).on("ready",function(){
 		      </div>
 		      <div class="modal-body notaBody" id="cuerpo">
 		        <p class="textareaCuerpo"  contenteditable="true" >One fine body&hellip;</p>
+				       <!-- CALENDAR -->
+				        <div class="well">
+							  <div id="datetimepicker4" class="input-append datepicker">
+							    <input data-format="yyyy-MM-dd" type="text"></input>
+							    <span class="add-on">
+							      <i class="icon-calendar" data-time-icon="icon-time" data-date-icon="icon-calendar">
+							      </i>
+							    </span>
+							  </div>
+					    </div>
+					    
+					    
+						<!-- CALENDAR -->	
 		      </div>
-		     
 		    </div><!-- /.modal-content -->
+   
 	</div><!-- /.modal-dialog -->
 	 </div>
 	

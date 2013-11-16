@@ -1,6 +1,6 @@
 <!doctype html>
  
-<html lang="en">
+<!--  html lang="en">
 <head>
   <meta charset="utf-8" />
   <title>jQuery UI Button - Radios</title>
@@ -32,4 +32,55 @@
 	</form>
 	
 </body>
-</html>
+</html>-->
+
+
+<html>
+  <head>
+    <script type="text/javascript"
+ src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+</script> 
+<script type="text/javascript"
+ src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
+</script>
+<script type="text/javascript"
+ src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
+</script>
+     <script type="text/javascript">
+     $(function () {
+    	  $('#StartDate').datetimepicker({
+    	     pickTime: false
+    	   })
+
+    	});
+    </script>
+  </head>
+  <body>
+           <div class="modal-body" align="">
+            <label>City/place</label>
+            <div class="input-append"><input type="text" id="" name=""><span class="add-on"><i class="icon-search"></i></span></div>
+
+            <label>number of people</label>
+            <div class="input-append"><input type="text" id="number" name="number"></div>
+
+            </br>
+
+
+           <div id="StartDate" class="input-append date">
+			    <input type="text" />
+			    <span class="add-on">
+			    <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+			    </span>
+			</div>
+        </div>
+        <div class="modal-footer" >
+            <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button class="btn btn-primary">Register</button>
+        </div>
+
+        </div>
+        <div class=""> 
+        <a class="btn btn-large btn-success" href="#search_modal" data-toggle="modal">Book a room ss</a>
+        </div>
+  </body>
+<html>
