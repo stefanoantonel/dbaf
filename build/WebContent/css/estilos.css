@@ -37,10 +37,10 @@ body{
 	
 .titulo {color: white; text-shadow: black 0.1em 0.1em 0.2em; font-size: 30px;}
 
-.tachado{
-	color:#f00;
+.NotaTachada{
+	color:black;
 	text-decoration:line-through; 
-	text-decoration: blink;  
-	/* .tachado_rojo span{color:#000;} 
-	*/
+	/*text-decoration: blink;*/  
+	tachado_rojo span{color:#000;} 
+	
 }

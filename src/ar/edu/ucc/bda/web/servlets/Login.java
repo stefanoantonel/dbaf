@@ -51,7 +51,7 @@ public class Login extends HttpServlet {
 		
 		request.getServletContext().setAttribute("usuarioActual", usuariop);
 		
-		System.out.println("guardo el usuario: " +usuariop);
+		System.out.println("guardo el usuario en el contexto: " +usuariop);
 
 		IUsuarioDAO usuarioDAO=new UsuarioDAO(); //uso la interfaz y uso la implementacion especifica de usuarioDAO. Esto usa polimorfismp
 		try {
@@ -68,6 +68,21 @@ public class Login extends HttpServlet {
 			
 //			if(usuario!=null && usuario.getClave().equals(clavep)){
 			switch (estado){
+			case -1:{
+				String mensaje=" <div class=\"alert alert-error\"> <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a>"
+			    		+ "<strong>La contraseña deben ser solo numeros</strong> </div>";
+				String volver="<a href=\"menu.jsp\">Volver al menu</a>";
+				despachar(mensaje, request, response);
+				break;
+				}
+			
+			case 0:{
+				String mensaje=" <div class=\"alert alert-error\"> <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a>"
+			    		+ "<strong>Usuario o contraseña incorrectos</strong> </div>";
+				String volver="<a href=\"menu.jsp\">Volver al menu</a>";
+				despachar(mensaje, request, response);
+				break;
+				}
 				case 1:{ //todo ok usuario registrado activado.
 					if(usuario!=null){
 						request.getServletContext().setAttribute("usuarioActualId", usuario.getId());

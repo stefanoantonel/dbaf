@@ -5,12 +5,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Block de Notas</title>
+
+ 
+
 <!-- script src="css/js/jquery-1.9.1.js"></script>
 <link href="dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link rel="stylesheet" href="./css/estilos.css" type="text/css" />
 <script src="dist/js/bootstrap.min.js"></script>
  -->
  <script src="css/js/jquery-1.9.1.js"></script>
+ 
  
 <script type="text/javascript">
 
@@ -21,9 +25,11 @@ $(document).on("ready",function(){
 
 	notaOriginal=$("#nota");
 	notaTemplate=notaOriginal.clone();
-	//$("#radio").buttonset();
-	
-	 
+/* 
+	$(function() {
+	    $( "#radio" ).buttonset();
+	  });
+	  */
 	armarNota(not);
 	asignarAgregar();
 	asignarFiltro();
@@ -117,7 +123,8 @@ $(document).on("ready",function(){
 	   		    url: "CrearNota",
 	   		    success:function(datos,status,jqXHR){
    		    		console.log("Nota creada");
-   		    		armarNota(datos);
+   		    		//armarNota(datos);
+   		    		armarNotaPrimero(datos);
    		    		console.log("datos dsp agregar"+datos.cuerpo);
    		    		asignarTodo();
 	   		    }
@@ -215,7 +222,7 @@ $(document).on("ready",function(){
 				
 				$("#"+json.id).find(".checkbox").attr("checked",esLista(json.lista) );
 				if(esLista(json.lista)==true){ //Si esta realizada que la tache y la madne al fondo 
-					$("#"+json.id).find("h4").addClass("tachado");
+					$("#"+json.id).find("h4").addClass("NotaTachada");
 					//$("#items p")
 					/*  */
 				}
@@ -230,7 +237,8 @@ $(document).on("ready",function(){
 				a1.attr("hidden",false);
 				a1.attr("id",json.id);
 				a1.attr("title","Creada: "+json.agregada+" Modificada: "+json.modificada+"");
-				$("body").append(a1);
+				//$("body").append(a1);
+				$("#antesNota").prepend(a1);
 				$("#"+json.id).find("p").text(json.cuerpo);
 				$("#"+json.id).find("h4").text(json.titulo);
 				$("#"+json.id).find(".checkbox").attr("checked",esLista(json.lista) );
@@ -293,14 +301,17 @@ $(document).on("ready",function(){
 	
 	<form>
   		<div id="radio">
-	    	<input type="radio" id="todas" name="radio" class="filtro"/>
-	    	<label for="radio1">Todas</label>
-		    <input type="radio" id="listas" name="radio" checked="checked" class="filtro"/>
-		    <label for="radio2">Listas</label>
+	    	<input type="radio" id="todas" name="radio" checked="checked"  class="filtro"/>
+	    	<label for="todas">Todas</label>
+		    <input type="radio" id="listas" name="radio" class="filtro"/>
+		    <label for="listas">Listas</label>
 		    <input type="radio" id="hacer" name="radio" class="filtro" />
-		    <label for="radio3">Hacer</label>
+		    <label for="hacer">Hacer</label>
   		</div>
 	</form>
+	
+
+	
 	
 	<div>   <!-- AUTOCOMPLETAR              -->
 		<input type="text" id="texto" />
@@ -308,7 +319,8 @@ $(document).on("ready",function(){
 	<br>
 	</div>
 	
-	<div id="antes.nota"> </div>
+	
+	<div id="antesNota">
 	<div  class ="centrar nota" id="nota" hidden="true" >
 
 	
@@ -326,7 +338,7 @@ $(document).on("ready",function(){
 		     
 		    </div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->
-	
+	 </div>
 	
 		
 </body>
