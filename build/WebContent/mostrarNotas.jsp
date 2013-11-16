@@ -25,10 +25,10 @@ $(document).on("ready",function(){
 
 	notaOriginal=$("#nota");
 	notaTemplate=notaOriginal.clone();
-	console.log("inicializado");
+	//console.log("inicializado");
 //	 var jq = $.noConflict();
 	// $("#datetimepicker4").Datepicker();
-	 $('.datepicker').datepicker()
+	 //$('.datepicker').datepicker()
 	 
 /* 
 	$(function() {
