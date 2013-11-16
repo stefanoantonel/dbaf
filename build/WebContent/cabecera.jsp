@@ -16,11 +16,15 @@
 <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
 <link href="dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="dist/css/datepicker.css" rel="stylesheet" media="screen">
-<link href="dist/js/bootstrap-datepicker.js" rel="stylesheet" media="screen">
+
 <script type="text/javascript" src="./css/js/bootstrap.min.js"></script>
 <!-- script type="text/javascript"
  src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
-</script> -->
+</script>
+
+
+<link href="dist/js/bootstrap-datepicker.js" rel="stylesheet" media="screen">
+ -->
 
 
 
@@ -69,7 +73,7 @@ function obtenerEstilo(estiloS)
 		     data:{estiloSeleccionado: estiloS},
 		     success:function(datos,status,jqXHR){
 		    	 
-		    	 console.log("datos:"+datos);
+		    	 //console.log("datos:"+datos);
 		    	 var oldlink = document.getElementsByTagName("link").item("./css/estilo");
 		    	 
 		         var newlink = document.createElement("link");
