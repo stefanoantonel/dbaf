@@ -35,7 +35,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		StringBuilder sql=new StringBuilder();
 		sql.append("SELECT * FROM usuarios WHERE usuario=? and clave=");
 		sql.append(desencriptar(clave));
-		
+		System.out.println(sql.toString());
 		int estado;
 		Usuario resultado=null;
 		try {

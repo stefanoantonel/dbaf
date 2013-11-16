@@ -45,7 +45,9 @@ public class AgregarUsuario extends HttpServlet {
 		//System.out.println("error: "+error);
 		
 		if(!clave1.equals(clave2)){
-			despachar("Error: Claves no coinciden", request, response);
+			String mensaje=" <div class=\"alert alert-error\"> <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a>"
+		    		+ "<strong>Las claves no coinciden</strong> </div>";
+			despachar(mensaje, request, response);
 			
 		}
 		

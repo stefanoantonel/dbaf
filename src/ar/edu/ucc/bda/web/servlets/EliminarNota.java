@@ -33,7 +33,9 @@ public class EliminarNota extends HttpServlet {
 		//Connection cn=(Connection)getServletContext().getAttribute(Constantes.NOMBRE_CONEXION);
 		
 		String id=request.getParameter("id");
+		System.out.println("id eliminada: "+ id);
 		id=id.trim();
+		System.out.println("id eliminada trimeada: "+ id);
 		NotasDAO dao=new NotasDAO();
 		boolean a=dao.delete(id);
 		if(a==true){
