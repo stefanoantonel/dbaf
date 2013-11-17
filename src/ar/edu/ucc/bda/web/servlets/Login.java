@@ -83,57 +83,57 @@ public class Login extends HttpServlet {
 				despachar(mensaje, request, response);
 				break;
 				}
-				case 1:{ //todo ok usuario registrado activado.
-					if(usuario!=null){
-						request.getServletContext().setAttribute("usuarioActualId", usuario.getId());
-						//todo OK. tengo que crear una sesion
-						System.out.println("antes de crear la sesion");
-						ArrayList<Usuario> ses=(ArrayList<Usuario>)request.getServletContext().getAttribute("sesiones");
-						int t,yaEsta=0;
-						
-						for(t=0;t<ses.size();t++){
-								if(usuario.getNombre().equals(ses.get(t).getNombre())){
-									yaEsta=-1;
-									
-								}
-						}
-						if(yaEsta==0){
-							ses.add(usuario);
-							HttpSession s = request.getSession(true); //false que si la sesion ya existe que no me la cree. Me la crea y graba ese usuario en el contexto de la sesion
-							//tiene un sesion creada y tien un atributo con el nnombre de usuario (esto es loq ue checkeamos en el filtro)
-							s.setAttribute(Constantes.usuario, usuario);
-							response.sendRedirect("menu.jsp");
-						}
-						else{
-							String mensaje=" <div class=\"alert alert-error\"> <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a>"
-						    		+ "<strong>EL USUARIO INGRESADO ESTA LOGUEADO</strong> </div>";
-							String volver="<a href=\"menu.jsp\">Volver al menu</a>";
-							request.setAttribute("volver", volver); //el "msj" es el nombre con el que guardo la variable en la tabla	
-							despachar(mensaje, request, response);
-						}		
+			case 1:{ //todo ok usuario registrado activado.
+				if(usuario!=null){
+					request.getServletContext().setAttribute("usuarioActualId", usuario.getId());
+					//todo OK. tengo que crear una sesion
+					System.out.println("antes de crear la sesion");
+					ArrayList<Usuario> ses=(ArrayList<Usuario>)request.getServletContext().getAttribute("sesiones");
+					int t,yaEsta=0;
+					
+					for(t=0;t<ses.size();t++){
+							if(usuario.getNombre().equals(ses.get(t).getNombre())){
+								yaEsta=-1;
+								
+							}
 					}
-					else {
+					if(yaEsta==0){
+						ses.add(usuario);
+						HttpSession s = request.getSession(true); //false que si la sesion ya existe que no me la cree. Me la crea y graba ese usuario en el contexto de la sesion
+						//tiene un sesion creada y tien un atributo con el nnombre de usuario (esto es loq ue checkeamos en el filtro)
+						s.setAttribute(Constantes.usuario, usuario);
+						response.sendRedirect("menu.jsp");
+					}
+					else{
 						String mensaje=" <div class=\"alert alert-error\"> <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a>"
-					    		+ "<strong>USUARIO O CONTRASEÒA INCORRECTOS</strong> </div>";
+					    		+ "<strong>EL USUARIO INGRESADO ESTA LOGUEADO</strong> </div>";
+						String volver="<a href=\"menu.jsp\">Volver al menu</a>";
+						request.setAttribute("volver", volver); //el "msj" es el nombre con el que guardo la variable en la tabla	
 						despachar(mensaje, request, response);
-					}
-					break;
+					}		
 				}
-				case 2:{	//falta activar
+				else {
 					String mensaje=" <div class=\"alert alert-error\"> <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a>"
-				    		+ "<strong>Debe activar su cuenta. Por favor revise su email.</strong> </div>";
+				    		+ "<strong>USUARIO O CONTRASEÒA INCORRECTOS</strong> </div>";
 					despachar(mensaje, request, response);
-					break;
 				}
-				case 3:{	//exipiro
-					response.sendRedirect("modificarUsuario.jsp");
-					break;
-				}
-				default: {
-					response.sendRedirect("login.jsp");
-					break;
-				}
+				break;
 			}
+			case 2:{	//falta activar
+				String mensaje=" <div class=\"alert alert-error\"> <a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a>"
+			    		+ "<strong>Debe activar su cuenta. Por favor revise su email.</strong> </div>";
+				despachar(mensaje, request, response);
+				break;
+			}
+			case 3:{	//exipiro
+				response.sendRedirect("modificarUsuario.jsp");
+				break;
+			}
+			default: {
+				response.sendRedirect("login.jsp");
+				break;
+			}
+		}
 			
 		} catch (Exception e1) {
 			e1.printStackTrace();
