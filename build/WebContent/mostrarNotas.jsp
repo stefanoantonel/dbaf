@@ -7,8 +7,12 @@
 <title>Block de Notas</title>
 
  
+
+<!--
+
 <script src="css/js/jquery-1.9.1.js"></script>
-<!-- script src="css/js/jquery-1.9.1.js"></script>
+
+ script src="css/js/jquery-1.9.1.js"></script>
 <link href="dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link rel="stylesheet" href="./css/estilos.css" type="text/css" />
 <script src="dist/js/bootstrap.min.js"></script>
@@ -28,7 +32,14 @@ $(document).on("ready",function(){
 	console.log("inicializado");
 //	 var jq = $.noConflict();
 	// $("#datetimepicker4").Datepicker();
-	 $('.datepicker').datepicker()
+	// $('#dTP').datetimepicker();
+	 
+	 $(function() {
+		 $("#dTP").datetimepicker({
+		 pickTime: false
+		 });
+		 });
+	 
 	 
 /* 
 	$(function() {
@@ -345,7 +356,7 @@ $(document).on("ready",function(){
 		        <p class="textareaCuerpo"  contenteditable="true" >One fine body&hellip;</p>
 				       <!-- CALENDAR -->
 				        <div class="well">
-							  <div id="datetimepicker4" class="input-append datepicker">
+							  <div id="dTP" class="input-append datepicker">
 							    <input data-format="yyyy-MM-dd" type="text"></input>
 							    <span class="add-on">
 							      <i class="icon-calendar" data-time-icon="icon-time" data-date-icon="icon-calendar">
