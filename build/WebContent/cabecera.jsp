@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 
-
+<link rel="stylesheet" href="./css/estiloVerde.css" type="text/css" />
 
 <script type="text/javascript"
  src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
@@ -16,7 +16,7 @@
 <script type="text/javascript"
  src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
 </script>
-<link rel="stylesheet" href="./css/estiloVerde.css" type="text/css" />
+
 <link rel="stylesheet" href="./css/estilos.css" type="text/css" />
 <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
 <link href="dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
