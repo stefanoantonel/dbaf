@@ -29,17 +29,12 @@ $(document).on("ready",function(){
 
 	notaOriginal=$("#nota");
 	notaTemplate=notaOriginal.clone();
-	console.log("inicializado");
+	//console.log("inicializado");
 //	 var jq = $.noConflict();
 	// $("#datetimepicker4").Datepicker();
-	// $('#dTP').datetimepicker();
-	 
-	 $(function() {
-		 $("#dTP").datetimepicker({
-		 pickTime: false
-		 });
-		 });
-	 
+
+	 //$('.datepicker').datepicker()
+
 	 
 /* 
 	$(function() {
@@ -90,7 +85,7 @@ $(document).on("ready",function(){
 		$(".textareaTitulo").blur(function() {
 			var notaCamb=$(this).text();
 			var notaId=$(this).closest(".nota").attr("id");
-			console.log("cambio: "+notaCamb+" id:"+notaId);
+			//console.log("cambio: "+notaCamb+" id:"+notaId);
 			$("#cambio").val($(this).val());
 			$.ajax({
 	   		     url: "GuardaNota?titulo="+notaCamb+"&id="+notaId+"",
@@ -103,7 +98,7 @@ $(document).on("ready",function(){
 		$(".textareaCuerpo").blur(function() {
 			var notaCamb=$(this).text();
 			var notaId=$(this).closest(".nota").attr("id");
-			console.log("cambio: "+notaCamb+" id:"+notaId);
+			//console.log("cambio: "+notaCamb+" id:"+notaId);
 			$("#cambio").val($(this).val());
 			$.ajax({
 	   		     url: "GuardaNota?cuerpo="+notaCamb+"&id="+notaId+"",
@@ -119,16 +114,27 @@ $(document).on("ready",function(){
 			var nota=$(this).closest(".nota");
 			var estado=$(this).is(":checked");
 			var id=$(this).closest(".nota").attr("id");
-			console.log("cambio: "+estado+" id:"+id);
+			//console.log("cambio: "+estado+" id:"+id);
 			estado = (estado==true) ? "1" : "0";
-			console.log("GuardarNotaLista?lista="+estado+"&id="+id+"");
+			//console.log("GuardarNotaLista?lista="+estado+"&id="+id+"");
 			$.ajax({
 	   		     url: "GuardarNotaLista?lista="+estado+"&id="+id+"",
 	   		     success:function(datos,status,jqXHR){
 						console.log("Nota realizada");
 	   		     }
 			});
+			//location.reload();
+			if(estado==true){
+				$(nota).find("h4").css("color","black" );
+				$(nota).find("h4").css("text-decoration", "line-through");	
+			}
+			else{
+				$(nota).find("h4").css("color","white" );
+				$(nota).find("h4").css("text-decoration", "none");	
+			}
+			 
 			ordenarListas();
+			
 			
 		});
 	}
@@ -141,7 +147,7 @@ $(document).on("ready",function(){
    		    		console.log("Nota creada");
    		    		//armarNota(datos);
    		    		armarNotaPrimero(datos);
-   		    		console.log("datos dsp agregar"+datos.cuerpo);
+   		    		//console.log("datos dsp agregar"+datos.cuerpo);
    		    		asignarTodo();
 	   		    }
 			});
@@ -151,7 +157,7 @@ $(document).on("ready",function(){
 	function ordenarListas(){
 		
 		var todasNotas=$(".nota");
-		console.log(todasNotas);
+		//console.log(todasNotas);
 		$.each(todasNotas, function(indice,data){
 			notaSimple=$(data);
 			
@@ -166,13 +172,13 @@ $(document).on("ready",function(){
 	function asignarFiltro(){
 		$(".filtro").click(function(){
 			var id=$(this).attr("id");
-			console.log("id filtro: "+id);
+			//console.log("id filtro: "+id);
 			if(id=="todas"){
 				$.ajax({
 		   		    url: "FiltrarNotas",
 		   		    data: {filtro:"todas"},
 		   		    success:function(datos,status,jqXHR){
-	   		    		console.log("Filtro todas");
+	   		    		//console.log("Filtro todas");
 	   		    		$(".nota").remove();
 	   		    		armarNota(datos);
 	   		    		//console.log("datos dsp agregar"+datos.cuerpo);
@@ -186,7 +192,7 @@ $(document).on("ready",function(){
 		   		    url: "FiltrarNotas",
 		   		    data: {filtro:"hacer"},
 		   		    success:function(datos,status,jqXHR){
-	   		    		console.log("Filtro hacer");
+	   		    		//console.log("Filtro hacer");
 	   		    		$(".nota").remove();
 	   		    		armarNota(datos);
 	   		    		//console.log("datos dsp agregar"+datos.cuerpo);
@@ -199,7 +205,7 @@ $(document).on("ready",function(){
 		   		    url: "FiltrarNotas",
 		   		    data: {filtro:"listas"},
 		   		    success:function(datos,status,jqXHR){
-	   		    		console.log("Filtro listas");
+	   		    		//console.log("Filtro listas");
 	   		    		$(".nota").remove();
 	   		    		armarNota(datos);
 	   		    		//console.log("datos dsp agregar"+datos.cuerpo);
@@ -352,9 +358,10 @@ $(document).on("ready",function(){
 
 		        <h4 class="textareaTitulo modal-title titulo" class="" name="aa" id="titulo" contenteditable="true" >Modal title</h4>
 		      </div>
+		      
 		      <div class="modal-body notaBody" id="cuerpo">
 		        <p class="textareaCuerpo"  contenteditable="true" >One fine body&hellip;</p>
-				       <!-- CALENDAR -->
+				       <!--  CALENDAR 
 				        <div class="well">
 							  <div id="dTP" class="input-append datepicker">
 							    <input data-format="yyyy-MM-dd" type="text"></input>
@@ -364,9 +371,7 @@ $(document).on("ready",function(){
 							    </span>
 							  </div>
 					    </div>
-					    
-					    
-						<!-- CALENDAR -->	
+						CALENDAR	 -->
 		      </div>
 		    </div><!-- /.modal-content -->
    

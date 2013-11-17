@@ -22,21 +22,10 @@
 <link href="dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="dist/css/datepicker.css" rel="stylesheet" media="screen">
 
+
 <!-- script src="./css/datepicker.less" type="text/css"></script> 
 <script src="./css/less-1.5.0.min.js" type="text/javascript"></script> 
  -->
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -74,7 +63,7 @@ function obtenerEstilo(estiloS)
 		     data:{estiloSeleccionado: estiloS},
 		     success:function(datos,status,jqXHR){
 		    	 
-		    	 console.log("datos:"+datos);
+		    	 //console.log("datos:"+datos);
 		    	 var oldlink = document.getElementsByTagName("link").item("./css/estilo");
 		    	 
 		         var newlink = document.createElement("link");
