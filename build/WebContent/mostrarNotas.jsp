@@ -208,6 +208,7 @@ $(document).on("ready",function(){
 			  
 		});
 
+
 	}
 	
 	function asignarFiltro(){

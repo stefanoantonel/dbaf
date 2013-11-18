@@ -18,6 +18,7 @@ public class Nota {
 	{
 		return dao.esVencida(fecha);
 	}
+
 	
 	
 	
