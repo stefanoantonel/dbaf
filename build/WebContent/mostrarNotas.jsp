@@ -184,7 +184,31 @@ $(document).on("ready",function(){
 		 var pickerOpts ={dateFormat:"yyyy-mm-dd"}; 
 				     
 		$( ".datepicker" ).datepicker(pickerOpts);
-		
+		$( ".datepicker" ).change(function(){
+			 var fechaSeleccionada= console.log($(this).val());
+			 var nota=$(this).closest(".nota");
+			 var notaId=$(this).closest(".nota").attr("id");
+			  $.ajax({
+		   		     url: "guardarFecha",
+		   		     data: {fecha:fechaSeleccionada, id:notaId},
+		   		     success:function(datos,status,jqXHR){
+							console.log("Fecha guardad");
+							console.log("vencida: "+ datos.vencida);
+							if(datos.vencida==1){
+								$(nota).find("h4").css("color","red" );
+							}
+							else{
+								$(nota).find("h4").css("color","white" );
+							}	
+							
+		   		     }
+				});
+			  
+			  
+			  
+		});
+
+
 	}
 	
 	function asignarFiltro(){
@@ -269,6 +293,14 @@ $(document).on("ready",function(){
 					//$("#items p")
 					/*  */
 				}
+				else if(json.vencida==1){ //Si esta realizada que la tache y la madne al fondo 
+					$("#"+json.id).find("h4").addClass("NotaVencida");
+					//$("#items p")
+					/*  */
+				}
+				$("#"+json.id).find(".datepicker").datepicker('setDate', json.fecha_fin);
+				
+	
 		});
 	 }
 	 
