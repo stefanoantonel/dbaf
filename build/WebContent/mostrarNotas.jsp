@@ -110,6 +110,7 @@ $(document).on("ready",function(){
 			$("#cambio").val($(this).val());
 			$.ajax({
 	   		     url: "GuardaNota?cuerpo="+notaCamb+"&id="+notaId+"",
+	   		    
 	   		     success:function(datos,status,jqXHR){
 						console.log("Nota guardada");
 	   		     }
