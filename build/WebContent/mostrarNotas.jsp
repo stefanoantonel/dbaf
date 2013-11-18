@@ -183,6 +183,7 @@ $(document).on("ready",function(){
 		 var pickerOpts ={dateFormat:"dd-mm-yy"};
 				     
 		$( ".datepicker" ).datepicker(pickerOpts);
+<<<<<<< HEAD
 		$( ".datepicker" ).change(function(){
 			 var fechaSeleccionada= console.log($(this).val());
 			 var nota=$(this).closest(".nota");
@@ -205,6 +206,9 @@ $(document).on("ready",function(){
 			  
 			  
 		});
+=======
+		
+>>>>>>> 9966f736e05fcbf0eee2f3ac0a34bf95924ddf36
 	}
 	
 	function asignarFiltro(){
