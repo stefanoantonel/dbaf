@@ -180,16 +180,17 @@ $(document).on("ready",function(){
 	function asignarDate(){
 		//console.log("se asigno");
 		
-		 var pickerOpts ={dateFormat:"dd-mm-yy"};
+		 /* var pickerOpts ={dateFormat:"dd-mm-yy"}; */
+		 var pickerOpts ={dateFormat:"yyyy-mm-dd"}; 
 				     
 		$( ".datepicker" ).datepicker(pickerOpts);
-<<<<<<< HEAD
 		$( ".datepicker" ).change(function(){
 			 var fechaSeleccionada= console.log($(this).val());
 			 var nota=$(this).closest(".nota");
+			 var notaId=$(this).closest(".nota").attr("id");
 			  $.ajax({
 		   		     url: "guardarFecha",
-		   		     data: {fecha:fechaSeleccionada},
+		   		     data: {fecha:fechaSeleccionada, id:notaId},
 		   		     success:function(datos,status,jqXHR){
 							console.log("Fecha guardad");
 							console.log("vencida: "+ datos.vencida);
@@ -206,9 +207,7 @@ $(document).on("ready",function(){
 			  
 			  
 		});
-=======
-		
->>>>>>> 9966f736e05fcbf0eee2f3ac0a34bf95924ddf36
+
 	}
 	
 	function asignarFiltro(){

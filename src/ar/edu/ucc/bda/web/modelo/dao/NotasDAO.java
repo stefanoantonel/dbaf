@@ -14,6 +14,7 @@ import org.json.JSONObject;
 import ar.edu.ucc.bda.web.modelo.PersistenciaException;
 import ar.edu.ucc.bda.web.modelo.Usuario;
 import ar.edu.ucc.bda.web.utiles.Constantes;
+import ar.edu.ucc.bda.web.utiles.Fecha;
 
 public class NotasDAO implements INotasDAO {
 
@@ -38,7 +39,8 @@ public class NotasDAO implements INotasDAO {
 			
 				//descripciones.add(rs.getString("nota"));
 			while(rs.next()){
-				JSONObject nota=agregarJson(rs.getString("id"), rs.getString("titulo"),rs.getString("lista"),rs.getString("fecha_agregada"),rs.getString("fecha_modificada"), rs.getString("cuerpo") );
+				JSONObject nota=agregarJson(rs.getString("id"), rs.getString("titulo"),rs.getString("lista"),rs.getString("fecha_agregada"),rs.getString("fecha_modificada"), rs.getString("cuerpo"), rs.getString("fecha_fin") );
+				nota.put("vencida", esVencida(nota.getString("fecha_fin")));
 				notas.put(nota);
 			}
 			System.out.println();
@@ -74,7 +76,8 @@ public class NotasDAO implements INotasDAO {
 			
 				//descripciones.add(rs.getString("nota"));
 			while(rs.next()){
-				JSONObject nota=agregarJson(rs.getString("id"), rs.getString("titulo"),rs.getString("lista"),rs.getString("fecha_agregada"),rs.getString("fecha_modificada"), rs.getString("cuerpo") );
+				JSONObject nota=agregarJson(rs.getString("id"), rs.getString("titulo"),rs.getString("lista"),rs.getString("fecha_agregada"),rs.getString("fecha_modificada"), rs.getString("cuerpo"), rs.getString("fecha_fin") );
+				nota.put("vencida", esVencida(nota.getString("fecha_fin")));
 				notas.put(nota);
 			}
 			System.out.println();
@@ -105,7 +108,8 @@ public class NotasDAO implements INotasDAO {
 			
 				//descripciones.add(rs.getString("nota"));
 			while(rs.next()){
-				JSONObject nota=agregarJson(rs.getString("id"), rs.getString("titulo"),rs.getString("lista"),rs.getString("fecha_agregada"),rs.getString("fecha_modificada"), rs.getString("cuerpo") );
+				JSONObject nota=agregarJson(rs.getString("id"), rs.getString("titulo"),rs.getString("lista"),rs.getString("fecha_agregada"),rs.getString("fecha_modificada"), rs.getString("cuerpo"), rs.getString("fecha_fin") );
+				nota.put("vencida", esVencida(nota.getString("fecha_fin")));
 				notas.put(nota);
 			}
 			System.out.println();
@@ -136,7 +140,8 @@ public class NotasDAO implements INotasDAO {
 			
 				//descripciones.add(rs.getString("nota"));
 			while(rs.next()){
-				JSONObject nota=agregarJson(rs.getString("id"), rs.getString("titulo"),rs.getString("lista"),rs.getString("fecha_agregada"),rs.getString("fecha_modificada"), rs.getString("cuerpo") );
+				JSONObject nota=agregarJson(rs.getString("id"), rs.getString("titulo"),rs.getString("lista"),rs.getString("fecha_agregada"),rs.getString("fecha_modificada"), rs.getString("cuerpo"), rs.getString("fecha_fin") );
+				nota.put("vencida", esVencida(nota.getString("fecha_fin")));
 				notas.put(nota);
 			}
 			System.out.println();
@@ -172,7 +177,8 @@ public class NotasDAO implements INotasDAO {
 			//	notas.put(nota);
 				//descripciones.add(rs.getString("nota"));
 			while(rs.next()){
-				JSONObject nota=agregarJson(rs.getString("id"), rs.getString("titulo"),rs.getString("lista"),rs.getString("fecha_agregada"),rs.getString("fecha_modificada"), rs.getString("cuerpo") );
+				JSONObject nota=agregarJson(rs.getString("id"), rs.getString("titulo"),rs.getString("lista"),rs.getString("fecha_agregada"),rs.getString("fecha_modificada"), rs.getString("cuerpo"), rs.getString("fecha_fin") );
+				nota.put("vencida", esVencida(nota.getString("fecha_fin")));
 				notas.put(nota);
 			}
 			System.out.println();
@@ -269,7 +275,7 @@ public class NotasDAO implements INotasDAO {
 			return false;
 		}
 	}
-	private JSONObject agregarJson(String id, String titulo,String lista,String fecha_agregada,String fecha_modificada, String cuerpo ) throws JSONException{
+	private JSONObject agregarJson(String id, String titulo,String lista,String fecha_agregada,String fecha_modificada, String cuerpo,String fecha_fin ) throws JSONException{
 		JSONObject nota=new JSONObject();
 		nota.put("id",id );
 		nota.put("titulo",titulo);
@@ -277,10 +283,37 @@ public class NotasDAO implements INotasDAO {
 		nota.put("agregada", fecha_agregada);
 		nota.put("modificada", fecha_modificada);
 		nota.put("cuerpo", cuerpo);
+		nota.put("fecha_fin",fecha_fin);
+		
 		return nota;
 	}
 
-
-
+	public void cambiarFecha(String fec,String id){
+		try {
+			String sql="UPDATE `practico`.`notas` SET `fecha_fin`=? WHERE `id`=? ";
+			PreparedStatement stm=cn.prepareStatement(sql);
+			stm.setString(1, fec);
+			stm.setString(2, id);
+			
+			System.out.println(sql);
+			stm.executeUpdate();
+			
+		} 
+		catch (SQLException e) {
+			System.out.println("error en update cambiar fecha notas");
+			
+		}
+	}
+	
+	public int esVencida(String fecha){
+		Fecha f=new Fecha();
+		boolean a=f.mayorFechaActual(fecha);
+		if(a){
+			return 1; //si es mayor
+		}
+		else{
+			return 0;
+		}
+	}
 
 }
