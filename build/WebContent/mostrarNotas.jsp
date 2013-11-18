@@ -59,6 +59,7 @@ $(document).on("ready",function(){
 		}
 	}); */
 	
+	 $("#radio").buttonset();
 });
 	
 	
@@ -378,6 +379,8 @@ $(document).on("ready",function(){
 		<br/>
 	</div>
 	
+	
+	
 	<form>
   		<div id="radio">
 	    	<input type="radio" id="todas" name="radio" checked="checked"  class="filtro"/>
@@ -388,6 +391,8 @@ $(document).on("ready",function(){
 		    <label for="hacer">Hacer</label>
   		</div>
 	</form>
+	
+	
 	
 
 	
