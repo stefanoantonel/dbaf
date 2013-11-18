@@ -299,11 +299,11 @@ $(document).on("ready",function(){
 					//$("#items p")
 					/*  */
 				}
+
 				console.log("fecha fin : "+json.fecha_fin);
 				var pickerOpts ={dateFormat:"yy-mm-dd"};
 				var dateP =$("#"+json.id).find(".datepicker").datepicker(pickerOpts).datepicker("setDate",  json.fecha_fin);
-				
-	
+
 		});
 	 }
 	 
