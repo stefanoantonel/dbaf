@@ -181,9 +181,9 @@ $(document).on("ready",function(){
 		//console.log("se asigno");
 		
 		 /* var pickerOpts ={dateFormat:"dd-mm-yy"}; */
-		 var pickerOpts ={dateFormat:"yyyy-mm-dd"}; 
+		//var pickerOpts ={dateFormat:"YYYY-mm-dd"}; 
 				     
-		$( ".datepicker" ).datepicker(pickerOpts);
+		/* $( ".datepicker" ).datepicker(pickerOp); */
 		$( ".datepicker" ).change(function(){
 			 var fechaSeleccionada= console.log($(this).val());
 			 var nota=$(this).closest(".nota");
@@ -298,7 +298,9 @@ $(document).on("ready",function(){
 					//$("#items p")
 					/*  */
 				}
-				$("#"+json.id).find(".datepicker").datepicker('setDate', json.fecha_fin);
+				console.log("fecha fin : "+json.fecha_fin);
+				var pickerOpts ={dateFormat:"yy-mm-dd"};
+				var dateP =$("#"+json.id).find(".datepicker").datepicker(pickerOpts).datepicker("setDate",  json.fecha_fin);
 				
 	
 		});
