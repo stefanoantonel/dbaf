@@ -30,7 +30,7 @@ public class Estilos extends HttpServlet {
 		
 		if(estilo == null)
 		{
-			estilo="Negro";
+			estilo="Blanco";
 		}
 		System.out.println("est: "+estilo);
 		response.setContentType("text/html");
