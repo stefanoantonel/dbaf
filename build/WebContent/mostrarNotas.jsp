@@ -398,7 +398,7 @@ $(document).on("ready",function(){
 	
 	
 	<div>   <!-- AUTOCOMPLETAR              -->
-		<input type="text" id="texto" />
+		<input type="text" id="texto" placeholder="Parametros de busqueda"/>
 		<div id="salida"></div>
 	<br>
 	</div>
