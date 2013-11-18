@@ -41,6 +41,8 @@ $(document).on("ready",function(){
 	    $( "#radio" ).buttonset();
 	  });
 	  */
+	  
+	
 	armarNota(not);
 	asignarAgregar();
 	asignarFiltro();
@@ -61,12 +63,7 @@ $(document).on("ready",function(){
 		    
 	});
 	
-	$( "#datepicker" ).change(function(){
-		  console.log($(this).val());
-	});
-	$(function() {
-	    $( "#datepicker" ).datepicker();
-	});
+	
 });
 	
 	
@@ -88,6 +85,7 @@ $(document).on("ready",function(){
 		//asignarAgregar();
 		asignarEliminar();
 		ordenarListas();
+		asignarDate();
 		
 	}
 	
@@ -120,6 +118,7 @@ $(document).on("ready",function(){
 	}
 	
 	function asignarCheckbox(){
+		
 		$("input:checkbox").click(function(){
 			var nota=$(this).closest(".nota");
 			var estado=$(this).is(":checked");
@@ -177,6 +176,16 @@ $(document).on("ready",function(){
 				$("body").last().append(notaSimple);
 			}
 		});	
+	}
+	function asignarDate(){
+		//console.log("se asigno");
+		
+		 var pickerOpts ={dateFormat:"dd-mm-yy"};
+				     
+		$( ".datepicker" ).datepicker(pickerOpts);
+		$( ".datepicker" ).change(function(){
+			  console.log($(this).val());
+		});
 	}
 	
 	function asignarFiltro(){
@@ -252,7 +261,7 @@ $(document).on("ready",function(){
 				a1.attr("title","Creada: "+json.agregada+" Modificada: "+json.modificada+"");
 				
 				$("body").last().append(a1);
-				$("#"+json.id).find("p").text(json.cuerpo);
+				$("#"+json.id).find(".textareaCuerpo").text(json.cuerpo);
 				$("#"+json.id).find("h4").text(json.titulo);
 				
 				$("#"+json.id).find(".checkbox").attr("checked",esLista(json.lista) );
@@ -274,11 +283,13 @@ $(document).on("ready",function(){
 				a1.attr("title","Creada: "+json.agregada+" Modificada: "+json.modificada+"");
 				//$("body").append(a1);
 				$("#antesNota").prepend(a1);
-				$("#"+json.id).find("p").text(json.cuerpo);
+				$("#"+json.id).find(".textareaCuerpo").text(json.cuerpo);
 				$("#"+json.id).find("h4").text(json.titulo);
 				$("#"+json.id).find(".checkbox").attr("checked",esLista(json.lista) );
 			});
 	 }
+	 
+	 
 	 function autocompletar (elemento, url, minLetras, clickCallback, idElem){
 		
 		var elem = $(elemento);
@@ -370,26 +381,19 @@ $(document).on("ready",function(){
 		      </div>
 		      
 		      <div class="modal-body notaBody" id="cuerpo">
+		    
 		        <p class="textareaCuerpo"  contenteditable="true" >One fine body&hellip;</p>
-				       <!--  CALENDAR 
-				        <div class="well">
-							  <div id="dTP" class="input-append datepicker">
-							    <input data-format="yyyy-MM-dd" type="text"></input>
-							    <span class="add-on">
-							      <i class="icon-calendar" data-time-icon="icon-time" data-date-icon="icon-calendar">
-							      </i>
-							    </span>
-							  </div>
-					    </div>
-						CALENDAR	 -->
+				       <!--  CALENDAR -->
+				  <p>Date: <input type="text"  class="datepicker"/></p>	       
+						<!-- CALENDAR	 -->
 		      </div>
 		    </div><!-- /.modal-content -->
    
 	</div><!-- /.modal-dialog -->
 	 </div>
-	<p>Date: <input type="text" id="datepicker" /></p>
+	
  
- 
+  <!--   <p>Date: <input type="text" id="datepicker" /></p>-->
 		
 </body>
 </html>
