@@ -29,19 +29,7 @@ $(document).on("ready",function(){
 
 	notaOriginal=$("#nota");
 	notaTemplate=notaOriginal.clone();
-	//console.log("inicializado");
-//	 var jq = $.noConflict();
-	// $("#datetimepicker4").Datepicker();
 
-	 //$('.datepicker').datepicker()
-
-	 
-/* 
-	$(function() {
-	    $( "#radio" ).buttonset();
-	  });
-	  */
-	  
 	
 	armarNota(not);
 	asignarAgregar();
@@ -63,6 +51,13 @@ $(document).on("ready",function(){
 		    
 	});
 	
+/* 	$.each(not, function(indice,json){	
+		 
+		if(json.vencida){
+			var titu=$("#"+json.id).find("h4").text();
+			alert(titu);
+		}
+	}); */
 	
 });
 	
@@ -296,6 +291,7 @@ $(document).on("ready",function(){
 				}
 				else if(json.vencida==1){ //Si esta realizada que la tache y la madne al fondo 
 					$("#"+json.id).find("h4").addClass("NotaVencida");
+					
 					//$("#items p")
 					/*  */
 				}
@@ -305,6 +301,7 @@ $(document).on("ready",function(){
 				var dateP =$("#"+json.id).find(".datepicker").datepicker(pickerOpts).datepicker("setDate",  json.fecha_fin);
 
 		});
+		
 	 }
 	 
 	 function armarNotaPrimero(not)
