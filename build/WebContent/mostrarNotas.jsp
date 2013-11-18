@@ -298,7 +298,7 @@ $(document).on("ready",function(){
 					//$("#items p")
 					/*  */
 				}
-				$("#"+json.id).find(".datepicker").datepicker('setDate', json.fecha_fin);
+				$("#"+json.id).find(".datepicker").datepicker().datepicker("setDate", json.fecha_fin);
 				
 	
 		});
