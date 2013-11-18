@@ -78,7 +78,7 @@ public class NotasDAO implements INotasDAO {
 				//descripciones.add(rs.getString("nota"));
 			while(rs.next()){
 				JSONObject nota=agregarJson(rs.getString("id"), rs.getString("titulo"),rs.getString("lista"),rs.getString("fecha_agregada"),rs.getString("fecha_modificada"), rs.getString("cuerpo"), rs.getString("fecha_fin") );
-				nota.put("vencida", esVencida(nota.getJSONObject("nota").getString("fecha_fin")));
+				nota.put("vencida", esVencida(nota.optString("fecha_fin")));
 				notas.put(nota);
 			}
 			System.out.println();
@@ -110,7 +110,7 @@ public class NotasDAO implements INotasDAO {
 				//descripciones.add(rs.getString("nota"));
 			while(rs.next()){
 				JSONObject nota=agregarJson(rs.getString("id"), rs.getString("titulo"),rs.getString("lista"),rs.getString("fecha_agregada"),rs.getString("fecha_modificada"), rs.getString("cuerpo"), rs.getString("fecha_fin") );
-				nota.put("vencida", esVencida(nota.getString("fecha_fin")));
+				nota.put("vencida", esVencida(nota.optString("fecha_fin")));
 				notas.put(nota);
 			}
 			System.out.println();
@@ -142,7 +142,7 @@ public class NotasDAO implements INotasDAO {
 				//descripciones.add(rs.getString("nota"));
 			while(rs.next()){
 				JSONObject nota=agregarJson(rs.getString("id"), rs.getString("titulo"),rs.getString("lista"),rs.getString("fecha_agregada"),rs.getString("fecha_modificada"), rs.getString("cuerpo"), rs.getString("fecha_fin") );
-				nota.put("vencida", esVencida(nota.getString("fecha_fin")));
+				nota.put("vencida", esVencida(nota.optString("fecha_fin")));
 				notas.put(nota);
 			}
 			System.out.println();
@@ -179,7 +179,7 @@ public class NotasDAO implements INotasDAO {
 				//descripciones.add(rs.getString("nota"));
 			while(rs.next()){
 				JSONObject nota=agregarJson(rs.getString("id"), rs.getString("titulo"),rs.getString("lista"),rs.getString("fecha_agregada"),rs.getString("fecha_modificada"), rs.getString("cuerpo"), rs.getString("fecha_fin") );
-				nota.put("vencida", esVencida(nota.getString("fecha_fin")));
+				nota.put("vencida", esVencida(nota.optString("fecha_fin")));
 				notas.put(nota);
 			}
 			System.out.println();
@@ -308,6 +308,9 @@ public class NotasDAO implements INotasDAO {
 	
 	public int esVencida(String fecha){
 		Fecha f=new Fecha();
+		if(fecha.equals(""))
+		{
+			return 0;}
 		boolean a=f.mayorFechaActual(fecha);
 		if(a){
 			return 1; //si es mayor

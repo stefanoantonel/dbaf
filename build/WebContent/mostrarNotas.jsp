@@ -181,11 +181,12 @@ $(document).on("ready",function(){
 		//console.log("se asigno");
 		
 		 /* var pickerOpts ={dateFormat:"dd-mm-yy"}; */
-		//var pickerOpts ={dateFormat:"YYYY-mm-dd"}; 
+		var pickerOpts ={dateFormat:"yy-mm-dd"}; 
 				     
-		/* $( ".datepicker" ).datepicker(pickerOp); */
+		 $( ".datepicker" ).datepicker(pickerOpts);
 		$( ".datepicker" ).change(function(){
-			 var fechaSeleccionada= console.log($(this).val());
+			console.log($(this).val());
+			 var fechaSeleccionada= $(this).val();
 			 var nota=$(this).closest(".nota");
 			 var notaId=$(this).closest(".nota").attr("id");
 			  $.ajax({
