@@ -180,7 +180,8 @@ $(document).on("ready",function(){
 	function asignarDate(){
 		//console.log("se asigno");
 		
-		 var pickerOpts ={dateFormat:"dd-mm-yy"};
+		 /* var pickerOpts ={dateFormat:"dd-mm-yy"}; */
+		 var pickerOpts ={dateFormat:"yyyy-mm-dd"}; 
 				     
 		$( ".datepicker" ).datepicker(pickerOpts);
 		

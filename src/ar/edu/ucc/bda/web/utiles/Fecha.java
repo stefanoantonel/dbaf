@@ -43,8 +43,8 @@ public class Fecha {
 	{
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
-		Fecha f=new Fecha();
-		int comparacion=f.compararFecha(dateFormat.format(date), fecha);
+//		Fecha f=new Fecha();
+		int comparacion=compararFecha(dateFormat.format(date), fecha);
 		if(comparacion>0)
 			return true;
 		
