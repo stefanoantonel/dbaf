@@ -13,7 +13,7 @@
 <!-- <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"> </script> -->  
 <link href="dist/js/bootstrap-datepicker.js" rel="stylesheet" media="screen">
 <script type="text/javascript" src="./css/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js"> </script>
+<!-- script type="text/javascript" src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js"> </script> -->
 
 <link rel="stylesheet" href="./css/estilos.css" type="text/css" />
 <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
