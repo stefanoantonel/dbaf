@@ -46,9 +46,11 @@
 	<br />
 	<div align="center">
 		<div>${requestScope.volver}</div>
-	
-		<br />
+		<b>Login</b>
+		<br>
+		<br/>
 		<form action="login" method="post">
+			
 			<fieldset>
 				<input type="text" placeholder="Escriba su nombre" name="usuario" /><br />
 				<input type="password" placeholder="Escriba su clave" name="clave" />

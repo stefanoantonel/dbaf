@@ -25,8 +25,10 @@
 
 	<div align="center">
 		<div id="scope" align="center">${requestScope.msj}</div>
-		<br />
-		<br />
+		<b>Crear Cuenta</b>
+		<br>
+		
+		<br>
 		<form action="agregarUsuario"  method="post">
 			Nombre: <input id="nombre" name="nombre" type="text" value="" style="display: list-item;" />
 			Clave: <input id="clave1" name="clave1" type="password" value="" style="display: list-item;" />
