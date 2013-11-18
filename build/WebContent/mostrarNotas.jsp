@@ -184,7 +184,26 @@ $(document).on("ready",function(){
 				     
 		$( ".datepicker" ).datepicker(pickerOpts);
 		$( ".datepicker" ).change(function(){
-			  console.log($(this).val());
+			 var fechaSeleccionada= console.log($(this).val());
+			 var nota=$(this).closest(".nota");
+			  $.ajax({
+		   		     url: "guardarFecha",
+		   		     data: {fecha:fechaSeleccionada},
+		   		     success:function(datos,status,jqXHR){
+							console.log("Fecha guardad");
+							console.log("vencida: "+ datos.vencida);
+							if(datos.vencida==1){
+								$(nota).find("h4").css("color","red" );
+							}
+							else{
+								$(nota).find("h4").css("color","white" );
+							}	
+							
+		   		     }
+				});
+			  
+			  
+			  
 		});
 	}
 	
@@ -270,6 +289,14 @@ $(document).on("ready",function(){
 					//$("#items p")
 					/*  */
 				}
+				else if(json.vencida==1){ //Si esta realizada que la tache y la madne al fondo 
+					$("#"+json.id).find("h4").addClass("NotaVencida");
+					//$("#items p")
+					/*  */
+				}
+				$("#"+json.id).find(".datepicker").datepicker('setDate', json.fecha_fin);
+				
+	
 		});
 	 }
 	 

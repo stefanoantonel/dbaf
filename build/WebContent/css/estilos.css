@@ -41,8 +41,11 @@ body{
 	color:black;
 	text-decoration:line-through; 
 	/*text-decoration: blink;*/  
-	tachado_rojo span{color:#000;} 
+	tachado_rojo span{color:red;} 
 	
 }
 
-
+.NotaVencida{
+	color:red;
+	
+}
