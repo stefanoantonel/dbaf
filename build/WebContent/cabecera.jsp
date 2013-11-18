@@ -7,21 +7,24 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" href="./css/estiloVerde.css" type="text/css" />
+<script src="css/js/jquery-1.9.1.js"></script>
+<script src=css/js/jquery-ui-1.10.3.custom.js></script>
 
-<script type="text/javascript"
- src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
-</script>  
+<!-- <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"> </script> -->  
 <link href="dist/js/bootstrap-datepicker.js" rel="stylesheet" media="screen">
 <script type="text/javascript" src="./css/js/bootstrap.min.js"></script>
-<script type="text/javascript"
- src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
-</script>
+<script type="text/javascript" src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js"> </script>
 
 <link rel="stylesheet" href="./css/estilos.css" type="text/css" />
 <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
 <link href="dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="dist/css/datepicker.css" rel="stylesheet" media="screen">
 
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<!-- <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>  -->
+  
 
 <!-- script src="./css/datepicker.less" type="text/css"></script> 
 <script src="./css/less-1.5.0.min.js" type="text/javascript"></script> 

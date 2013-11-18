@@ -59,9 +59,19 @@ $(document).on("ready",function(){
 	        newlink.setAttribute("href", "./css/estilo"+estilo+".css");
 	        document.getElementsByTagName("head").item(0).replaceChild(newlink, oldlink);
 		    
-		});
 	});
 	
+	$( "#datepicker" ).change(function(){
+		  console.log($(this).val());
+	});
+	$(function() {
+	    $( "#datepicker" ).datepicker();
+	});
+});
+	
+	
+
+
 	function esLista(lista){
 		if(lista!=null){
 			if(lista=="1"){
@@ -377,7 +387,9 @@ $(document).on("ready",function(){
    
 	</div><!-- /.modal-dialog -->
 	 </div>
-	
+	<p>Date: <input type="text" id="datepicker" /></p>
+ 
+ 
 		
 </body>
 </html>
