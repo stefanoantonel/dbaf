@@ -18,7 +18,7 @@
 	  });
 	  $(function() {
 		    $( "#datepicker" ).datepicker();
-	});
+		});
   });
 	  	  
   
