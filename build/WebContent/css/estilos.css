@@ -18,7 +18,18 @@
 	horizontal-align:right; 
 	padding: 1mm;
 	
+}
+
+.derFondo
+{
+	position:relative;
+    float:right;
+
+	padding: 1mm;
+	
 }	
+
+
 	
 body{
 	text-align:center;
@@ -38,12 +49,14 @@ body{
 .titulo {color: white; text-shadow: black 0.1em 0.1em 0.2em; font-size: 30px;}
 
 .NotaTachada{
-	color:black;
+	color:#000;
 	text-decoration:line-through; 
 	/*text-decoration: blink;*/  
-	tachado_rojo span{color:red;} 
+	
 	
 }
+.NotaTachada h4{color:#f00;}
+
 
 .NotaVencida{
 	color:red;

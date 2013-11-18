@@ -90,7 +90,7 @@ function obtenerEstilo(estiloS)
 <div class="tituloArriba">
 Mis notas
 </div>
-<div class="bs-example" align="left" style="width: 200px">
+<div class="bs-example" align="left" style="width: 200px; background-color:#DEDADA">
             <ul role="navigation" class="nav" id="listaLookFeel">
                 <li class="dropdown">
                     <a href="#" data-toggle="dropdown" class=" dropdown-toggle">Look & Feel <b class="caret"></b></a>

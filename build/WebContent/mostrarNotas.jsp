@@ -411,14 +411,14 @@ $(document).on("ready",function(){
 		      	<input type="checkbox" class="checkbox" aria-hidden="true" />
 		        <button type="button"  class="cruz close botonEliminar " data-dismiss="modal" aria-hidden="true">&times;</button>
 
-		        <h4 class="textareaTitulo modal-title titulo" class="" name="aa" id="titulo" contenteditable="true" >Modal title</h4>
+		        <h4 class="textareaTitulo modal-title titulo"  name="aa" id="titulo" contenteditable="true" >Modal title</h4>
 		      </div>
 		      
 		      <div class="modal-body notaBody" id="cuerpo">
 		    
 		        <p class="textareaCuerpo"  contenteditable="true" >One fine body&hellip;</p>
 				       <!--  CALENDAR -->
-				  <p>Date: <input type="text"  class="datepicker"/></p>	       
+				  <p  class="derFondo"><input type="text" style="width:68pt; " class="datepicker"/></p>	       
 						<!-- CALENDAR	 -->
 		      </div>
 		    </div><!-- /.modal-content -->
