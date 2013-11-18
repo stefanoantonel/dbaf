@@ -183,9 +183,7 @@ $(document).on("ready",function(){
 		 var pickerOpts ={dateFormat:"dd-mm-yy"};
 				     
 		$( ".datepicker" ).datepicker(pickerOpts);
-		$( ".datepicker" ).change(function(){
-			  console.log($(this).val());
-		});
+		
 	}
 	
 	function asignarFiltro(){
